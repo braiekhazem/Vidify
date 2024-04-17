@@ -8,9 +8,9 @@ import SoundIcon from "../SoundIcon";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { formatTime } from "@src/utils/formatDurationTime";
-import Settings from "../Settings";
+// import Settings from "../Settings";
 import FullScreen from "../FullScreen";
-import Subtitle from "../Subtitle";
+// import Subtitle from "../Subtitle";
 import MiniPlayer from "../MiniPlayer";
 import SecondsForward from "../SecondsForward";
 import ProgressBar from "../ProgressBar";
@@ -129,8 +129,8 @@ const internalControlsBar: React.ForwardRefRenderFunction<
           />
         )}
         {/* {renderButton(<Speed />)} */}
-        {renderButton(<Subtitle />)}
-        {renderButton(<Settings />)}
+        {/* {renderButton(<Subtitle />)}
+        {renderButton(<Settings />)} */}
         {renderButton(<MiniPlayer video={videoRef} />)}
         {renderButton(
           <FullScreen

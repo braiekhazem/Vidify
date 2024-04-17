@@ -22,29 +22,29 @@ $class-prefix-vidify: "vf-video";
     width: 100%;
     position: absolute;
     bottom: 0;
-    opacity: 1;
+    opacity: 1 !important;
     transition: all 0.3s ease;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==)
       repeat-x bottom;
   }
 
   &-gradient-bottom-hidden {
-    opacity: 0;
+    opacity: 0 !important;
+  }
+}
+
+.#{$class-prefix-vidify}-wrapper:not(.#{$class-prefix-vidify}-hidden):hover {
+  transition-delay: 10s;
+  .vf-control-bar {
+    transform: none;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
   }
 
-  &:hover {
-    transition-delay: 10s;
-    .vf-control-bar {
-      transform: none;
-      -webkit-transform: none;
-      -moz-transform: none;
-      -ms-transform: none;
-      -o-transform: none;
-    }
-
-    .vf-video-wrapper-gradient-bottom {
-      opacity: 1;
-    }
+  .vf-video-wrapper-gradient-bottom {
+    opacity: 1 !important;
   }
 }
 

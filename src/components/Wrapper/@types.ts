@@ -8,6 +8,7 @@ export interface WrapperProps {
   currentVideoRef: React.Ref<any>;
   className: string;
   prefixCls: string;
+  title: string;
   onKeyDown: any;
   ref: any;
   onDoubleClick: any;

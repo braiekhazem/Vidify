@@ -33,6 +33,7 @@ export interface VideoPlayerProps {
   onDurationChange?: () => void;
   onVolumeChange?: () => void;
   onLoadedData?: () => void;
+  onWaiting?: () => void;
 }
 
 export interface VideoPlayerState {

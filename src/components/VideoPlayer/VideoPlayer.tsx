@@ -26,6 +26,9 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     className,
     containerRef,
     autoPlay = false,
+    volume,
+    title = "",
+    // currentTime = 0,
     id,
     width: customWidth = DEFAULT_VIDEO_WIDTH,
     height: customHeight = DEFAULT_VIDEO_HEIGHT,
@@ -38,8 +41,14 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     primaryColor,
     onClick,
     onPause,
+    onPlay,
+    onProgress: onProgressHnadler,
+    onDurationChange,
+    onVolumeChange,
     onLoadedData,
     onError,
+    onEnded,
+    onWaiting,
     // ...rest
   } = props;
   const currentVideoRef = useRef<HTMLVideoElement>(null);
@@ -48,7 +57,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const [videoState, setVideoState] = useState<VideoPlayerState>({
     playing: false,
-    volume: muted ? 0 : 1,
+    volume: volume ? volume : muted ? 0 : 1,
     muted,
     loop,
     rendered: false,
@@ -92,6 +101,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const handleTimeUpdate = () => {
     if (currentVideoRef.current) {
+      onProgressHnadler && onProgressHnadler();
+      onDurationChange && onDurationChange();
       videoState.actions?.setCurrentTime(
         setVideoState,
         currentVideoRef.current.currentTime
@@ -177,6 +188,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       onClick={onClickHandler}
       playing={videoState.playing}
       tabIndex={0}
+      title={title}
       style={containerstyle}
     >
       <video
@@ -187,14 +199,18 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         ref={mergeRefs(ref, currentVideoRef)}
         controls={false}
         onPause={onPause}
+        onPlay={onPlay}
+        onEnded={onEnded}
+        onVolumeChange={onVolumeChange}
         className={prefixCls}
         crossOrigin="anonymous"
-        preload={"auto"}
+        preload="auto"
         onTimeUpdate={handleTimeUpdate}
         onProgress={onProgress}
-        onWaiting={() =>
-          videoState.actions?.setLoadingData(setVideoState, true)
-        }
+        onWaiting={() => {
+          onWaiting && onWaiting();
+          videoState.actions?.setLoadingData(setVideoState, true);
+        }}
         onLoadStart={() =>
           videoState.actions?.setLoadingData(setVideoState, true)
         }
@@ -231,7 +247,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
           setVideoState={setVideoState}
         />
       )}
-      <div className={gradientClasses} style={{ opacity: 1 }}></div>
+      <div className={gradientClasses}></div>
       {videoState.error && (
         <div
           style={{
