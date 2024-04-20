@@ -25,6 +25,8 @@ const ControlIcon = React.forwardRef<HTMLElement, ControlIconProps>(
     const onClickHandler = (
       event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
     ) => {
+      event.stopPropagation();
+
       setSelfPlay(!selfPlay);
 
       const isPlay = !selfPlay;

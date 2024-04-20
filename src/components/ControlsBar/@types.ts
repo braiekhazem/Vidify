@@ -1,8 +1,14 @@
-import { VideoPlayerState } from "../VideoPlayer/@types";
+import { VideoPlayerProps, VideoPlayerState } from "../VideoPlayer/@types";
 
+export interface controlBarAllowedItems {
+  screenshot?: boolean;
+  fullScreen?: boolean;
+  volumeSlider?: boolean;
+}
 export interface ControlsBarProps {
   videoRef: any;
   videoState: VideoPlayerState;
-  setVideoState: React.Dispatch<React.SetStateAction<VideoPlayerState>>;
   actions: VideoPlayerState["actions"];
+  allowedItems: controlBarAllowedItems;
+  durationType: VideoPlayerProps["durationType"];
 }

@@ -4,6 +4,7 @@ import { ReactComponent as FullscreenSVG } from "../../global/assets/icons/fulls
 import { ReactComponent as CancelFullscreenSVG } from "../../global/assets/icons/fullscreen/cancel-fullscreen.svg";
 import { getPrefixCls } from "@src/utils/getPrefixCls";
 import classNames from "classnames";
+import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 export const fullScreenMode = () => {
   const element: any = document.querySelector(".vf-video-wrapper"); //container element
@@ -50,7 +51,7 @@ export const FullScreen: React.FC<FullScreenProps> = (props) => {
 
   return (
     <div className={classes} onClick={fullScreenMode}>
-      <Icon width={26} height={26} />
+      <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
     </div>
   );
 };

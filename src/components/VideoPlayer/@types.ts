@@ -1,18 +1,25 @@
-import { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
+import { controlBarAllowedItems } from "../ControlsBar/@types";
 
+interface contextmenu extends controlBarAllowedItems {}
 export interface VideoPlayerProps {
-  src: string;
+  src: string | string[];
+  defaultSrcIndex?: number;
   startTime?: number;
   children?: React.ReactNode;
   className?: string;
   id?: string;
   primaryColor?: string;
+  annotation?: ReactNode;
+  annotationStyle?: CSSProperties;
   width?: string;
   height?: string;
+  durationType?: "remainingTime" | "default";
   placeholder?: string;
   title?: string;
   style?: CSSProperties;
   currentTime?: number;
+  contextmenu?: contextmenu;
   volume?: number;
   paused?: boolean;
   poster?: string;
@@ -32,12 +39,14 @@ export interface VideoPlayerProps {
   onLoadStart?: () => void;
   onDurationChange?: () => void;
   onVolumeChange?: () => void;
+  onScreenshot?: (screenshot: string) => void;
   onLoadedData?: () => void;
   onWaiting?: () => void;
 }
 
 export interface VideoPlayerState {
   playing: boolean;
+  src: VideoPlayerProps["src"];
   loop: boolean;
   muted: boolean;
   volume: number;
@@ -46,6 +55,7 @@ export interface VideoPlayerState {
   bufferingProgress: number;
   currentTime: number;
   fullscreen: boolean;
+  currentSrcIndex: number;
   speed: number;
   error: any;
   rendered: boolean;
@@ -55,44 +65,17 @@ export interface VideoPlayerState {
   playbackProgress: number;
   loadingData: boolean;
   actions?: {
-    play: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      videoRef?: HTMLVideoElement
-    ) => void;
-    pause: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      videoRef?: HTMLVideoElement
-    ) => void;
-    setVolume: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      volume: number,
-      videoRef?: HTMLVideoElement
-    ) => void;
-    mute: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      videoRef?: HTMLVideoElement
-    ) => void;
-    setCurrentTime: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      currentTime: number,
-      videoRef?: HTMLVideoElement
-    ) => void;
-    updateCurrentTime: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      newCurrentTime: number,
-      videoRef?: HTMLVideoElement
-    ) => void;
-    setFullscreen: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      fullscreen: boolean
-    ) => void;
-    setLoadingData: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      loading: boolean
-    ) => void;
-    screenShot: (
-      fn: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
-      videoRef?: HTMLVideoElement
-    ) => void;
+    play: () => void;
+    pause: () => void;
+    setVolume: (volume: number) => void;
+    mute: () => void;
+    setCurrentTime: (currentTime: number) => void;
+    updateCurrentTime: (newCurrentTime: number) => void;
+    setFullscreen: (fullscreen: boolean) => void;
+    setLoadingData: (loading: boolean) => void;
+    screenShot: () => void;
+    setCurrentSrcIndex: (index: number) => void;
+    nextVideo: () => void;
+    previousVideo: () => void;
   };
 }

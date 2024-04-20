@@ -1,4 +1,10 @@
-import { SyntheticEvent, forwardRef, useEffect, useRef, useState } from "react";
+import React, {
+  SyntheticEvent,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { VideoPlayerProps, VideoPlayerState } from "./@types";
 import ClassNames from "classnames";
 import mergeRefs from "@src/utils/mergeRefs";
@@ -11,30 +17,39 @@ import { managePlayerKeyDown } from "@src/utils/managePlayerKeyDown";
 import Wrapper from "../Wrapper";
 import PlayButton from "../PlayButton";
 import classNames from "classnames";
+import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { getAllowedControlBarItems } from "@src/utils/getAllowedControlBarItems";
+import { getVideoSrc } from "@src/utils/getVideoSrc";
 
 const ASPECT_RATIO = 16 / 9;
 
 const DEFAULT_VIDEO_WIDTH = 800;
 const DEFAULT_VIDEO_HEIGHT = Math.round(DEFAULT_VIDEO_WIDTH / ASPECT_RATIO);
+export const DEFAULT_ICONS_SIZE = 25;
 
 const InternalVideoPlayer: React.ForwardRefRenderFunction<
   HTMLVideoElement,
   VideoPlayerProps
 > = (props, ref) => {
   const {
-    src = "",
+    src,
+    defaultSrcIndex = 0,
     className,
     containerRef,
     autoPlay = false,
     volume,
     title = "",
+    durationType = "default",
     // currentTime = 0,
     id,
+    annotation,
+    annotationStyle,
     width: customWidth = DEFAULT_VIDEO_WIDTH,
     height: customHeight = DEFAULT_VIDEO_HEIGHT,
     style = {},
     muted = false,
     thumbnail,
+    poster,
     loop = false,
     block = false,
     rounded = true,
@@ -46,6 +61,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     onDurationChange,
     onVolumeChange,
     onLoadedData,
+    onScreenshot,
     onError,
     onEnded,
     onWaiting,
@@ -54,14 +70,22 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   const currentVideoRef = useRef<HTMLVideoElement>(null);
   // const secondVideoRef = useRef<HTMLVideoElement>(null);
   const currentContainerRef = useRef<HTMLDivElement>(null);
-
   const [videoState, setVideoState] = useState<VideoPlayerState>({
+    src,
     playing: false,
-    volume: volume ? volume : muted ? 0 : 1,
-    muted,
+    volume:
+      volume !== undefined && typeof volume === "number"
+        ? volume
+        : muted
+        ? 0
+        : 1,
+    muted:
+      (volume !== undefined && typeof volume === "number" && volume === 0) ||
+      muted,
     loop,
     rendered: false,
     speed: 1,
+    currentSrcIndex: defaultSrcIndex,
     loadingData: false,
     bufferingProgress: 0,
     duration: 0,
@@ -73,8 +97,17 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     videoLoaded: false,
     subtitle: "English",
     playbackProgress: 0,
-    actions: playerManager as any,
   });
+
+  useEffect(() => {
+    if (currentVideoRef.current)
+      setVideoState((prev) => ({
+        ...prev,
+        actions: playerManager(setVideoState, currentVideoRef.current, {
+          onScreenshot,
+        }) as any,
+      }));
+  }, [currentVideoRef]);
 
   if (style) {
     style.width = style.width || customWidth;
@@ -88,25 +121,49 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   if (primaryColor) containerstyle["--vf-color-primary"] = primaryColor;
 
   const handleVideoLoaded = () => {
-    if (currentVideoRef.current)
-      setVideoState((prev) => ({
-        ...prev,
-        videoLoaded: true,
-        loadingData: false,
-        error: false,
-        duration: currentVideoRef.current!.duration,
-      }));
-    onLoadedData && onLoadedData();
+    if (currentVideoRef.current) {
+      let duration = currentVideoRef.current.duration;
+      if (duration === Infinity) {
+        currentVideoRef.current.currentTime = 1e101;
+        setTimeout(() => {
+          currentVideoRef.current!.currentTime = 0; // to reset the time, so it starts at the beginning
+          duration = currentVideoRef.current!.duration;
+          setVideoState((prev) => ({
+            ...prev,
+            videoLoaded: true,
+            loadingData: false,
+            error: false,
+            duration,
+          }));
+          onLoadedData && onLoadedData();
+        }, 100);
+      } else {
+        setVideoState((prev) => ({
+          ...prev,
+          videoLoaded: true,
+          loadingData: false,
+          error: false,
+          duration,
+        }));
+        onLoadedData && onLoadedData();
+      }
+    }
   };
 
   const handleTimeUpdate = () => {
     if (currentVideoRef.current) {
       onProgressHnadler && onProgressHnadler();
       onDurationChange && onDurationChange();
-      videoState.actions?.setCurrentTime(
-        setVideoState,
-        currentVideoRef.current.currentTime
-      );
+      videoState.actions?.setCurrentTime(currentVideoRef.current.currentTime);
+      if (
+        videoState.duration === Infinity &&
+        currentVideoRef.current?.duration > 0
+      ) {
+        setVideoState((prev) => ({
+          ...prev,
+          duration: currentVideoRef.current?.duration as number,
+        }));
+      }
     }
   };
 
@@ -116,13 +173,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (currentVideoRef.current)
-      managePlayerKeyDown(
-        e,
-        videoState.actions,
-        setVideoState,
-        videoState,
-        currentVideoRef.current
-      );
+      managePlayerKeyDown(e, videoState.actions, videoState);
   };
 
   const handleVideoError = () => {
@@ -137,9 +188,9 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   const onClickHandler = (event: SyntheticEvent<Element, Event>) => {
     if (event.target === currentVideoRef.current)
       if (videoState.playing) {
-        videoState.actions?.pause(setVideoState);
+        videoState.actions?.pause();
       } else {
-        videoState.actions?.play(setVideoState);
+        videoState.actions?.play();
       }
 
     onClick && onClick(event);
@@ -159,6 +210,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     }
   };
 
+  // console.log(currentVideoRef.current?.duration);
+
   const prefixCls = getPrefixCls("video");
 
   const classes = ClassNames(className, `${prefixCls}-wrapper`, {
@@ -176,6 +229,16 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       syncStateWithVideo(currentVideoRef.current, videoState);
   }, [videoState, currentVideoRef]);
 
+  useEffect(() => {
+    if (ref) {
+      const { actions, ...rest } = videoState;
+      //@ts-ignore
+      ref.current.videoState = rest;
+      //@ts-ignore
+      ref.current.videoActions = actions;
+    }
+  }, [videoState]);
+
   return (
     <Wrapper
       className={classes}
@@ -192,9 +255,9 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       style={containerstyle}
     >
       <video
-        src={src}
+        src={getVideoSrc(props, videoState)}
         id={id}
-        poster={thumbnail}
+        poster={thumbnail || poster}
         width={block ? "100%" : width}
         ref={mergeRefs(ref, currentVideoRef)}
         controls={false}
@@ -204,16 +267,14 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         onVolumeChange={onVolumeChange}
         className={prefixCls}
         crossOrigin="anonymous"
-        preload="auto"
+        preload="metadata"
         onTimeUpdate={handleTimeUpdate}
         onProgress={onProgress}
         onWaiting={() => {
           onWaiting && onWaiting();
-          videoState.actions?.setLoadingData(setVideoState, true);
+          videoState.actions?.setLoadingData(true);
         }}
-        onLoadStart={() =>
-          videoState.actions?.setLoadingData(setVideoState, true)
-        }
+        onLoadStart={() => videoState.actions?.setLoadingData(true)}
         onLoadedData={handleVideoLoaded}
         onError={handleVideoError}
         autoPlay={autoPlay}
@@ -236,18 +297,34 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
       <PlayButton
         videoState={videoState}
-        onPlay={() => videoState.actions?.play(setVideoState)}
-        onPuase={() => videoState.actions?.pause(setVideoState)}
+        onPlay={() => videoState.actions?.play()}
+        onPuase={() => videoState.actions?.pause()}
       />
       {videoState.videoLoaded && (
         <ControlsBar
           videoRef={currentVideoRef?.current}
           videoState={videoState}
           actions={videoState.actions}
-          setVideoState={setVideoState}
+          allowedItems={getAllowedControlBarItems(props)}
+          durationType={durationType}
         />
       )}
       <div className={gradientClasses}></div>
+      <div
+        className={`${gradientClasses} ${concatPrefixCls(
+          prefixCls,
+          "wrapper-gradient-top"
+        )}`}
+      ></div>
+      <div
+        className={`${concatPrefixCls(
+          prefixCls,
+          "annotation"
+        )} ${gradientClasses}`}
+        style={annotationStyle}
+      >
+        {annotation}
+      </div>
       {videoState.error && (
         <div
           style={{

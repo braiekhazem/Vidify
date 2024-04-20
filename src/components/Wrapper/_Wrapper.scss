@@ -28,6 +28,15 @@ $class-prefix-vidify: "vf-video";
       repeat-x bottom;
   }
 
+  &-gradient-top {
+    top: 0;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+  }
+
   &-gradient-bottom-hidden {
     opacity: 0 !important;
   }
@@ -41,6 +50,10 @@ $class-prefix-vidify: "vf-video";
     -moz-transform: none;
     -ms-transform: none;
     -o-transform: none;
+  }
+
+  .vf-video-annotation {
+    opacity: 1;
   }
 
   .vf-video-wrapper-gradient-bottom {
@@ -75,6 +88,10 @@ $class-prefix-vidify: "vf-video";
     -o-transform: translateY(100%) !important;
   }
   .vf-video-wrapper-gradient-bottom {
+    opacity: 0 !important;
+  }
+
+  .vf-video-annotation {
     opacity: 0 !important;
   }
 }

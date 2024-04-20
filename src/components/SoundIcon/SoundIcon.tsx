@@ -4,6 +4,7 @@ import { getPrefixCls } from "@src/utils/getPrefixCls";
 import classNames from "classnames";
 import { ReactComponent as SoundSVG } from "../../global/assets/icons/sound/Sound.svg";
 import { ReactComponent as MuteSVG } from "../../global/assets/icons/sound/Mute.svg";
+import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 const SoundIcon = React.forwardRef<HTMLDivElement, SoundIconProps>(
   (props, ref) => {
@@ -27,6 +28,7 @@ const SoundIcon = React.forwardRef<HTMLDivElement, SoundIconProps>(
     const onClickHandler = (
       event: React.MouseEvent<HTMLDivElement, MouseEvent>
     ) => {
+      event.stopPropagation();
       setSelfMute(!selfMute);
 
       onClick && onClick(event, volume);
@@ -42,7 +44,7 @@ const SoundIcon = React.forwardRef<HTMLDivElement, SoundIconProps>(
 
     return (
       <div className={classes} ref={ref} onClick={onClickHandler}>
-        <Icon width={26} height={26} />
+        <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
       </div>
     );
   }

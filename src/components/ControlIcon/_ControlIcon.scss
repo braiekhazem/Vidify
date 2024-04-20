@@ -1,15 +1,15 @@
 #vf-control-button-play-button-container {
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
 }
 
 .vf-control-button-play-button {
   display: inline-block;
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   background: var(--vf-color-white);
   transition: clip-path 0.3s ease;
 }

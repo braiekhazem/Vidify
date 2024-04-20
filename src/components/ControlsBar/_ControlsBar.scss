@@ -105,6 +105,25 @@ $class-prefix-control-bar: "vf-control-bar";
   -o-transition: all 0.4s;
 }
 
+.#{$class-prefix-control-bar}-button-tooltip {
+  background-color: rgba(14, 14, 14, 0.907) !important;
+  padding: 0 8px !important;
+  height: 23px !important;
+  width: fit-content !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px !important;
+  text-transform: capitalize;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px;
+  border-radius: 7px !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 7px !important;
+  -ms-border-radius: 7px !important;
+  -o-border-radius: 7px !important;
+}
+
 .vf-duration {
   font-size: 15px;
   white-space: nowrap;

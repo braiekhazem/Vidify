@@ -7,7 +7,7 @@ import { getPercentage } from "@src/utils/getPercentage";
 import { formatTime } from "@src/utils/formatDurationTime";
 
 const ProgressBar: React.FC<ProgressBarProps> = (props) => {
-  const { videoState, setVideoState, video } = props;
+  const { videoState } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const hoveredRef = useRef<HTMLDivElement>(null);
   const [hoveredPos, setHoveredPos] = useState<hoveredPosType | null>(null);
@@ -34,7 +34,7 @@ const ProgressBar: React.FC<ProgressBarProps> = (props) => {
     const newElapsedMs = durationMs * clickedPos;
     const newTimeSec = newElapsedMs / 1000;
 
-    videoState.actions?.updateCurrentTime(setVideoState, newTimeSec, video);
+    videoState.actions?.updateCurrentTime(newTimeSec);
   };
 
   const setHoveredPosition = (
