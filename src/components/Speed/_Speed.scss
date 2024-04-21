@@ -1,0 +1,22 @@
+$class-prefix-seed-button: "vf-speed-button";
+
+.#{$class-prefix-seed-button} {
+  position: relative;
+  overflow: visible;
+  &-speed-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 200;
+    background-color: red;
+    color: #fff;
+    transform: translate(-50%, calc(-100% - 40px));
+    -webkit-transform: translate(-50%, calc(-100% - 40px));
+    -moz-transform: translate(-50%, calc(-100% - 40px));
+    -ms-transform: translate(-50%, calc(-100% - 40px));
+    -o-transform: translate(-50%, calc(-100% - 40px));
+  }
+}

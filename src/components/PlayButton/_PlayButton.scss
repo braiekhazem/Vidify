@@ -1,0 +1,127 @@
+$class-prefix-play-button: "vf-play-button";
+
+.#{$class-prefix-play-button} {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  color: rgb(202, 202, 202);
+  background-color: #00000080;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  display: none;
+  animation: 0.5s linear 0s 1 normal forwards running play-animation;
+  -webkit-animation: 0.5s linear 0s 1 normal forwards running play-animation;
+  transition:
+    transform 0.2s ease 0s,
+    background-color 0.2s ease 0s;
+  -webkit-transition:
+    transform 0.2s ease 0s,
+    background-color 0.2s ease 0s;
+  -moz-transition:
+    transform 0.2s ease 0s,
+    background-color 0.2s ease 0s;
+  -ms-transition:
+    transform 0.2s ease 0s,
+    background-color 0.2s ease 0s;
+  -o-transition:
+    transform 0.2s ease 0s,
+    background-color 0.2s ease 0s;
+
+  @media screen and (max-width: 500px) {
+    width: 50px;
+    height: 50px;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    max-width: 40px;
+    max-height: 40px;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+##{$class-prefix-play-button}-initial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  color: rgb(202, 202, 202);
+  background-color: var(--vf-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: none;
+  -webkit-animation: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    -webkit-transform: translate(-50%, -50%) scale(1.2);
+    -moz-transform: translate(-50%, -50%) scale(1.2);
+    -ms-transform: translate(-50%, -50%) scale(1.2);
+    -o-transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 60px;
+    height: 60px;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    max-width: 50px;
+    max-height: 50px;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+// .#{$class-prefix-play-button}-play {
+//   //   display: none;
+// }
+
+// .#{$class-prefix-play-button}-pause {
+//   //   display: none;
+// }
+
+@keyframes play-animation {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+    -webkit-transform: translate(-50%, -50%) scale(1.5);
+    -moz-transform: translate(-50%, -50%) scale(1.5);
+    -ms-transform: translate(-50%, -50%) scale(1.5);
+    -o-transform: translate(-50%, -50%) scale(1.5);
+  }
+}

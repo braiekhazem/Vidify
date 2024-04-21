@@ -1,0 +1,35 @@
+#vf-control-button-play-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.vf-control-button-play-button {
+  display: inline-block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: var(--vf-color-white);
+  transition: clip-path 0.3s ease;
+}
+
+.vf-control-button-play-button-before {
+  clip-path: polygon(0 0, 50% 25%, 50% 75%, 0% 100%);
+}
+
+.vf-control-button-play-button-after {
+  clip-path: polygon(50% 25%, 100% 50%, 100% 50%, 50% 75%);
+}
+
+.vf-control-button-pause {
+  .vf-control-button-play-button-before {
+    clip-path: polygon(0 0, 30% 0, 30% 100%, 0% 100%);
+  }
+
+  .vf-control-button-play-button-after {
+    clip-path: polygon(70% 0, 100% 0, 100% 100%, 70% 100%);
+  }
+}

@@ -1,0 +1,126 @@
+$class-prefix-vidify: "vf-video";
+
+.#{$class-prefix-vidify}-wrapper {
+  position: relative;
+  background-color: var(--vf-color-black);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+
+  &-gradient-bottom {
+    height: 98px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    opacity: 1 !important;
+    transition: all 0.3s ease;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==)
+      repeat-x bottom;
+  }
+
+  &-gradient-top {
+    top: 0;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+  }
+
+  &-gradient-bottom-hidden {
+    opacity: 0 !important;
+  }
+}
+
+.#{$class-prefix-vidify}-wrapper:not(.#{$class-prefix-vidify}-hidden):hover {
+  transition-delay: 10s;
+  .vf-control-bar {
+    transform: none;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+  }
+
+  .vf-video-annotation {
+    opacity: 1;
+  }
+
+  .vf-video-wrapper-gradient-bottom {
+    opacity: 1 !important;
+  }
+}
+
+.#{$class-prefix-vidify}-block {
+  width: 100%;
+}
+
+.#{$class-prefix-vidify}-rounded {
+  border-radius: var(--vf-border-radius);
+  -webkit-border-radius: var(--vf-border-radius);
+  -moz-border-radius: var(--vf-border-radius);
+  -ms-border-radius: var(--vf-border-radius);
+  -o-border-radius: var(--vf-border-radius);
+}
+
+.#{$class-prefix-vidify}-loading-icon {
+  animation: icon-spin 2s infinite linear;
+  -webkit-animation: icon-spin 2s infinite linear;
+}
+
+.#{$class-prefix-vidify}-hidden {
+  cursor: none;
+  .vf-control-bar {
+    transform: translateY(100%) !important;
+    -webkit-transform: translateY(100%) !important;
+    -moz-transform: translateY(100%) !important;
+    -ms-transform: translateY(100%) !important;
+    -o-transform: translateY(100%) !important;
+  }
+  .vf-video-wrapper-gradient-bottom {
+    opacity: 0 !important;
+  }
+
+  .vf-video-annotation {
+    opacity: 0 !important;
+  }
+}
+
+@keyframes icon-spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+    -moz-transform: translate(-50%, -50%) rotate(0deg);
+    -ms-transform: translate(-50%, -50%) rotate(0deg);
+    -o-transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(359deg);
+    -webkit-transform: translate(-50%, -50%) rotate(359deg);
+    -moz-transform: translate(-50%, -50%) rotate(359deg);
+    -ms-transform: translate(-50%, -50%) rotate(359deg);
+    -o-transform: translate(-50%, -50%) rotate(359deg);
+  }
+}
+
+.vf-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
