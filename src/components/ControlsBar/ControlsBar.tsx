@@ -231,9 +231,9 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               allowedItems,
               renderButton(
                 <Download onClick={() => actions?.download()} />,
-                "Donwload"
+                `downlaod (${vidifyShortcuts.download})`
               ),
-              `downlaod (${vidifyShortcuts.download})`
+              `downlaod`
             )}
             {renderItem(
               allowedItems,
