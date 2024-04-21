@@ -2,7 +2,7 @@
   "name": "vidify",
   "author": "hazem braiek",
   "private": false,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
