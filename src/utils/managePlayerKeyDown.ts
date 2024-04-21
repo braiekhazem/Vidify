@@ -1,4 +1,15 @@
+import { fullScreenMode } from "@src/components/FullScreen/FullScreen";
 import { VideoPlayerState } from "@src/components/VideoPlayer/@types";
+
+export const vidifyShortcuts = {
+  play: "k",
+  fullscreen: "f",
+  screenshot: "SHIFT+S",
+  download: "SHIFT D",
+  mute: "m",
+  next_video: "SHIFT+P",
+  prev_video: "SHIFT+N",
+};
 
 export const managePlayerKeyDown = (
   event: React.KeyboardEvent<HTMLDivElement>,
@@ -33,5 +44,19 @@ export const managePlayerKeyDown = (
     typeof videoState.src !== "string"
   ) {
     actions?.previousVideo();
+  } else if (event.key === "m" || event.key === "M") {
+    if (videoState.muted) {
+      actions?.setVolume(videoState.volume);
+    } else actions?.mute();
+  } else if (event.key === "f" || event.key === "F") {
+    if (videoState.fullscreen) actions?.setFullscreen(false);
+    else actions?.setFullscreen(true);
+    fullScreenMode();
+  } else if (event.key === "k" || event.key === "K") {
+    videoState.playing ? actions?.pause() : actions?.play();
+  } else if (event.shiftKey && (event.key === "S" || event.key === "s")) {
+    actions?.screenShot();
+  } else if (event.shiftKey && (event.key === "D" || event.key === "d")) {
+    actions?.download();
   }
 };

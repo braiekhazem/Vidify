@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { VideoPlayerProps, VideoPlayerState } from "./@types";
+import { VideoPlayerProps, VideoPlayerState, contextmenu } from "./@types";
 import ClassNames from "classnames";
 import mergeRefs from "@src/utils/mergeRefs";
 import { getPrefixCls } from "@src/utils/getPrefixCls";
@@ -25,7 +25,7 @@ const ASPECT_RATIO = 16 / 9;
 
 const DEFAULT_VIDEO_WIDTH = 800;
 const DEFAULT_VIDEO_HEIGHT = Math.round(DEFAULT_VIDEO_WIDTH / ASPECT_RATIO);
-export const DEFAULT_ICONS_SIZE = 25;
+export const DEFAULT_ICONS_SIZE = 26;
 
 const InternalVideoPlayer: React.ForwardRefRenderFunction<
   HTMLVideoElement,
@@ -48,12 +48,16 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     height: customHeight = DEFAULT_VIDEO_HEIGHT,
     style = {},
     muted = false,
+    contextmenu = true,
     thumbnail,
     poster,
     loop = false,
     block = false,
     rounded = true,
     primaryColor,
+    playsInline,
+    preload,
+    crossOrigin = "anonymous",
     onClick,
     onPause,
     onPlay,
@@ -65,14 +69,15 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     onError,
     onEnded,
     onWaiting,
-    // ...rest
+    onDownload,
   } = props;
   const currentVideoRef = useRef<HTMLVideoElement>(null);
+  const controlsBarRef = useRef<HTMLDivElement>(null);
   // const secondVideoRef = useRef<HTMLVideoElement>(null);
   const currentContainerRef = useRef<HTMLDivElement>(null);
   const [videoState, setVideoState] = useState<VideoPlayerState>({
     src,
-    playing: false,
+    playing: autoPlay,
     volume:
       volume !== undefined && typeof volume === "number"
         ? volume
@@ -81,6 +86,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         : 1,
     muted:
       (volume !== undefined && typeof volume === "number" && volume === 0) ||
+      autoPlay ||
       muted,
     loop,
     rendered: false,
@@ -93,9 +99,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     buffering: false,
     fullscreen: false,
     error: null,
-    quality: "1080p",
     videoLoaded: false,
-    subtitle: "English",
     playbackProgress: 0,
   });
 
@@ -105,6 +109,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         ...prev,
         actions: playerManager(setVideoState, currentVideoRef.current, {
           onScreenshot,
+          onDownload,
         }) as any,
       }));
   }, [currentVideoRef]);
@@ -210,8 +215,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     }
   };
 
-  // console.log(currentVideoRef.current?.duration);
-
   const prefixCls = getPrefixCls("video");
 
   const classes = ClassNames(className, `${prefixCls}-wrapper`, {
@@ -253,6 +256,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       tabIndex={0}
       title={title}
       style={containerstyle}
+      controlBarElement={controlsBarRef.current}
     >
       <video
         src={getVideoSrc(props, videoState)}
@@ -266,18 +270,21 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         onEnded={onEnded}
         onVolumeChange={onVolumeChange}
         className={prefixCls}
-        crossOrigin="anonymous"
-        preload="metadata"
+        loop={videoState.loop}
+        preload={preload}
         onTimeUpdate={handleTimeUpdate}
         onProgress={onProgress}
         onWaiting={() => {
           onWaiting && onWaiting();
           videoState.actions?.setLoadingData(true);
         }}
+        playsInline={playsInline}
+        crossOrigin={crossOrigin}
         onLoadStart={() => videoState.actions?.setLoadingData(true)}
         onLoadedData={handleVideoLoaded}
         onError={handleVideoError}
         autoPlay={autoPlay}
+        muted={videoState.muted}
       />
       {/* <video
         style={{ display: "none" }}
@@ -300,12 +307,36 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         onPlay={() => videoState.actions?.play()}
         onPuase={() => videoState.actions?.pause()}
       />
-      {videoState.videoLoaded && (
+      {videoState.videoLoaded && contextmenu && (
         <ControlsBar
+          ref={controlsBarRef}
+          customControlBar={
+            typeof contextmenu === "function" ||
+            (typeof contextmenu === "object" && contextmenu.controlBar)
+              ? (typeof contextmenu === "object" &&
+                  typeof contextmenu.controlBar === "function" &&
+                  contextmenu.controlBar(videoState.actions)) ||
+                (typeof contextmenu === "function" &&
+                  contextmenu(videoState.actions))
+              : null
+          }
           videoRef={currentVideoRef?.current}
           videoState={videoState}
           actions={videoState.actions}
+          customButtons={
+            typeof contextmenu === "object"
+              ? (contextmenu as contextmenu)?.customButtons || []
+              : null
+          }
           allowedItems={getAllowedControlBarItems(props)}
+          progressBar={
+            typeof contextmenu === "object" &&
+            contextmenu.progressBar !== undefined
+              ? contextmenu.progressBar
+              : typeof contextmenu === "function"
+              ? false
+              : true
+          }
           durationType={durationType}
         />
       )}

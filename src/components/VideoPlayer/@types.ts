@@ -1,7 +1,21 @@
 import { CSSProperties, ReactNode } from "react";
 import { controlBarAllowedItems } from "../ControlsBar/@types";
 
-interface contextmenu extends controlBarAllowedItems {}
+export interface customButton {
+  placement: "left" | "right";
+  content: ReactNode;
+}
+
+export interface contextmenu extends controlBarAllowedItems {
+  customButtons?: customButton[];
+  progressBar?: boolean;
+  controlBar?: contextmenuRender;
+}
+
+export type contextmenuRender = (
+  actions: VideoPlayerState["actions"]
+) => ReactNode;
+
 export interface VideoPlayerProps {
   src: string | string[];
   defaultSrcIndex?: number;
@@ -19,12 +33,16 @@ export interface VideoPlayerProps {
   title?: string;
   style?: CSSProperties;
   currentTime?: number;
-  contextmenu?: contextmenu;
+  contextmenu?: contextmenu | boolean | contextmenuRender;
   volume?: number;
   paused?: boolean;
   poster?: string;
   thumbnail?: string;
   autoPlay?: boolean;
+  playbackRate?: number;
+  playsInline?: boolean;
+  preload?: string;
+  crossOrigin?: "anonymous" | "use-credentials" | "" | undefined;
   loop?: boolean;
   muted?: boolean;
   containerRef?: React.Ref<any>;
@@ -42,6 +60,7 @@ export interface VideoPlayerProps {
   onScreenshot?: (screenshot: string) => void;
   onLoadedData?: () => void;
   onWaiting?: () => void;
+  onDownload?: () => void;
 }
 
 export interface VideoPlayerState {
@@ -60,8 +79,6 @@ export interface VideoPlayerState {
   error: any;
   rendered: boolean;
   videoLoaded: boolean;
-  quality: string | null;
-  subtitle: string | null;
   playbackProgress: number;
   loadingData: boolean;
   actions?: {
@@ -77,5 +94,6 @@ export interface VideoPlayerState {
     setCurrentSrcIndex: (index: number) => void;
     nextVideo: () => void;
     previousVideo: () => void;
+    download: () => void;
   };
 }

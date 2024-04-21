@@ -137,5 +137,25 @@ export const playerManager: (
         mediaEventHandlers.onScreenshot(file);
       });
     },
+
+    download() {
+      const date = new Date(Date.now());
+
+      const fileName = `Vidify ${date.getFullYear()}-${String(
+        date.getMonth() + 1
+      ).padStart(2, "0")}-${String(date.getDate()).padStart(
+        2,
+        "0"
+      )} at ${String(date.getHours() % 12 || 12).padStart(2, "0")}.${String(
+        date.getMinutes()
+      ).padStart(2, "0")}.${String(date.getSeconds()).padStart(2, "0")} ${
+        date.getHours() >= 12 ? "PM" : "AM"
+      }`;
+
+      downloadFile({
+        url: video?.src as string,
+        name: `${fileName}.mp4`,
+      }).then(() => mediaEventHandlers.onDownload());
+    },
   };
 };

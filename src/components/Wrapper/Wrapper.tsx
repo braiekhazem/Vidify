@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { WrapperProps } from "./@types";
 import classNames from "classnames";
 import { concatPrefixCls } from "@src/utils/concatPrefixCls";
@@ -12,43 +12,58 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
     onClick,
     playing,
     videoState: { loadingData },
+    controlBarElement,
     ...rest
   } = props;
 
-  const [longHover, setLongHover] = useState<boolean>(true);
+  const [hide, setHide] = useState<boolean>(false);
+  const [forceCancel, setForceCancel] = useState<boolean>(false);
   const classes = classNames(className, {
-    [`${prefixCls}-hidden`]: playing && !longHover,
+    [`${prefixCls}-hidden`]: playing && hide,
   });
 
   const videoRef = useRef<HTMLDivElement>(null);
-  let timeout: any;
 
-  const handleMouseEnter = () => {
-    clearTimeout(timeout);
-    setLongHover(true);
-  };
+  let timeoutId: NodeJS.Timeout | null = null;
 
-  const handleMouseLeave = () => {
-    timeout = setTimeout(() => {
-      setLongHover(false);
-    }, 10000);
-  };
+  const manageMenuPreview = () => {
+    timeoutId = setInterval(() => {
+      if (playing && !forceCancel) setHide(true);
+    }, 5000);
 
-  const handleMouseMove = () => {
-    if (!longHover) {
-      setLongHover(true);
-      handleMouseLeave();
-      clearTimeout(timeout);
+    if (!playing) {
+      setHide(false);
+      clearInterval(timeoutId);
     }
   };
+
+  const handleMouseMove = () => setHide(false);
+
+  useEffect(() => {
+    manageMenuPreview();
+
+    return () => {
+      timeoutId && clearInterval(timeoutId);
+    };
+  }, [playing, forceCancel]);
+
+  useEffect(() => {
+    if (controlBarElement) {
+      controlBarElement?.addEventListener("mouseenter", () => {
+        setForceCancel(true);
+      });
+      controlBarElement?.addEventListener("mouseleave", () => {
+        setForceCancel(false);
+      });
+    }
+  }, [controlBarElement]);
 
   return (
     <div
       {...rest}
       className={classes}
       ref={videoRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => timeoutId && clearInterval(timeoutId)}
       onMouseMove={handleMouseMove}
       onClick={onClick}
     >

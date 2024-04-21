@@ -15,4 +15,5 @@ export interface WrapperProps {
   onClick: any;
   tabIndex: number;
   style: React.CSSProperties;
+  controlBarElement: HTMLDivElement | null;
 }

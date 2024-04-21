@@ -58,14 +58,12 @@ const ProgressBar: React.FC<ProgressBarProps> = (props) => {
   //   const { offset, point } = info;
   //   const { left, width } = event.srcElement.getBoundingClientRect();
   //   const clickedPos = (offset.x - left) / containerWidth;
-  //   console.log("hello", clickedPos, { left, containerWidth });
   //   if (clickedPos < 0 || clickedPos > 1) return;
 
   //   const durationMs = videoState.duration * 1000 || 0;
 
   //   const newElapsedMs = durationMs * clickedPos;
   //   const newTimeSec = newElapsedMs / 1000;
-  //   console.log({ newTimeSecDrag: newTimeSec });
   //   // videoState.actions?.updateCurrentTime(setVideoState, newTimeSec, video);
   // };
 

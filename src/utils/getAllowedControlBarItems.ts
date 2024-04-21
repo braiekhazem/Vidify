@@ -1,25 +1,31 @@
 import { controlBarAllowedItems } from "@src/components/ControlsBar/@types";
 import { VideoPlayerProps } from "@src/components/VideoPlayer/@types";
 
-export const defaultAllowedItems = {
+export const defaultAllowedItems: controlBarAllowedItems = {
   screenshot: true,
-  fullScreen: true,
+  fullscreen: true,
   volumeSlider: true,
+  downlaod: true,
 };
 
 export const getAllowedControlBarItems = (
   props: VideoPlayerProps
 ): controlBarAllowedItems => {
   const { contextmenu = defaultAllowedItems } = props;
+
   const {
     screenshot = true,
-    fullScreen = true,
+    fullscreen = true,
     volumeSlider = true,
-  } = contextmenu;
+    downlaod = true,
+  } = typeof contextmenu === "object"
+    ? (contextmenu as controlBarAllowedItems)
+    : defaultAllowedItems;
 
   return {
     screenshot,
-    fullScreen,
+    fullscreen,
     volumeSlider,
+    downlaod,
   };
 };

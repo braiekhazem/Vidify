@@ -1,5 +1,7 @@
 #vf-control-button-play-button-container {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 15px;
   height: 15px;
   cursor: pointer;
