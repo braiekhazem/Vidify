@@ -23,6 +23,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { getPercentage } from "@src/utils/getPercentage";
 import Download from "../Download";
 import { vidifyShortcuts } from "@src/utils/managePlayerKeyDown";
+import { VideoPlayer } from "../VideoPlayer";
 
 const renderItem = (
   options: controlBarAllowedItems,
@@ -95,14 +96,16 @@ const internalControlsBar: React.ForwardRefRenderFunction<
       if (childButton) childButton.click();
     };
 
+    const randomId = `${Math.random() * 99999}`;
+
     return (
       <div
         className={concatPrefixCls(prefixCls, "button")}
         onClick={handleClick}
-        data-tooltip-id={tooltipContent as string}
+        data-tooltip-id={randomId as string}
       >
         <Tooltip
-          id={tooltipContent as string}
+          id={randomId as string}
           variant="dark"
           offset={20}
           noArrow={true}
@@ -136,13 +139,24 @@ const internalControlsBar: React.ForwardRefRenderFunction<
         <>
           <div className={`${prefixCls}-left`}>
             {typeof videoState.src !== "string" &&
+              videoState.currentSrcIndex !== 0 &&
               renderButton(
                 <ArrowNavigation
                   type="prev"
                   disabled={videoState.currentSrcIndex === 0}
                   onClickPrev={() => actions?.previousVideo()}
                 />,
-                `previous (${vidifyShortcuts.prev_video})`
+                <div className={concatPrefixCls(prefixCls, "video-preview")}>
+                  <div>previous {vidifyShortcuts.prev_video}</div>
+                  <VideoPlayer
+                    width="300px"
+                    autoPlay
+                    contextmenu={false}
+                    src={
+                      videoState.src[videoState.currentSrcIndex - 1] as string
+                    }
+                  />
+                </div>
               )}
             {renderButton(
               <ControlIcon
@@ -155,6 +169,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               })`
             )}
             {typeof videoState.src !== "string" &&
+              !(videoState.currentSrcIndex + 1 > videoState.src.length - 1) &&
               renderButton(
                 <ArrowNavigation
                   type="next"
@@ -163,7 +178,17 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   }
                   onClickNext={() => actions?.nextVideo()}
                 />,
-                `next (${vidifyShortcuts.next_video})`
+                <div className={concatPrefixCls(prefixCls, "video-preview")}>
+                  <div>next {vidifyShortcuts.next_video}</div>
+                  <VideoPlayer
+                    width="300px"
+                    autoPlay
+                    contextmenu={false}
+                    src={
+                      videoState.src[videoState.currentSrcIndex + 1] as string
+                    }
+                  />
+                </div>
               )}
 
             {renderButton(
@@ -245,7 +270,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
             )}
             {/* {renderButton(<Speed />)} */}
             {/* {renderButton(<Subtitle />)}
-        {renderButton(<Settings />)} */}
+                {renderButton(<Settings />)} */}
             {renderButton(<MiniPlayer video={videoRef} />, "mini player")}
             {renderItem(
               allowedItems,

@@ -65,7 +65,7 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
         <svg
           stroke="currentColor"
           fill="currentColor"
-          stroke-width="0"
+          strokeWidth="0"
           viewBox="0 0 20 20"
           aria-hidden="true"
           height="35px"
@@ -78,7 +78,7 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
         <svg
           stroke="currentColor"
           fill="currentColor"
-          stroke-width="0"
+          strokeWidth="0"
           viewBox="0 0 20 20"
           aria-hidden="true"
           height="35px"
