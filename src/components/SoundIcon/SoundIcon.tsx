@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { SoundIconProps } from "./@types";
 import { getPrefixCls } from "@src/utils/getPrefixCls";
 import classNames from "classnames";
-import { ReactComponent as SoundSVG } from "../../global/assets/icons/sound/Sound.svg";
-import { ReactComponent as MuteSVG } from "../../global/assets/icons/sound/Mute.svg";
+import { ReactComponent as SoundSVG } from "../../global/assets/icons/volume/Sound.svg";
+import { ReactComponent as MuteSVG } from "../../global/assets/icons/volume/Mute.svg";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 const SoundIcon = React.forwardRef<HTMLDivElement, SoundIconProps>(

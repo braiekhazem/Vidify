@@ -72,9 +72,11 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     onDownload,
   } = props;
   const currentVideoRef = useRef<HTMLVideoElement>(null);
+
   const controlsBarRef = useRef<HTMLDivElement>(null);
-  // const secondVideoRef = useRef<HTMLVideoElement>(null);
+
   const currentContainerRef = useRef<HTMLDivElement>(null);
+
   const [videoState, setVideoState] = useState<VideoPlayerState>({
     src,
     playing: autoPlay,
