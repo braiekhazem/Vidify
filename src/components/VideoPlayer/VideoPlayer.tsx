@@ -48,7 +48,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     height: customHeight = DEFAULT_VIDEO_HEIGHT,
     style = {},
     muted = false,
-    contextmenu = true,
+    controller = true,
     thumbnail,
     poster,
     loop = false,
@@ -59,6 +59,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     preload,
     crossOrigin = "anonymous",
     onClick,
+    onClickNext,
+    onClickPrevious,
     onPause,
     onPlay,
     onProgress: onProgressHnadler,
@@ -70,6 +72,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     onEnded,
     onWaiting,
     onDownload,
+    onAbort,
   } = props;
   const currentVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -112,6 +115,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         actions: playerManager(setVideoState, currentVideoRef.current, {
           onScreenshot,
           onDownload,
+          onClickNext,
+          onClickPrevious,
         }) as any,
       }));
   }, [currentVideoRef]);
@@ -272,6 +277,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         onEnded={onEnded}
         onVolumeChange={onVolumeChange}
         className={prefixCls}
+        onAbort={onAbort}
         loop={videoState.loop}
         preload={preload}
         onTimeUpdate={handleTimeUpdate}
@@ -309,33 +315,33 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         onPlay={() => videoState.actions?.play()}
         onPuase={() => videoState.actions?.pause()}
       />
-      {videoState.videoLoaded && contextmenu && (
+      {videoState.videoLoaded && controller && (
         <ControlsBar
           ref={controlsBarRef}
           customControlBar={
-            typeof contextmenu === "function" ||
-            (typeof contextmenu === "object" && contextmenu.controlBar)
-              ? (typeof contextmenu === "object" &&
-                  typeof contextmenu.controlBar === "function" &&
-                  contextmenu.controlBar(videoState.actions)) ||
-                (typeof contextmenu === "function" &&
-                  contextmenu(videoState.actions))
+            typeof controller === "function" ||
+            (typeof controller === "object" && controller.controlBar)
+              ? (typeof controller === "object" &&
+                  typeof controller.controlBar === "function" &&
+                  controller.controlBar(videoState.actions)) ||
+                (typeof controller === "function" &&
+                  controller(videoState.actions))
               : null
           }
           videoRef={currentVideoRef?.current}
           videoState={videoState}
           actions={videoState.actions}
           customButtons={
-            typeof contextmenu === "object"
-              ? (contextmenu as contextmenu)?.customButtons || []
+            typeof controller === "object"
+              ? (controller as contextmenu)?.customButtons || []
               : null
           }
           allowedItems={getAllowedControlBarItems(props)}
           progressBar={
-            typeof contextmenu === "object" &&
-            contextmenu.progressBar !== undefined
-              ? contextmenu.progressBar
-              : typeof contextmenu === "function"
+            typeof controller === "object" &&
+            controller.progressBar !== undefined
+              ? controller.progressBar
+              : typeof controller === "function"
               ? false
               : true
           }

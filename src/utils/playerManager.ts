@@ -85,6 +85,7 @@ export const playerManager: (
             ? prev.src.length - 1
             : prev.currentSrcIndex + 1,
       }));
+      mediaEventHandlers.onClickNext && mediaEventHandlers.onClickNext();
     },
 
     previousVideo() {
@@ -94,6 +95,8 @@ export const playerManager: (
         currentSrcIndex:
           prev.currentSrcIndex - 1 < 0 ? 0 : prev.currentSrcIndex - 1,
       }));
+      mediaEventHandlers.onClickPrevious &&
+        mediaEventHandlers.onClickPrevious();
     },
 
     screenShot() {
@@ -134,7 +137,8 @@ export const playerManager: (
       let canvas = capture(video as HTMLVideoElement);
       downloadFile({ url: canvas.toDataURL(), name: fileName });
       convertDataURLtoFile(canvas.toDataURL(), fileName).then((file) => {
-        mediaEventHandlers.onScreenshot(file);
+        mediaEventHandlers.onScreenshot &&
+          mediaEventHandlers.onScreenshot(file);
       });
     },
 
@@ -155,7 +159,9 @@ export const playerManager: (
       downloadFile({
         url: video?.src as string,
         name: `${fileName}.mp4`,
-      }).then(() => mediaEventHandlers.onDownload());
+      }).then(
+        () => mediaEventHandlers.onDownload && mediaEventHandlers.onDownload()
+      );
     },
   };
 };

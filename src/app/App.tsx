@@ -14,7 +14,8 @@ const App = () => {
       <VideoPlayer
         ref={videoRef}
         loop={false}
-        defaultSrcIndex={1}
+        defaultSrcIndex={0}
+        preload=""
         durationType={"remainingTime"}
         src={
           url || [
@@ -24,20 +25,9 @@ const App = () => {
             "https://dl.dropboxusercontent.com/scl/fi/sxr9bdro2sq1g7ne5m5u1/0dda3906-9b06-471d-82f5-6fc357e9c035.mp4?rlkey=z41jupmqi8p8v5wlj4bpg9ccm&dl=0",
           ]
         }
-        contextmenu={{
-          screenshot: true,
-          customButtons: [{ content: "test", placement: "right" }],
-          // controlBar: (actions) => {
-          //   console.log({ actions });
-          //   return (
-          //     <div>
-          //       <button onClick={actions?.play}>Play</button>
-          //       <button onClick={actions?.pause}>Pause</button>
-          //     </div>
-          //   );
-          // },
-        }}
-        thumbnail="https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png"
+        crossOrigin=""
+        primaryColor="red"
+        thumbnail="https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         volume={0.7}
         annotation={
           <img src="https://i.loli.net/2019/06/06/5cf8c5d94521136430.png" />
@@ -55,6 +45,8 @@ const App = () => {
         onDownload={() => console.log("download...")}
         onVolumeChange={() => console.log("vol change")}
         onScreenshot={(file) => console.log({ file })}
+        onClickNext={() => console.log("next")}
+        onClickPrevious={() => console.log("nprevious")}
       />
       {/* <VideoPlayer
         src={
