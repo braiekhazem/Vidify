@@ -4,6 +4,8 @@ import svgr from "vite-plugin-svgr";
 import path from "path";
 import dts from "vite-plugin-dts";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import { typescriptPaths } from "rollup-plugin-typescript-paths";
+import typescript from "@rollup/plugin-typescript";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,24 +17,25 @@ export default defineConfig({
       "@src": path.resolve(__dirname, "./src"),
     },
   },
-  // build: {
-  //   lib: {
-  //     entry: path.resolve(__dirname, "src/index.ts"),
-  //     name: "vidify",
-  //     fileName: (format) => `index.${format}.js`,
-  //   },
-  //   rollupOptions: {
-  //     external: ["react", "react-dom"],
-  //     output: {
-  //       globals: {
-  //         react: "React",
-  //         "react-dom": "ReactDOM",
-  //       },
-  //     },
-  //   },
-  //   sourcemap: false,
-  //   emptyOutDir: false,
-  // },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, "src/main.tsx"),
+      name: "vidify",
+      fileName: (format) => `index.${format}.js`,
+    },
+    rollupOptions: {
+      external: ["react", "react-dom"],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
+    },
+    sourcemap: false,
+    emptyOutDir: false,
+  },
+
   server: {
     port: 3000,
 
