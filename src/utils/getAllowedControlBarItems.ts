@@ -11,15 +11,15 @@ export const defaultAllowedItems: controlBarAllowedItems = {
 export const getAllowedControlBarItems = (
   props: VideoPlayerProps
 ): controlBarAllowedItems => {
-  const { contextmenu = defaultAllowedItems } = props;
+  const { controller = defaultAllowedItems } = props;
 
   const {
     screenshot = true,
     fullscreen = true,
     volumeSlider = true,
     downlaod = true,
-  } = typeof contextmenu === "object"
-    ? (contextmenu as controlBarAllowedItems)
+  } = typeof controller === "object"
+    ? (controller as controlBarAllowedItems)
     : defaultAllowedItems;
 
   return {
