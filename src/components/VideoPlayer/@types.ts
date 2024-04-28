@@ -13,7 +13,8 @@ export interface contextmenu extends controlBarAllowedItems {
 }
 
 export type contextmenuRender = (
-  actions: VideoPlayerState["actions"]
+  actions: VideoPlayerState["actions"],
+  info: VideoPlayerState
 ) => ReactNode;
 
 export interface VideoPlayerProps {

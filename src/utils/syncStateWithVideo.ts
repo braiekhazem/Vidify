@@ -14,5 +14,7 @@ export const syncStateWithVideo = (
   }
 
   video.muted = muted;
-  video.volume = volume;
+  if (volume >= 0 && volume <= 1) {
+    video.volume = volume;
+  } else console.error("Volume outside of range [0,1]");
 };

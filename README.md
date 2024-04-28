@@ -1,41 +1,37 @@
-<p align="center">
-  <img alt="logo" src="./assets/logo.png" width="100" max-width="100%">
-</p>
-
-<h1 align="center">Vidify</h1>
+<h1 style="display:flex;align-items:center ; justify-content:center ;gap:10px" >  <img alt="vidify-logo" src="./src/global/assets/icons/logo/logo.svg" width="80" height="80"> Vidify</h1>
 
 <div align="center">
-  <a href="https://www.npmjs.com/package/react-h5-audio-player" title="MIT License">
-    <img src="https://img.shields.io/npm/l/react-h5-audio-player.svg?color=brightgreen" alt="MIT License">
+  <a href="https://www.npmjs.com/package/vidify" title="MIT License">
+    <img src="https://img.shields.io/npm/l/vidify?color=brightgreen" alt="MIT License">
   </a>
-  <a href="https://www.npmjs.com/package/react-h5-audio-player" title="Monthly download">
-    <img src="https://img.shields.io/npm/dm/react-h5-audio-player.svg?color=green" alt="Monthly download">
+  <a href="https://www.npmjs.com/package/vidify" title="Latest version">
+    <img src="https://img.shields.io/npm/v/vidify" alt="Latest version">
   </a>
-  <a href="https://www.npmjs.com/package/react-h5-audio-player" title="Latest version">
-    <img src="https://img.shields.io/npm/v/react-h5-audio-player.svg" alt="Latest version">
+  <a href="https://www.npmjs.com/package/vidify" title="Latest version">
+    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-blue.svg" alt="Latest version">
   </a>
 </div>
 
-- Video player component that provides consistent UI/UX on different browsers.
-- Super customizable layout.
-- Provide tools for users to add annotations.
-- Vidify supports passing an array of video sources.
-- Flexbox css with SVG icons. Mobile friendly.
-- Provide options for users to customize the primary color.
-- Accessibility supported, keyboards events supported.
-- Vidify offers all the essential features expected from a modern video player.
-- Customize the control bar, context menu, progress bar, and more to match your application's design and user experience requirements.
-- Define states and actions to control Vidify with your own user interface elements.
-- vidify supports customizable context menus for enhanced user interaction.
-- Written in TypeScript.
+## ✨ Features
+
+- 📹 Video player component that provides consistent UI/UX on different browsers.
+- 🎨 Super customizable layout.
+- 📝 Provide tools for users to add annotations.
+- 🔄 Vidify supports passing an array of video sources.
+- 📱 Flexbox css with SVG icons. Mobile friendly.
+- 🎨 Provide options for users to customize the primary color.
+- ♿️ Accessibility supported, keyboards events supported.
+- ✔️ Vidify offers all the essential features expected from a modern video player.
+- 🛠️ Customize the control bar, progress bar, and more to match your a- pplication's design and user experience requirements.
+- 🎮 Define states and actions to control Vidify with your own user interface elements.
+- 📋 Vidify supports customizable ccontrol bar for enhanced user interaction.
+- 💻 Written in TypeScript.
 
 ![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1713985718/Screen_Shot_2024-04-24_at_8.07.33_PM_vbdqeg.png)
 
-Live Demo: [Demo](https://vidify-demo.netlify.app)
+## 🔗 🚀 Live Demo: [Demo](https://vidify-demo.netlify.app)
 
-Supported browsers: Chrome, Firefox, Safari, Opera, Edge.
-
-## Installation
+## 📦 Install
 
 You can install Vidify via npm:
 
@@ -49,7 +45,7 @@ Or using yarn:
 yarn add vidify
 ```
 
-## Usage
+## 🔨 Usage
 
 ```jsx
 import { VideoPlayer } from "vidify";
@@ -61,7 +57,7 @@ const MyVideoPlayer = ({ src }) => (
 export default MyVideoPlayer;
 ```
 
-#### Keyboard shortcuts (When video player focused)
+### ⌨️ Keyboard shortcuts (When video player focused)
 
 | Key binding | Action            |
 | ----------- | ----------------- |
@@ -77,9 +73,9 @@ export default MyVideoPlayer;
 | M           | Toggle mute       |
 | F           | Toggle fullscreen |
 
-## Props
+## 🛠️ Props
 
-### HTML Video Tag Native Attributes
+### 🏷️ HTML Video Tag Native Attributes
 
 | Props       | Type                           | Default     | Note |
 | ----------- | ------------------------------ | ----------- | ---- |
@@ -91,9 +87,9 @@ export default MyVideoPlayer;
 | volume      | number                         | 1.0         |
 | crossOrigin | string                         | 'anonymous' |      |
 
-More attributes details: [Vidify props attributes](https://github.com/braiekhazem/Vidify/blob/main/src/components/VideoPlayer/%40types.ts#L19)
+##### More attributes details : [Vidify props attributes](https://github.com/braiekhazem/Vidify/blob/main/src/components/VideoPlayer/%40types.ts#L19)
 
-### Vididy Props
+### 🛠️ Vidify Props
 
 | Prop            | Type                                                | Description                                                                       |
 | --------------- | --------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -112,7 +108,7 @@ More attributes details: [Vidify props attributes](https://github.com/braiekhaze
 | placeholder     | string                                              | The URL of an image to display as a placeholder before the video loads.           |
 | title           | string                                              | The title of the video player.                                                    |
 | style           | CSSProperties                                       | Custom CSS styles to apply to the video player.                                   |
-| controller      | contextmenu \| boolean \| contextmenuRender         | Configurations for the context menu of the video player.                          |
+| controller      | contextmenu \| boolean \| contextmenuRender         | Configurations for the control bar of the video player.                           |
 | volume          | number                                              | The volume level of the video player (0 to 1).                                    |
 | paused          | boolean                                             | Whether the video is paused or not.                                               |
 | poster          | string                                              | The URL of an image to display as the video poster.                               |
@@ -128,7 +124,7 @@ More attributes details: [Vidify props attributes](https://github.com/braiekhaze
 | block           | boolean                                             | Whether the video player should be displayed full width or not.                   |
 | rounded         | boolean                                             |
 
-### Event Props
+### 🎉 Event Props
 
 | Props            | Type             | Default | Note                                                                                |
 | ---------------- | ---------------- | ------- | ----------------------------------------------------------------------------------- |
@@ -145,13 +141,13 @@ More attributes details: [Vidify props attributes](https://github.com/braiekhaze
 | onDurationChange | Function (Event) | null    | Called when the duration video change                                               |
 | onVolumeChange   | Function (Event) | null    | Called when the volume video change                                                 |
 | onScreenshot     | Function (File)  | null    | Called when the user screenshot                                                     |
-| onLoadedData     | Function (File)  | null    | Called when the video data loaded                                                   |
-| onWaiting        | Function (File)  | null    | Called when the user is waiting the video to load                                   |
-| onDownload       | Function (File)  | null    | Called when the user download the video                                             |
+| onLoadedData     | Function ()      | null    | Called when the video data loaded                                                   |
+| onWaiting        | Function ()      | null    | Called when the user is waiting the video to load                                   |
+| onDownload       | Function ()      | null    | Called when the user download the video                                             |
 
-## Dynamic Source Switching
+## 🔄 Dynamic Source Switching with Tooltip Preview
 
-Vidify supports passing an array of video sources (srcs) to enable dynamic source switching. This feature allows users to seamlessly switch between different video sources within the same player instance.
+Vidify supports passing an array of video sources (srcs) to enable dynamic source switching. This feature allows users to seamlessly switch between different video sources within the same player instance. Additionally, when hovering over the next or previous video button, Vidify displays a tooltip previewing the next or previous video. This enhancement provides users with a visual preview of upcoming content, enabling informed decisions when switching between videos.
 
 ```jsx
 import { VideoPlayer } from "vidify";
@@ -174,7 +170,9 @@ const MyVideoPlayer = () => (
 export default MyVideoPlayer;
 ```
 
-## Customizable Primary Color
+![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1714307088/Screen_Shot_2024-04-28_at_1.24.28_PM_sqmko7.png)
+
+## 🎨 Customizable Primary Color
 
 Vidify provides a 'primaryColor' prop that allows users to specify a custom primary color for the video player interface. This feature enables users to match the video player's appearance to their application's branding or design scheme.
 
@@ -196,7 +194,7 @@ export default MyVideoPlayer;
 
 ![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1713988952/Screen_Shot_2024-04-24_at_9.02.09_PM_hl5afg.png)
 
-## Control Bar and Progress Bar Customization
+## 🛠️ Control Bar and Progress Bar Customization
 
 The `controller` prop in Vidify allows for fine-grained control over the visibility and customization of the control bar and progress bar. Users can choose from various options to tailor the video player interface according to their needs.
 
@@ -232,14 +230,24 @@ controller={{
   fullscreen: false,
   progressBar: false,
   controlBar: (actions) => (
-    <div>
-      <span onClick={actions?.play}>Play</span>
-      <span onClick={actions?.pause}>Pause</span>
-    </div>
+    <div style={{ display: "flex", columnGap: "10px" }}>
+      <p>{info.currentTime} / {info.duration}</p>
+      <button onClick={actions?.play}>Play</button>
+      <button onClick={actions?.pause}>Pause</button>
+      <p>Volume</p>
+      <input
+        type="range"
+        onChange={(e) => actions?.setVolume(+e.target. value / 100)}
+      />
+      <button onClick={actions?.screenShot}  >ScreenShot</button>
+      <button onClick={actions?.download}>Download</button>
+    /div>
   ),
 }}
 
 ```
+
+![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1714305851/Screen_Shot_2024-04-28_at_1.03.49_PM_eaygp7.png)
 
 ### Option 4: Custom Buttons
 
@@ -255,16 +263,56 @@ controller={{
 
 ```
 
-## Release Notes
+## ❤️ Support
 
-https://github.com/lhz516/react-h5-audio-player/releases
+If you've found Vidify useful and would like to support its ongoing development, you can donate via Buy Me a Coffee:
 
-## How to contribute
+<a href="https://buymeacoffee.com/hazembraiek" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200"></a>
 
-Issues and PR's are welcome.
+Your support is greatly appreciated! ☕️❤️
 
-## Credits
+## 🤝 How to Contribute
 
-- Inspired by [React Audio Player](https://github.com/justinmc/react-audio-player).
-- Icon wrapper [iconify](https://iconify.design/)
-- Icons [Material Design Icons](https://github.com/Templarian/MaterialDesign)
+Thank you for considering contributing to Vidify! Here's how you can help:
+
+### Opening Issues
+
+If you encounter any bugs or have suggestions for improvements, please [open an issue](https://github.com/your-username/vidify/issues) on GitHub. Be sure to include detailed information about the issue or suggestion, along with any relevant screenshots or code examples.
+
+### Pull Requests
+
+We welcome contributions from the community! If you'd like to contribute code changes, enhancements, or new features, please follow these steps:
+
+1. Fork the repository to your GitHub account.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and ensure they are thoroughly tested.
+4. Submit a pull request with a clear description of your changes and the problem they solve.
+5. We'll review your pull request and provide feedback or merge it into the main branch.
+
+### Code Style
+
+Please adhere to the existing code style and conventions when making changes to the codebase. This helps maintain consistency and readability across the project.
+
+### Feature Requests
+
+If you have an idea for a new feature or improvement, feel free to [open an issue](https://github.com/braiekhazem/Vidify/issues) to discuss it with the maintainers and community members. We're always interested in hearing your ideas!
+
+By contributing to Vidify, you're helping to make it a better tool for everyone. Thank you for your support!
+
+## 📜 License
+
+```markdown
+Copyright 2024 Hazem braiek
+
+Licensed under the Apache License, Version 2.0.
+You may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```

@@ -47,3 +47,17 @@ $class-prefix-vidify: "vf-video";
     max-height: 30px;
   }
 }
+
+.#{$class-prefix-vidify}-error {
+  background: var(--vf-color-white);
+  color: var(--vf-color-red);
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}

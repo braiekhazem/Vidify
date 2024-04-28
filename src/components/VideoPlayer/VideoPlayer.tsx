@@ -294,21 +294,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         autoPlay={autoPlay}
         muted={videoState.muted}
       />
-      {/* <video
-        style={{ display: "none" }}
-        src={src}
-        poster={thumbnail}
-        id="video2"
-        width={block ? "100%" : width}
-        ref={secondVideoRef}
-        controls={false}
-        onPause={onPause}
-        crossOrigin="anonymous"
-        preload={"auto"}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedData={handleVideoLoaded}
-        autoPlay={autoPlay}
-      /> */}
 
       <PlayButton
         videoState={videoState}
@@ -323,9 +308,9 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
             (typeof controller === "object" && controller.controlBar)
               ? (typeof controller === "object" &&
                   typeof controller.controlBar === "function" &&
-                  controller.controlBar(videoState.actions)) ||
+                  controller.controlBar(videoState.actions, videoState)) ||
                 (typeof controller === "function" &&
-                  controller(videoState.actions))
+                  controller(videoState.actions, videoState))
               : null
           }
           videoRef={currentVideoRef?.current}
@@ -349,6 +334,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         />
       )}
       <div className={gradientClasses}></div>
+      <div className={gradientClasses}></div>
       <div
         className={`${gradientClasses} ${concatPrefixCls(
           prefixCls,
@@ -365,17 +351,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         {annotation}
       </div>
       {videoState.error && (
-        <div
-          style={{
-            background: "white",
-            color: "red",
-            position: "absolute",
-            left: "20px",
-            top: "20px",
-            padding: "10px",
-            borderRadius: "5px",
-          }}
-        >
+        <div className={concatPrefixCls(prefixCls, "error")}>
           Error : video not supported
         </div>
       )}
