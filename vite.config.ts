@@ -15,24 +15,24 @@ export default defineConfig({
       "@src": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: "vidify",
-      fileName: (format) => `index.${format}.js`,
-    },
-    rollupOptions: {
-      external: ["react", "react-dom"],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
-      },
-    },
-    sourcemap: false,
-    emptyOutDir: false,
-  },
+  // build: {
+  //   lib: {
+  //     entry: path.resolve(__dirname, "src/index.ts"),
+  //     name: "vidify",
+  //     fileName: (format) => `index.${format}.js`,
+  //   },
+  //   rollupOptions: {
+  //     external: ["react", "react-dom"],
+  //     output: {
+  //       globals: {
+  //         react: "React",
+  //         "react-dom": "ReactDOM",
+  //       },
+  //     },
+  //   },
+  //   sourcemap: false,
+  //   emptyOutDir: false,
+  // },
   server: {
     port: 3000,
 
