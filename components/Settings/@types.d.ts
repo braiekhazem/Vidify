@@ -1,0 +1,2 @@
+export interface SettingsProps {
+}
