@@ -8,6 +8,7 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr(), dts(), cssInjectedByJsPlugin()],
+  base: "/vidify/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "."),
