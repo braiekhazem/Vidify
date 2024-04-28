@@ -1,4 +1,4 @@
-<h1 style="display:flex;align-items:center ; justify-content:center ;gap:10px" >  <img alt="vidify-logo" src="./src/global/assets/icons/logo/logo.svg" width="80" height="80"> Vidify</h1>
+<div align="center">  <img  alt="vidify-logo" src="./src/global/assets/icons/logo/logo.svg" width="80" height="80" style="display:inline"> <h1 style="margin-top:0" >Vidify</h1></div>
 
 <div align="center">
   <a href="https://www.npmjs.com/package/vidify" title="MIT License">
@@ -11,6 +11,8 @@
     <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-blue.svg" alt="Latest version">
   </a>
 </div>
+
+### 🔗 🚀 Live Demo: [Demo](https://vidify-demo.netlify.app)
 
 ## ✨ Features
 
@@ -28,8 +30,6 @@
 - 💻 Written in TypeScript.
 
 ![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1713985718/Screen_Shot_2024-04-24_at_8.07.33_PM_vbdqeg.png)
-
-## 🔗 🚀 Live Demo: [Demo](https://vidify-demo.netlify.app)
 
 ## 📦 Install
 
