@@ -13,7 +13,8 @@ export interface contextmenu extends controlBarAllowedItems {
 }
 
 export type contextmenuRender = (
-  actions: VideoPlayerState["actions"]
+  actions: VideoPlayerState["actions"],
+  info: VideoPlayerState
 ) => ReactNode;
 
 export interface VideoPlayerProps {
@@ -33,7 +34,7 @@ export interface VideoPlayerProps {
   title?: string;
   style?: CSSProperties;
   currentTime?: number;
-  contextmenu?: contextmenu | boolean | contextmenuRender;
+  controller?: contextmenu | boolean | contextmenuRender;
   volume?: number;
   paused?: boolean;
   poster?: string;
@@ -49,6 +50,8 @@ export interface VideoPlayerProps {
   block?: boolean;
   rounded?: boolean;
   onClick?: (event: React.SyntheticEvent) => void;
+  onClickNext?: () => void;
+  onClickPrevious?: () => void;
   onError?: (error?: string) => void;
   onPlay?: () => void;
   onProgress?: () => void;
@@ -61,6 +64,7 @@ export interface VideoPlayerProps {
   onLoadedData?: () => void;
   onWaiting?: () => void;
   onDownload?: () => void;
+  onAbort?: () => void;
 }
 
 export interface VideoPlayerState {

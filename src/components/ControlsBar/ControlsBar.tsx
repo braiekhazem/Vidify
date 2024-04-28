@@ -151,7 +151,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   <VideoPlayer
                     width="300px"
                     autoPlay
-                    contextmenu={false}
+                    controller={false}
                     src={
                       videoState.src[videoState.currentSrcIndex - 1] as string
                     }
@@ -183,7 +183,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   <VideoPlayer
                     width="300px"
                     autoPlay
-                    contextmenu={false}
+                    controller={false}
                     src={
                       videoState.src[videoState.currentSrcIndex + 1] as string
                     }
