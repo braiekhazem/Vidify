@@ -5,7 +5,7 @@ import logo from "./../global/assets/icons/logo/logo.svg";
 const App = () => {
   const [url, setURL] = useState("");
   const videoRef = useRef(null);
-
+  console.log("Hello in vidify , React Video Player");
   console.log({ videoRef });
   return (
     <div className="app">
