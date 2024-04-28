@@ -4421,4 +4421,3 @@ const hl = (e, t, n) => ({
 export {
   Ur as VideoPlayer
 };
-//# sourceMappingURL=index.es.js.map
