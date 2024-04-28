@@ -12,7 +12,7 @@
   </a>
 </div>
 
-### 🔗 🚀 Live Demo: [Demo](https://vidify-demo.netlify.app)
+### 🔗 🚀 Live Demo: [Demo](https://braiekhazem.github.io/Vidify/)
 
 ## ✨ Features
 
