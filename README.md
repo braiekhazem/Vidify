@@ -1,4 +1,4 @@
-<div align="center">  <img  alt="vidify-logo" src="./src/global/assets/icons/logo/logo.svg" width="80" height="80" style="display:inline"> <h1 style="margin-top:0" >Vidify</h1></div>
+<div align="center">  <img  alt="vidify-logo" src="./assets/logo.svg" width="80" height="80" style="display:inline"> <h1 style="margin-top:0" >Vidify</h1></div>
 
 <div align="center">
   <a href="https://www.npmjs.com/package/vidify" title="MIT License">
@@ -7,7 +7,7 @@
   <a href="https://www.npmjs.com/package/vidify" title="Latest version">
     <img src="https://img.shields.io/npm/v/vidify" alt="Latest version">
   </a>
-  <a href="https://www.npmjs.com/package/vidify" title="Latest version">
+  <a href="https://buymeacoffee.com/hazembraiek" title="Latest version">
     <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-blue.svg" alt="Latest version">
   </a>
 </div>
