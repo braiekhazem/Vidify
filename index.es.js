@@ -630,7 +630,18 @@ Check the top-level render call using <` + S + ">.");
   }()), It;
 }
 process.env.NODE_ENV === "production" ? Jt.exports = En() : Jt.exports = xn();
-var P = Jt.exports, Br = { exports: {} };
+var P = Jt.exports;
+const pr = (e) => !e || typeof e == "function" ? e : (t) => {
+  e.current = t;
+};
+function gr(e, t) {
+  const n = pr(e), r = pr(t);
+  return (o) => {
+    typeof n == "function" && n(o), typeof r == "function" && r(o);
+  };
+}
+const rt = (e) => `vf-${e}`;
+var Br = { exports: {} };
 /*!
 	Copyright (c) 2018 Jed Watson.
 	Licensed under the MIT License (MIT), see
@@ -667,17 +678,7 @@ var P = Jt.exports, Br = { exports: {} };
   })();
 })(Br);
 var Sn = Br.exports;
-const xe = /* @__PURE__ */ bn(Sn), pr = (e) => !e || typeof e == "function" ? e : (t) => {
-  e.current = t;
-};
-function gr(e, t) {
-  const n = pr(e), r = pr(t);
-  return (o) => {
-    typeof n == "function" && n(o), typeof r == "function" && r(o);
-  };
-}
-const rt = (e) => `vf-${e}`;
-const Ie = (e, t) => (t == null ? void 0 : t.split(" ")).map((r) => `${e}-${r}`).join(" "), Cn = et.forwardRef(
+const xe = /* @__PURE__ */ bn(Sn), Ie = (e, t) => (t == null ? void 0 : t.split(" ")).map((r) => `${e}-${r}`).join(" "), Cn = et.forwardRef(
   (e, t) => {
     const {
       onClick: n,
