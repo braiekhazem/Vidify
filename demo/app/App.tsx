@@ -20,10 +20,8 @@ const App = () => {
         durationType={"remainingTime"}
         src={
           url || [
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
             "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-            "https://dl.dropboxusercontent.com/scl/fi/sxr9bdro2sq1g7ne5m5u1/0dda3906-9b06-471d-82f5-6fc357e9c035.mp4?rlkey=z41jupmqi8p8v5wlj4bpg9ccm&dl=0",
           ]
         }
         controller={{}}
