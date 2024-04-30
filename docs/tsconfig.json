@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    // Strict mode
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "useUnknownInCatchVariables": true,
+
+     // No unused code 
+     "noUnusedLocals": true,
+     "noUnusedParameters": true,
+     "allowUnusedLabels": false,
+     "allowUnreachableCode": false,
+ 
+     // No implicit code 
+     "noImplicitOverride": true,
+     "noImplicitReturns": true,
+ 
+     // Others
+     "noUncheckedIndexedAccess": true,
+     "noPropertyAccessFromIndexSignature": true,
+     "noFallthroughCasesInSwitch": true,
+     "exactOptionalPropertyTypes": true,
+     "forceConsistentCasingInFileNames": true,
+     "declaration": false,
+     "typeRoots": ["./dist/index.d.ts", "node_modules/@types"],
+
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["./src/*"]
+    }
+  },
+  "ts-node": {
+    // 
+    "esm": true, 
+  },
+  "include": ["src","./src/index.ts", "demo/app"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "types": ["vite/client"]
+}
