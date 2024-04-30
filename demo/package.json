@@ -1,30 +1,12 @@
 {
-  "homepage": "https://braiekhazem.github.io/Vidify",
   "name": "vidify",
   "author": "hazem braiek",
   "private": false,
-  "version": "0.0.10",
+  "version": "0.0.0",
   "type": "module",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "sideEffects": true,
   "files": [
     "/dist"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "bin": {
-    "mycli": "./cli.cjs"
-  },
   "scripts": {
     "test": "jest --watchAll --coverage",
     "dev": "vite",

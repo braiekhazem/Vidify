@@ -12,26 +12,16 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [
-        "classnames",
-        "rc-slider",
-        "react-full-screen",
-        "rc-tooltip",
-        "react-tooltip",
-        "rc-slider/assets/index.css",
+        "/classnames",
+        "/rc-slider",
+        "/react-full-screen",
+        "/rc-tooltip",
+        "/react-tooltip",
+        "/rc-slider/assets/index.css",
+        "/react-tooltip/dist/react-tooltip.css",
+        "/react-use-pip",
       ],
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules") && !id.includes("sentry")) {
-            return id
-              .toString()
-              .split("node_modules/")[1]
-              .split("/")[0]
-              .toString();
-          }
-        },
-      },
     },
-    sourcemap: true,
   },
 
   server: {
