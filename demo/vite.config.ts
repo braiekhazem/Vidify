@@ -18,6 +18,7 @@ export default defineConfig({
         "rc-tooltip",
         "react-tooltip",
         "rc-slider/assets/index.css",
+        "react-tooltip/dist/react-tooltip.css",
       ],
       output: {
         manualChunks(id) {
