@@ -6,7 +6,6 @@ import React, {
   useState,
 } from "react";
 import { VideoPlayerProps, VideoPlayerState, contextmenu } from "./@types";
-import ClassNames from "classnames";
 import mergeRefs from "./../../utils/mergeRefs";
 import { getPrefixCls } from "./../../utils/getPrefixCls";
 import { ControlsBar } from "../ControlsBar";
@@ -224,7 +223,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const prefixCls = getPrefixCls("video");
 
-  const classes = ClassNames(className, `${prefixCls}-wrapper`, {
+  const classes = classNames(className, `${prefixCls}-wrapper`, {
     [`${prefixCls}-wrapper-fullscreen`]: videoState.fullscreen,
     [`${prefixCls}-block`]: block,
     [`${prefixCls}-rounded`]: rounded,

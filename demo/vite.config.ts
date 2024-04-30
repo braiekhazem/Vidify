@@ -15,7 +15,11 @@ export default defineConfig({
       "@src": path.resolve(__dirname, "./src"),
     },
   },
-  build: {},
+  build: {
+    rollupOptions: {
+      external: ["classnames"], // Add 'classnames' to the external dependencies
+    },
+  },
 
   server: {
     port: 3000,
