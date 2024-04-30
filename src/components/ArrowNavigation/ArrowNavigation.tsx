@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowNavigationProps } from "./@types";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
 import { ReactComponent as NextSVG } from "../../global/assets/icons/arrowNavigation/next.svg";
 import { ReactComponent as PreviousSVG } from "../../global/assets/icons/arrowNavigation/previous.svg";

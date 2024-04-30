@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SpeedProps } from "./@types";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import useWindowSize from "@src/hooks/useWindowSize";
 
 const Speed: React.FC<SpeedProps> = (props) => {

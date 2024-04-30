@@ -1,5 +1,6 @@
 # Logs
 logs
+/docs/logs
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -9,6 +10,8 @@ lerna-debug.log*
 
 node_modules
 dist
+/docs/node_modules
+/docs/dist
 dist-ssr
 *.local
 
@@ -25,6 +28,9 @@ dist-ssr
 
 .package-lock.json
 package-lock.json
+
+./docs/package-lock.json
+./docs/package-lock.json
 
 Dockerfile
 .env

@@ -1,4 +1,4 @@
-import { fullScreenMode } from "@src/components/FullScreen/FullScreen";
+import { fullScreenMode } from "./../components/FullScreen/FullScreen";
 import { VideoPlayerState } from "@src/components/VideoPlayer/@types";
 
 export const vidifyShortcuts = {

@@ -2,7 +2,7 @@ import React from "react";
 import { SubtitleProps } from "./@types";
 import { ReactComponent as SubtitleSVG } from "../../global/assets/icons/subtitle/subtitle.svg";
 import { ReactComponent as InactiveSubtitleSVG } from "../../global/assets/icons/subtitle/inactive-subtitle.svg";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 
 const Subtitle: React.FC<SubtitleProps> = (props) => {
   const {} = props;

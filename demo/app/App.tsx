@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
-import { VideoPlayer } from "..";
-import logo from "./../global/assets/icons/logo/logo.svg";
+import { VideoPlayer } from "../../src/index";
+import logo from "./../../assets/logo.svg";
 
 const App = () => {
   const [url, setURL] = useState("");
   const videoRef = useRef(null);
-  console.log("Hello in vidify , React Video Player");
+  console.log("Hello in vidify , React Video Player, hhssh");
   console.log({ videoRef });
+
   return (
     <div className="app">
       <h1>Hello in vidify</h1>

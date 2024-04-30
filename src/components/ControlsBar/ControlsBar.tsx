@@ -1,13 +1,13 @@
 import React, { ReactNode, useState } from "react";
 import { ControlsBarProps, controlBarAllowedItems } from "./@types";
 import classNames from "classnames";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import ControlIcon from "../ControlIcon";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import SoundIcon from "../SoundIcon";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { formatTime } from "@src/utils/formatDurationTime";
+import { formatTime } from "./../../utils/formatDurationTime";
 // import Settings from "../Settings";
 import FullScreen from "../FullScreen";
 // import Subtitle from "../Subtitle";
@@ -20,9 +20,9 @@ import { VideoPlayerProps } from "../VideoPlayer/@types";
 // import Speed from "../Speed";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { getPercentage } from "@src/utils/getPercentage";
+import { getPercentage } from "./../../utils/getPercentage";
 import Download from "../Download";
-import { vidifyShortcuts } from "@src/utils/managePlayerKeyDown";
+import { vidifyShortcuts } from "./../../utils/managePlayerKeyDown";
 import { VideoPlayer } from "../VideoPlayer";
 
 const renderItem = (

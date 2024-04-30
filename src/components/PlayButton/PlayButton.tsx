@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { PlayButtonProps } from "./@types";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
 
 const PlayButton: React.FC<PlayButtonProps> = (props) => {
