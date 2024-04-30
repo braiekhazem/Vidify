@@ -8,12 +8,7 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr(), dts(), cssInjectedByJsPlugin()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "."),
-      "@src": path.resolve(__dirname, "./src"),
-    },
-  },
+
   build: {
     rollupOptions: {
       external: [
@@ -22,6 +17,7 @@ export default defineConfig({
         "react-full-screen",
         "rc-tooltip",
         "react-tooltip",
+        "rc-slider/assets/index.css",
       ],
       output: {
         manualChunks(id) {
