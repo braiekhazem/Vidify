@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SoundIconProps } from "./@types";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
 import { ReactComponent as SoundSVG } from "../../global/assets/icons/volume/Sound.svg";
 import { ReactComponent as MuteSVG } from "../../global/assets/icons/volume/Mute.svg";

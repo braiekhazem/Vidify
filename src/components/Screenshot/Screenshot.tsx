@@ -1,7 +1,7 @@
 import React from "react";
 import { ScreenshotProps } from "./@types";
 import { ReactComponent as ScreenShotSVG } from "../../global/assets/icons/screenshot/screenshot.svg";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 

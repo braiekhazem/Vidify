@@ -7,19 +7,19 @@ import React, {
 } from "react";
 import { VideoPlayerProps, VideoPlayerState, contextmenu } from "./@types";
 import ClassNames from "classnames";
-import mergeRefs from "@src/utils/mergeRefs";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import mergeRefs from "./../../utils/mergeRefs";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import { ControlsBar } from "../ControlsBar";
-import { playerManager } from "@src/utils/playerManager";
-import { syncStateWithVideo } from "@src/utils/syncStateWithVideo";
+import { playerManager } from "./../../utils/playerManager";
+import { syncStateWithVideo } from "./../../utils/syncStateWithVideo";
 import { fullScreenMode } from "../FullScreen/FullScreen";
-import { managePlayerKeyDown } from "@src/utils/managePlayerKeyDown";
+import { managePlayerKeyDown } from "./../../utils/managePlayerKeyDown";
 import Wrapper from "../Wrapper";
 import PlayButton from "../PlayButton";
 import classNames from "classnames";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
-import { getAllowedControlBarItems } from "@src/utils/getAllowedControlBarItems";
-import { getVideoSrc } from "@src/utils/getVideoSrc";
+import { concatPrefixCls } from "./../../utils/concatPrefixCls";
+import { getAllowedControlBarItems } from "./../../utils/getAllowedControlBarItems";
+import { getVideoSrc } from "./../../utils/getVideoSrc";
 
 const ASPECT_RATIO = 16 / 9;
 

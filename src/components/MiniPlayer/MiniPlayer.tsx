@@ -1,7 +1,7 @@
 import React from "react";
 import { MiniPlayerProps } from "./@types";
 import { ReactComponent as MiniPlayerSVG } from "../../global/assets/icons/miniPlayer/miniPlayer.svg";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import usePictureInPicture from "react-use-pip";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 

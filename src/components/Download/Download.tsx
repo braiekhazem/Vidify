@@ -3,7 +3,7 @@ import { DownloadProps } from "./@types";
 import { ReactComponent as DownloadSVG } from "../../global/assets/icons/download/download.svg";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 import classNames from "classnames";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 
 const Download: React.FC<DownloadProps> = (props) => {
   const { onClick, className } = props;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { WrapperProps } from "./@types";
 import classNames from "classnames";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
 
 const Wrapper: React.FC<WrapperProps> = (props) => {

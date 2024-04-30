@@ -1,8 +1,8 @@
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { ControlIconProps } from "./@types";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 
 const ControlIcon = React.forwardRef<HTMLElement, ControlIconProps>(
   (props, ref) => {

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ProgressBarProps, hoveredPosType } from "./@types";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
-import { getPercentage } from "@src/utils/getPercentage";
-import { formatTime } from "@src/utils/formatDurationTime";
+import { concatPrefixCls } from "./../../utils/concatPrefixCls";
+import { getPercentage } from "./../../utils/getPercentage";
+import { formatTime } from "./../../utils/formatDurationTime";
 
 const ProgressBar: React.FC<ProgressBarProps> = (props) => {
   const { videoState } = props;
