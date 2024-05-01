@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { WrapperProps } from "./@types";
 import classNames from "classnames";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
 
-const Wrapper: React.FC<WrapperProps> = (props) => {
+const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
+  props,
+  ref
+) => {
   const {
     children,
     prefixCls,
@@ -21,8 +24,6 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
   const classes = classNames(className, {
     [`${prefixCls}-hidden`]: playing && hide,
   });
-
-  const videoRef = useRef<HTMLDivElement>(null);
 
   let timeoutId: NodeJS.Timeout | null = null;
 
@@ -62,7 +63,7 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
     <div
       {...rest}
       className={classes}
-      ref={videoRef}
+      ref={ref}
       onMouseLeave={() => timeoutId && clearInterval(timeoutId)}
       onMouseMove={handleMouseMove}
       onClick={onClick}
@@ -79,4 +80,4 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
   );
 };
 
-export default Wrapper;
+export default forwardRef<HTMLDivElement, WrapperProps>(Wrapper);

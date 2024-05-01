@@ -5,7 +5,6 @@ export interface WrapperProps {
   children: ReactNode;
   playing: boolean;
   videoState: VideoPlayerState;
-  currentVideoRef: React.Ref<any>;
   className: string;
   prefixCls: string;
   title: string;

@@ -23,6 +23,7 @@ export const playerManager: (
     },
 
     setVolume(volume) {
+      console.log({ volume });
       setState((prev: VideoPlayerState) => ({
         ...prev,
         volume,

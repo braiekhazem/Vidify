@@ -9,7 +9,6 @@ export const getVideoSrc = (
 ) => {
   const { src } = props;
   const { currentSrcIndex } = videoState;
-
   if (
     typeof src !== "string" &&
     src?.length &&

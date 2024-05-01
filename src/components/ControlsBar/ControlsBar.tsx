@@ -198,7 +198,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   actions?.updateCurrentTime(videoState.currentTime - sec)
                 }
               />,
-              `Previous 5s`
+              `Skip backward 5 seconds ←`
             )}
             {renderButton(
               <SecondsForward
@@ -207,7 +207,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   actions?.updateCurrentTime(videoState.currentTime + sec)
                 }
               />,
-              "Next 5s"
+              "Skip forward 5 seconds →"
             )}
 
             <div className={concatPrefixCls(prefixCls, "volume-area")}>

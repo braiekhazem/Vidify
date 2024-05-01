@@ -1,10 +1,4 @@
-import React, {
-  SyntheticEvent,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { VideoPlayerProps, VideoPlayerState, contextmenu } from "./@types";
 import mergeRefs from "./../../utils/mergeRefs";
 import { getPrefixCls } from "./../../utils/getPrefixCls";
@@ -53,7 +47,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     loop = false,
     block = false,
     rounded = true,
-    primaryColor,
+    primaryColor = "#5f55ee",
     playsInline,
     preload,
     crossOrigin = "anonymous",
@@ -93,11 +87,13 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       autoPlay ||
       muted,
     loop,
+    durationType,
     rendered: false,
     speed: 1,
     currentSrcIndex: defaultSrcIndex,
     loadingData: false,
     bufferingProgress: 0,
+    primaryColor,
     duration: 0,
     currentTime: 0,
     buffering: false,
@@ -119,6 +115,10 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         }) as any,
       }));
   }, [currentVideoRef]);
+
+  useEffect(() => {
+    setVideoState((prev) => ({ ...prev, src }));
+  }, [src]);
 
   if (style) {
     style.width = style.width || customWidth;
@@ -209,8 +209,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const onProgress = () => {
     const element = currentVideoRef.current;
-    if (!element) return;
-    if (!element.buffered) return;
+    if (!element || !element.buffered || element.buffered.length === 0) return;
+
     const bufferedEnd = element.buffered.end(element.buffered.length - 1);
     const duration = element.duration;
     if (duration > 0) {
@@ -254,7 +254,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       prefixCls={prefixCls}
       videoState={videoState}
       onKeyDown={keyDownHandler}
-      currentVideoRef={currentVideoRef}
       ref={mergeRefs(containerRef, currentContainerRef)}
       onDoubleClick={fullScreenHandler}
       onClick={onClickHandler}
@@ -340,15 +339,17 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
           "wrapper-gradient-top"
         )}`}
       ></div>
-      <div
-        className={`${concatPrefixCls(
-          prefixCls,
-          "annotation"
-        )} ${gradientClasses}`}
-        style={annotationStyle}
-      >
-        {annotation}
-      </div>
+      {annotation && (
+        <div
+          className={`${concatPrefixCls(
+            prefixCls,
+            "annotation"
+          )} ${gradientClasses}`}
+          style={annotationStyle}
+        >
+          {annotation}
+        </div>
+      )}
       {videoState.error && (
         <div className={concatPrefixCls(prefixCls, "error")}>
           Error : video not supported
@@ -358,6 +359,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   );
 };
 
-export const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
+export const VideoPlayer = React.forwardRef<HTMLVideoElement, VideoPlayerProps>(
   InternalVideoPlayer
 );
