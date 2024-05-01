@@ -11,6 +11,8 @@ export interface controlBarAllowedItems {
     fullscreen?: ItemType | boolean;
     volumeSlider?: ItemType | boolean;
     downlaod?: ItemType | boolean;
+    duration?: ItemType | boolean;
+    skip?: ItemType | boolean;
 }
 export interface ControlsBarProps {
     videoRef: any;
