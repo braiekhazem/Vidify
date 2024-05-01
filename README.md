@@ -207,7 +207,7 @@ Setting `controller={false}` hides both the control bar and progress bar, provid
 Passing a function to the `controller` prop allows users to create their own custom control bar using React components. The function receives an `actions` object containing methods to control the video playback (e.g., `play`, `pause`).
 
 ```jsx
-controller={(actions) => (
+controller={(actions, info) => (
   <div>
     <span onClick={actions?.play}>Play</span>
     <span onClick={actions?.pause}>Pause</span>
@@ -229,7 +229,7 @@ controller={{
   },
   fullscreen: false,
   progressBar: false,
-  controlBar: (actions) => (
+  controlBar: (actions, info) => (
     <div style={{ display: "flex", columnGap: "10px" }}>
       <p>{info.currentTime} / {info.duration}</p>
       <button onClick={actions?.play}>Play</button>
@@ -270,6 +270,21 @@ If you've found Vidify useful and would like to support its ongoing development,
 <a href="https://buymeacoffee.com/hazembraiek" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="200"></a>
 
 Your support is greatly appreciated! ☕️❤️
+
+## ⌨️ Development
+
+🚀 Follow these steps to clone and run Vidify locally:
+
+```bash
+$ git clone https://github.com/braiekhazem/Vidify.git
+$ cd vidify
+$ npm install
+$ npm run dev  # for running the development server
+# OR
+$ npm run demo # for running the demo
+```
+
+Open your browser and visit http://localhost:3000 .
 
 ## 🤝 How to Contribute
 

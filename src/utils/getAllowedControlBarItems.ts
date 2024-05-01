@@ -6,6 +6,8 @@ export const defaultAllowedItems: controlBarAllowedItems = {
   fullscreen: true,
   volumeSlider: true,
   downlaod: true,
+  duration: true,
+  skip: true,
 };
 
 export const getAllowedControlBarItems = (

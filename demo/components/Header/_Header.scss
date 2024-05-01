@@ -1,0 +1,70 @@
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #d7e7ef;
+  border-bottom: 1px solid #8c8c8c33;
+  &-left {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    p {
+      font-size: 25px;
+      font-weight: 600;
+      color: var(--vf-color-primary);
+      letter-spacing: 2px;
+    }
+  }
+
+  &-right {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    .buy-me-coffee-button {
+      display: flex;
+      align-items: center;
+      width: 150px;
+      img {
+        width: 100%;
+      }
+    }
+
+    .github-button {
+      display: flex;
+      align-items: center;
+      column-gap: 3px;
+      cursor: pointer;
+      color: var(--vf-color-black);
+      &:hover {
+        color: var(--vf-color-primary);
+      }
+    }
+
+    .start-button {
+      display: flex;
+      align-items: center;
+      column-gap: 8px;
+      cursor: pointer;
+      border: 1px solid #768390;
+      background-color: #010409;
+      color: var(--vf-color-white);
+      padding: 10px;
+      border-radius: 9px;
+      -webkit-border-radius: 9px;
+      -moz-border-radius: 9px;
+      -ms-border-radius: 9px;
+      -o-border-radius: 9px;
+      box-shadow: inset 0px 0px 5px 0px var(--vf-color-white);
+      &:hover {
+        box-shadow: inset 0px 0px 8px 0px var(--vf-color-white);
+      }
+      transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -ms-transition: all 0.2s;
+      -o-transition: all 0.2s;
+    }
+  }
+}
