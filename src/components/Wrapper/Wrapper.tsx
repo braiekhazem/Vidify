@@ -3,6 +3,12 @@ import { WrapperProps } from "./@types";
 import classNames from "classnames";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
+import { useRefDimensions } from "../../hooks/useRefDimensions";
+
+const small = 500;
+const xSmall = 400;
+const maxSmall = 350;
+const medium = 630;
 
 const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
   props,
@@ -13,16 +19,23 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     prefixCls,
     className,
     onClick,
+    currentVideoRef,
     playing,
     videoState: { loadingData },
     controlBarElement,
     ...rest
   } = props;
 
+  const { width } = useRefDimensions(currentVideoRef);
   const [hide, setHide] = useState<boolean>(false);
   const [forceCancel, setForceCancel] = useState<boolean>(false);
+
   const classes = classNames(className, {
     [`${prefixCls}-hidden`]: playing && hide,
+    [`${prefixCls}-small`]: width <= small,
+    [`${prefixCls}-x-small`]: width <= xSmall,
+    [`${prefixCls}-max-small`]: width <= maxSmall,
+    [`${prefixCls}-medium`]: width <= medium,
   });
 
   let timeoutId: NodeJS.Timeout | null = null;
