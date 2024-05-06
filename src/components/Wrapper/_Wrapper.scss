@@ -194,7 +194,9 @@ $class-prefix-vidify: "vf-video";
     .vf-duration {
       display: none;
     }
-
+  }
+  .skip {
+    display: none !important;
     .vf-seconds-forward-button {
       display: none;
     }
@@ -213,7 +215,9 @@ $class-prefix-vidify: "vf-video";
         display: none;
       }
     }
-
+  }
+  .skip {
+    display: none !important;
     .vf-seconds-forward-button {
       display: none;
     }

@@ -26,14 +26,16 @@ import { vidifyShortcuts } from "./../../utils/managePlayerKeyDown";
 import { VideoPlayer } from "../VideoPlayer";
 
 const renderItem = (
-  options: controlBarAllowedItems,
+  options: controlBarAllowedItems | null,
   item: JSX.Element,
   itemName: string
 ) => {
-  const itemSettings = options[itemName as keyof controlBarAllowedItems];
+  const itemSettings = options
+    ? options[itemName as keyof controlBarAllowedItems]
+    : null;
   const isBoolean = typeof itemSettings === "boolean";
   const isAllowed = isBoolean ? itemSettings : itemSettings?.allow;
-  if (!isAllowed) return null;
+  if (!isAllowed && options) return null;
 
   const className = !isBoolean && itemSettings?.className;
   const style = !isBoolean && itemSettings?.style;
@@ -47,7 +49,7 @@ const renderItem = (
   const mergedStyle = { ...existingStyle, ...style };
 
   const finalItem = React.cloneElement(item, {
-    className: mergedClassName,
+    className: `${mergedClassName} ${itemName}`,
     style: mergedStyle,
   });
   return finalItem;
@@ -195,23 +197,31 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                 </div>
               )}
 
-            {renderButton(
-              <SecondsForward
-                isNext={false}
-                onClick={(_, sec) =>
-                  actions?.updateCurrentTime(videoState.currentTime - sec)
-                }
-              />,
-              `Skip backward 5 seconds ←`
+            {renderItem(
+              null,
+              renderButton(
+                <SecondsForward
+                  isNext={false}
+                  onClick={(_, sec) =>
+                    actions?.updateCurrentTime(videoState.currentTime - sec)
+                  }
+                />,
+                `Skip backward 5 seconds ←`
+              ),
+              "skip"
             )}
-            {renderButton(
-              <SecondsForward
-                isNext={true}
-                onClick={(_, sec) =>
-                  actions?.updateCurrentTime(videoState.currentTime + sec)
-                }
-              />,
-              "Skip forward 5 seconds →"
+            {renderItem(
+              null,
+              renderButton(
+                <SecondsForward
+                  isNext={true}
+                  onClick={(_, sec) =>
+                    actions?.updateCurrentTime(videoState.currentTime + sec)
+                  }
+                />,
+                "Skip forward 5 seconds →"
+              ),
+              "skip"
             )}
 
             <div className={concatPrefixCls(prefixCls, "volume-area")}>
