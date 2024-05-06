@@ -10,11 +10,18 @@
     justify-content: center;
     max-height: calc(100% - 60px);
     overflow: auto;
+    background: linear-gradient(
+      287deg,
+      #f3fdff 0%,
+      #e8f1f8 51.6%,
+      #f4edfa 100%
+    );
   }
 
   &-input-left,
   &-input-right {
     width: 20%;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -63,6 +70,17 @@
     text-align: center;
     cursor: pointer;
     font-weight: 500;
+  }
+
+  .skip-box {
+    div:not(.demo-box-header) {
+      margin-bottom: 5px;
+    }
+
+    label {
+      margin-left: 5px;
+      margin-bottom: 5px;
+    }
   }
 
   .size-box {
@@ -140,7 +158,7 @@
       max-height: 300px;
       overflow: auto;
       input {
-        margin-bottom: 8px;
+        margin: 1px 1px 8px 1px;
         border: 1px solid var(--vf-color-black);
         padding: 5px;
         border-radius: 5px;
@@ -148,7 +166,7 @@
         -moz-border-radius: 5px;
         -ms-border-radius: 5px;
         -o-border-radius: 5px;
-        width: 100%;
+        width: calc(100% - 2px);
         &:focus {
           outline: 1px solid var(--vf-color-primary);
         }
@@ -175,6 +193,35 @@
       text-transform: capitalize;
     }
   }
+
+  @media screen and (max-width: 1000px) {
+    .vidify-demo-content {
+      flex-direction: column;
+      .vidify-demo-input-left,
+      .vidify-demo-input-right {
+        width: 100%;
+        height: 200px;
+        flex-direction: row;
+        overflow: auto;
+
+        .demo-box {
+          overflow: auto;
+          min-width: fit-content;
+          &-header {
+            white-space: nowrap;
+          }
+        }
+
+        .other-options-box,
+        .control-bar-box,
+        .sources-box,
+        .video-state-box {
+          width: 300px;
+          min-width: 300px;
+        }
+      }
+    }
+  }
 }
 
 a {
@@ -185,6 +232,7 @@ a {
   &::-webkit-scrollbar {
     background: transparent;
     width: 5px;
+    height: 5px;
   }
 
   &::-webkit-scrollbar-thumb {

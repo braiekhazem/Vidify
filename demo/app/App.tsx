@@ -17,11 +17,12 @@ const defaultSrc = [
 
 const App = () => {
   const [url] = useState("");
-  const videoRef = useRef(null);
+  const videoRef = useRef<any>(null);
   const [width, setWidth] = useState<number>(800);
   const [rounded, setRounded] = useState<boolean>(true);
-  const [annoation, setAnnotation] = useState<boolean>(true);
+  const [annotation, setAnnotation] = useState<boolean>(true);
   const [block, setBlock] = useState<boolean>(false);
+  const [autoPlay, setAutoplay] = useState<boolean>(false);
   const [poster, setPoster] = useState<string>(defaultPoster);
   const [src, setSrc] = useState<string | string[]>(defaultSrc);
   const [customControlBar, setCustomControlBar] = useState<boolean>(false);
@@ -31,15 +32,16 @@ const App = () => {
     {} as VideoPlayerState
   );
 
-  const { videoState, videoActions } =
-    videoRef.current ||
-    ({} as unknown as {
-      videoState: VideoPlayerState;
-      videoActions: VideoPlayerState["actions"];
-    });
+  const { videoState, videoActions } = (videoRef.current || {}) as unknown as {
+    videoState: VideoPlayerState;
+    videoActions: VideoPlayerState["actions"];
+  };
 
   const updateVideoInfo = (key, value) => {
-    setVideoInfo((prev) => ({ ...prev, [key]: value }));
+    setVideoInfo((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   };
 
   const toggleAllowedItems = (key: string) => {
@@ -48,15 +50,27 @@ const App = () => {
 
   useEffect(() => {
     if (videoState) {
-      setVideoInfo(videoState);
+      setVideoInfo({
+        ...videoState,
+        durationType: videoInfo.durationType || videoState.durationType,
+      });
     }
   }, [videoState]);
 
-  console.log({ videoState });
-
   return (
     <div className="vidify-demo">
-      <Header />
+      <Header
+        videoState={videoState}
+        extraInfos={{
+          width,
+          rounded,
+          block,
+          annotation,
+          allowedItems,
+          customControlBar,
+          autoPlay,
+        }}
+      />
       <div className="vidify-demo-content hovered-scrollbar">
         <div className="vidify-demo-input-left hovered-scrollbar">
           <DemoBox header="Volume" classNames="volume-box">
@@ -104,31 +118,29 @@ const App = () => {
           </DemoBox>
           <DemoBox header="Duration type" classNames="skip-box">
             <div>
-              <div>
-                <input
-                  type="radio"
-                  id="default"
-                  name="duration"
-                  value="default"
-                  onChange={(e) => updateVideoInfo("durationType", "default")}
-                  // checked={videoInfo.durationType === "default"}
-                />
-                <label htmlFor="default">Default</label>
-              </div>
+              <input
+                type="radio"
+                id="default"
+                name="duration"
+                value="default"
+                defaultChecked
+                onChange={(e) => updateVideoInfo("durationType", "default")}
+              />
+              <label htmlFor="default">Default</label>
+            </div>
 
-              <div>
-                <input
-                  type="radio"
-                  id="remainingTime"
-                  name="duration"
-                  onChange={(e) =>
-                    updateVideoInfo("durationType", "remainingTime")
-                  }
-                  value="remainingTime"
-                  // checked={videoInfo.durationType === "remainingTime"}
-                />
-                <label htmlFor="remainingTime">Remaining Time</label>
-              </div>
+            <div>
+              <input
+                type="radio"
+                id="remainingTime"
+                name="duration"
+                onChange={(e) =>
+                  updateVideoInfo("durationType", "remainingTime")
+                }
+                value="remainingTime"
+                // checked={videoInfo.durationType === "remainingTime"}
+              />
+              <label htmlFor="remainingTime">Remaining Time</label>
             </div>
           </DemoBox>
           <DemoBox header="Size" classNames="size-box">
@@ -137,10 +149,7 @@ const App = () => {
               <input
                 type="number"
                 value={width}
-                onChange={(e) =>
-                  +e.target.value >= 400 && setWidth(+e.target.value)
-                }
-                min={400}
+                onChange={(e) => setWidth(+e.target.value)}
               />
             </label>
 
@@ -186,13 +195,22 @@ const App = () => {
               <input
                 type="checkbox"
                 id="annotation"
-                defaultChecked={annoation}
-                onChange={() => setAnnotation(!annoation)}
+                defaultChecked={annotation}
+                onChange={() => setAnnotation(!annotation)}
               />
               Annotation
             </label>
+            <label htmlFor="auto-play">
+              <input
+                type="checkbox"
+                id="auto-play"
+                defaultChecked={autoPlay}
+                onChange={() => setAutoplay(!autoPlay)}
+              />
+              Auto play
+            </label>
             <label htmlFor="poster">
-              Poster{" "}
+              Poster
               <input
                 type="file"
                 id="poster"
@@ -253,13 +271,13 @@ const App = () => {
             crossOrigin=""
             thumbnail={poster}
             volume={0.7}
-            annotation={annoation ? <img src={logo} /> : false}
+            annotation={annotation ? <img src={logo} /> : false}
             block={block}
             rounded={rounded}
             width={`${width}`}
             primaryColor={videoInfo.primaryColor}
             poster={poster}
-            autoPlay={false}
+            autoPlay={autoPlay}
             onPlay={() => updateVideoInfo("playing", videoState?.playing)}
             onPause={() => updateVideoInfo("playing", videoState?.playing)}
             onProgress={() =>
@@ -269,7 +287,7 @@ const App = () => {
             onError={() => updateVideoInfo("error", (videoInfo.error || 0) + 1)}
             onEnded={() => console.log("video end")}
             onLoadedData={() =>
-              updateVideoInfo("videoLoaded", videoState.videoLoaded)
+              updateVideoInfo("videoLoaded", videoState?.videoLoaded)
             }
             onDownload={() => console.log("download...")}
             onVolumeChange={() => updateVideoInfo("volume", videoState?.volume)}
@@ -374,6 +392,7 @@ const App = () => {
                   {src.map((_, index) => (
                     <input
                       type="text"
+                      key={index}
                       value={src[index]}
                       onChange={(e) =>
                         setSrc((prev) =>
@@ -437,9 +456,9 @@ const App = () => {
             </div>
             <div className="state-key-value">Width: {width}</div>
             <div className="state-key-value">Poster: {poster}</div>
-            {Object.keys(allowedItems).map((key) => {
+            {Object.keys(allowedItems).map((key, index) => {
               return (
-                <div className="state-key-value">
+                <div className="state-key-value" key={index}>
                   {key}: {allowedItems[key] ? "Allowed" : "Not allowed"}
                 </div>
               );

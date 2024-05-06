@@ -97,6 +97,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     duration: 0,
     currentTime: 0,
     buffering: false,
+    downloading: false,
     fullscreen: false,
     error: null,
     videoLoaded: false,
@@ -117,8 +118,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   }, [currentVideoRef]);
 
   useEffect(() => {
-    setVideoState((prev) => ({ ...prev, src }));
-  }, [src]);
+    setVideoState((prev) => ({ ...prev, src, primaryColor, durationType }));
+  }, [src, primaryColor, durationType]);
 
   if (style) {
     style.width = style.width || customWidth;
@@ -254,6 +255,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       prefixCls={prefixCls}
       videoState={videoState}
       onKeyDown={keyDownHandler}
+      currentVideoRef={currentVideoRef}
       ref={mergeRefs(containerRef, currentContainerRef)}
       onDoubleClick={fullScreenHandler}
       onClick={onClickHandler}

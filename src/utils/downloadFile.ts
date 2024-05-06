@@ -10,7 +10,11 @@ async function toDataURL(url: string) {
 
 export async function downloadFile(file: fileType) {
   const a = document.createElement("a");
-  a.href = await toDataURL(file?.url);
+  const url = await toDataURL(file?.url);
+  a.href = url;
   a.download = file?.name;
+  a.target = "_blank";
+  a.rel = "noreferrer";
   a.click();
+  window.URL.revokeObjectURL(url);
 }

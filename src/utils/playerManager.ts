@@ -23,7 +23,6 @@ export const playerManager: (
     },
 
     setVolume(volume) {
-      console.log({ volume });
       setState((prev: VideoPlayerState) => ({
         ...prev,
         volume,
@@ -136,7 +135,7 @@ export const playerManager: (
       };
 
       let canvas = capture(video as HTMLVideoElement);
-      downloadFile({ url: canvas.toDataURL(), name: fileName });
+      downloadFile({ url: canvas.toDataURL(), name: `${fileName}.png` });
       convertDataURLtoFile(canvas.toDataURL(), fileName).then((file) => {
         mediaEventHandlers.onScreenshot &&
           mediaEventHandlers.onScreenshot(file);
@@ -157,12 +156,19 @@ export const playerManager: (
         date.getHours() >= 12 ? "PM" : "AM"
       }`;
 
+      setState((prev) => ({ ...prev, downloading: true }));
       downloadFile({
         url: video?.src as string,
         name: `${fileName}.mp4`,
-      }).then(
-        () => mediaEventHandlers.onDownload && mediaEventHandlers.onDownload()
-      );
+      })
+        .then(() => {
+          setState((prev) => ({ ...prev, downloading: false }));
+
+          mediaEventHandlers.onDownload && mediaEventHandlers.onDownload();
+        })
+        .catch((err) => {
+          console.log("Error", err);
+        });
     },
   };
 };

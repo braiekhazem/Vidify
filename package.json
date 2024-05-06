@@ -22,6 +22,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/braiekhazem/Vidify"
+  },
   "bin": {
     "mycli": "./cli.cjs"
   },
@@ -73,6 +77,7 @@
     "react-helmet-async": "^2.0.3",
     "react-i18next": "^13.0.0",
     "react-redux": "^8.0.7",
+    "react-resize-detector": "^10.0.1",
     "react-router-dom": "^6.12.0",
     "react-tooltip": "^5.26.3",
     "react-use-pip": "^1.5.0",

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { ControlsBarProps, controlBarAllowedItems } from "./@types";
 import classNames from "classnames";
 import { getPrefixCls } from "./../../utils/getPrefixCls";
@@ -59,7 +59,11 @@ const renderVideoDuration = (
   type: VideoPlayerProps["durationType"]
 ) => {
   const prefixCls = getPrefixCls("duration");
-  const [durationType, setDurationType] = useState(type === "default" ? 0 : 1);
+  const [durationType, setDurationType] = useState<number | null>(null);
+
+  useEffect(() => {
+    setDurationType(type === "default" ? 0 : 1);
+  }, [type]);
 
   return (
     <div
@@ -255,8 +259,13 @@ const internalControlsBar: React.ForwardRefRenderFunction<
             {renderItem(
               allowedItems,
               renderButton(
-                <Download onClick={() => actions?.download()} />,
-                `downlaod (${vidifyShortcuts.download})`
+                <Download
+                  onClick={() => actions?.download()}
+                  downloading={videoState.downloading}
+                />,
+                `${videoState.downloading ? "downlaoding" : "downlaod"} (${
+                  vidifyShortcuts.download
+                })`
               ),
               `downlaod`
             )}

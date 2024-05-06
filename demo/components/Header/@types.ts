@@ -1,3 +1,6 @@
+import { VideoPlayerState } from "../../../src";
+
 export interface HeaderProps {
-    // Define props here
+  videoState: VideoPlayerState;
+  extraInfos: any;
 }

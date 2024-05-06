@@ -66,5 +66,62 @@
       -ms-transition: all 0.2s;
       -o-transition: all 0.2s;
     }
+
+    .generate-code-button {
+      background-color: var(--vf-color-info);
+      color: var(--vf-color-white);
+      padding: 10px;
+      border-radius: 9px;
+      -webkit-border-radius: 9px;
+      -moz-border-radius: 9px;
+      -ms-border-radius: 9px;
+      -o-border-radius: 9px;
+      cursor: pointer;
+      box-shadow: inset 0px 0px 5px 0px var(--vf-color-white);
+      display: flex;
+      align-items: center;
+      svg {
+        margin-right: 7px;
+      }
+    }
+  }
+
+  #generate-code {
+    white-space: pre-wrap;
+    z-index: 100;
+    background-color: #1e1e1e;
+    opacity: 1;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    line-height: 23px;
+    padding: 20px;
+    z-index: 1000;
+    width: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .header-right {
+      .generate-code-button svg {
+        margin: 0;
+      }
+      .buy-me-coffee-button {
+        width: fit-content;
+      }
+    }
+
+    #generate-code {
+      width: 300px;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    .header-right {
+      display: none;
+    }
   }
 }
