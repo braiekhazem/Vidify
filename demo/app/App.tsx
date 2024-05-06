@@ -266,11 +266,6 @@ const App = () => {
                     ),
                   }
                 : {}),
-              screenshot: {
-                allow: true,
-                style: { color: "red" },
-                className: "custom-button skisssp",
-              },
             }}
             src={url || src}
             crossOrigin=""
