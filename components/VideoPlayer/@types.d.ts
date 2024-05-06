@@ -72,6 +72,7 @@ export interface VideoPlayerState {
     durationType: VideoPlayerProps["durationType"];
     currentTime: number;
     fullscreen: boolean;
+    downloading: boolean;
     currentSrcIndex: number;
     speed: number;
     error: any;
