@@ -36,6 +36,8 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     [`${prefixCls}-x-small`]: width <= xSmall,
     [`${prefixCls}-max-small`]: width <= maxSmall,
     [`${prefixCls}-medium`]: width <= medium,
+    [`${prefixCls}-500`]: width <= 500,
+    [`${prefixCls}-400`]: width <= 400,
   });
 
   let timeoutId: NodeJS.Timeout | null = null;

@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 const DemoBox: React.FC<DemoBoxProps> = ({ children, header, classNames }) => {
   return (
-    <div className={`demo-box ${classNames}`}>
+    <div className={`demo-box ${classNames} hovered-scrollbar`}>
       <div className="demo-box-header">{header}</div>
       {children}
     </div>

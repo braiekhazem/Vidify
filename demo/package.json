@@ -24,6 +24,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
     "@rollup/plugin-typescript": "^11.1.6",
     "accessible-nprogress": "^2.1.2",
     "browserify-fs": "^1.0.0",
