@@ -9,29 +9,7 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 export default defineConfig({
   plugins: [react(), svgr(), dts(), cssInjectedByJsPlugin()],
 
-  build: {
-    rollupOptions: {
-      external: [
-        "/classnames",
-        "/rc-slider",
-        "/react-full-screen",
-        "/rc-tooltip",
-        "/react-tooltip",
-        "/rc-slider/assets/index.css",
-        "/react-tooltip/dist/react-tooltip.css",
-        "/react-use-pip",
-      ],
-    },
-  },
-
   server: {
     port: 3000,
-
-    // to get images from the server
-    // proxy: {
-    //   '^/users': {
-    //     target: 'http://localhost:8000/',
-    //   },
-    // },
   },
 });
