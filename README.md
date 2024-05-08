@@ -29,7 +29,7 @@
 - 📋 Vidify supports customizable ccontrol bar for enhanced user interaction.
 - 💻 Written in TypeScript.
 
-![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1713985718/Screen_Shot_2024-04-24_at_8.07.33_PM_vbdqeg.png)
+![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1715112645/Screen_Shot_2024-05-07_at_9.05.31_PM_v2jemq.png)
 
 ## 📦 Install
 
@@ -170,7 +170,7 @@ const MyVideoPlayer = () => (
 export default MyVideoPlayer;
 ```
 
-![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1714307088/Screen_Shot_2024-04-28_at_1.24.28_PM_sqmko7.png)
+![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1715112646/Screen_Shot_2024-05-07_at_9.07.27_PM_eca32w.png)
 
 ## 🎨 Customizable Primary Color
 
@@ -192,7 +192,7 @@ const MyVideoPlayer = () => (
 export default MyVideoPlayer;
 ```
 
-![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1713988952/Screen_Shot_2024-04-24_at_9.02.09_PM_hl5afg.png)
+![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1715112647/Screen_Shot_2024-05-07_at_9.08.33_PM_xcf3ij.png)
 
 ## 🛠️ Control Bar and Progress Bar Customization
 
@@ -247,7 +247,7 @@ controller={{
 
 ```
 
-![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1714305851/Screen_Shot_2024-04-28_at_1.03.49_PM_eaygp7.png)
+![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1715112646/Screen_Shot_2024-05-07_at_9.10.19_PM_vtqkes.png)
 
 ### Option 4: Custom Buttons
 
