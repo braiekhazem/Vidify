@@ -1,4 +1,4 @@
-<div align="center">  <img  alt="vidify-logo" src="https://res.cloudinary.com/dj6kxvxqb/image/upload/v1714516244/logo_yvh5kf.svg" width="80" height="80" style="display:inline"> <h1 style="margin-top:0" >Vidify</h1></div>
+<div align="center">  <img  alt="vidify-logo" src="https://res.cloudinary.com/dj6kxvxqb/image/upload/v1715187268/logo_t3smlf.svg" width="80" height="80" style="display:inline"> <h1 style="margin-top:0" >Vidify</h1></div>
 
 <div align="center">
   <a href="https://www.npmjs.com/package/vidify" title="MIT License">
