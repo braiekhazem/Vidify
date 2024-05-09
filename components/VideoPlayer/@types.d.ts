@@ -68,7 +68,6 @@ export interface VideoPlayerState {
     duration: number;
     buffering: boolean;
     bufferingProgress: number;
-    primaryColor: string;
     durationType: VideoPlayerProps["durationType"];
     currentTime: number;
     fullscreen: boolean;
