@@ -24,6 +24,7 @@ const App = () => {
   const [block, setBlock] = useState<boolean>(false);
   const [autoPlay, setAutoplay] = useState<boolean>(false);
   const [poster, setPoster] = useState<string>(defaultPoster);
+  const [primaryColor, setPrimaryColor] = useState<string>("#5f55ee");
   const [src, setSrc] = useState<string | string[]>(defaultSrc);
   const [customControlBar, setCustomControlBar] = useState<boolean>(false);
   const [allowedItems, setAllowedItems] =
@@ -69,6 +70,7 @@ const App = () => {
           allowedItems,
           customControlBar,
           autoPlay,
+          primaryColor,
         }}
       />
       <div className="vidify-demo-content hovered-scrollbar">
@@ -87,10 +89,8 @@ const App = () => {
             <div>
               <input
                 type="color"
-                value={videoInfo.primaryColor || ""}
-                onChange={(e) =>
-                  updateVideoInfo("primaryColor", e.target.value)
-                }
+                value={primaryColor || ""}
+                onChange={(e) => setPrimaryColor(e.target.value)}
               />
             </div>
           </DemoBox>
@@ -275,7 +275,7 @@ const App = () => {
             block={block}
             rounded={rounded}
             width={`${width}`}
-            primaryColor={videoInfo.primaryColor}
+            primaryColor={primaryColor}
             poster={poster}
             autoPlay={autoPlay}
             onPlay={() => updateVideoInfo("playing", videoState?.playing)}
@@ -442,9 +442,7 @@ const App = () => {
             <div className="state-key-value">
               Video Loaded: {videoInfo.videoLoaded ? "True" : "False"}
             </div>
-            <div className="state-key-value">
-              Primary color: {videoInfo.primaryColor}
-            </div>
+            <div className="state-key-value">Primary color: {primaryColor}</div>
             <div className="state-key-value">
               Muted: {videoInfo.muted ? "True" : "False"}
             </div>
