@@ -41,7 +41,7 @@ export const generateCode = async (
     block={${extraInfos.block}}
     rounded={${extraInfos.rounded}}
     width={"${extraInfos.width}px"}
-    primaryColor={"${videoState.primaryColor}"}
+    primaryColor={"${extraInfos.primaryColor}"}
     autoPlay={${extraInfos.autoPlay}}
     onPlay={() => console.log("Play")}
     onPause={() => console.log("Pause")}
