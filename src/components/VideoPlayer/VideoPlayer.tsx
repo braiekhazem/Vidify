@@ -93,7 +93,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     currentSrcIndex: defaultSrcIndex,
     loadingData: false,
     bufferingProgress: 0,
-    primaryColor,
     duration: 0,
     currentTime: 0,
     buffering: false,
@@ -118,8 +117,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   }, [currentVideoRef]);
 
   useEffect(() => {
-    setVideoState((prev) => ({ ...prev, src, primaryColor, durationType }));
-  }, [src, primaryColor, durationType]);
+    setVideoState((prev) => ({ ...prev, src, durationType }));
+  }, [src, durationType]);
 
   if (style) {
     style.width = style.width || customWidth;

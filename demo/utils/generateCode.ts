@@ -29,7 +29,7 @@ export const generateCode = async (
   const component = `
 <VideoPlayer
     loop={${videoState.loop}}
-    mute={${videoState.muted}}
+    muted={${videoState.muted}}
     defaultSrcIndex={${videoState.currentSrcIndex}}
     src={${JSON.stringify(videoState.src)}}
     volume={${videoState.volume}}
@@ -38,6 +38,7 @@ export const generateCode = async (
       extraInfos.annotation &&
       "<img src='https://res.cloudinary.com/dj6kxvxqb/image/upload/v1714516244/logo_yvh5kf.svg' />"
     }}
+    controller={{${extraInfos.customControlBar ? customControlBar : ""}}}
     block={${extraInfos.block}}
     rounded={${extraInfos.rounded}}
     width={"${extraInfos.width}px"}

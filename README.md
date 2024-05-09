@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://www.npmjs.com/package/vidify" title="MIT License">
-    <img src="https://img.shields.io/npm/l/vidify?color=brightgreen" alt="MIT License">
+    <img src="https://img.shields.io/npm/l/vidify" alt="MIT License">
   </a>
   <a href="https://www.npmjs.com/package/vidify" title="Latest version">
     <img src="https://img.shields.io/npm/v/vidify" alt="Latest version">
@@ -241,7 +241,7 @@ controller={{
       />
       <button onClick={actions?.screenShot}  >ScreenShot</button>
       <button onClick={actions?.download}>Download</button>
-    /div>
+    </div>
   ),
 }}
 

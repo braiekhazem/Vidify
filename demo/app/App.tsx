@@ -70,6 +70,7 @@ const App = () => {
           allowedItems,
           customControlBar,
           autoPlay,
+          primaryColor,
         }}
       />
       <div className="vidify-demo-content hovered-scrollbar">
