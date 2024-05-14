@@ -41,7 +41,7 @@ export const playerManager: (
       setState((prev: VideoPlayerState) => ({
         ...prev,
         currentTime,
-        rendered: true,
+        rendered: currentTime > 0,
         loadingData: false,
       }));
     },

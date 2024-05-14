@@ -76,6 +76,7 @@ $class-prefix-vidify: "vf-video";
 .#{$class-prefix-vidify}-loading-icon {
   animation: icon-spin 2s infinite linear;
   -webkit-animation: icon-spin 2s infinite linear;
+  z-index: 120px;
 }
 
 .#{$class-prefix-vidify}-hidden {
@@ -87,6 +88,7 @@ $class-prefix-vidify: "vf-video";
     -ms-transform: translateY(100%) !important;
     -o-transform: translateY(100%) !important;
   }
+
   .vf-video-wrapper-gradient-bottom {
     opacity: 0 !important;
   }

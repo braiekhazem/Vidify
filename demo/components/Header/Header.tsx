@@ -42,6 +42,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           <p>Vidify</p>
         </a>
       </div>
+
       <div className="header-right">
         {!isSmall && (
           <a href="https://github.com/braiekhazem/Vidify" target="_blank">

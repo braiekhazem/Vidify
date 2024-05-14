@@ -38,7 +38,6 @@ export const generateCode = async (
       extraInfos.annotation &&
       "<img src='https://res.cloudinary.com/dj6kxvxqb/image/upload/v1714516244/logo_yvh5kf.svg' />"
     }}
-    controller={{${extraInfos.customControlBar ? customControlBar : ""}}}
     block={${extraInfos.block}}
     rounded={${extraInfos.rounded}}
     width={"${extraInfos.width}px"}
@@ -48,6 +47,13 @@ export const generateCode = async (
     onPause={() => console.log("Pause")}
     onClick={() => console.log("Video clicked")}
     onError={() => console.log("Error")}
+    ${
+      extraInfos.customControlBar
+        ? `controller={{${
+            extraInfos.customControlBar ? customControlBar : ""
+          }}}`
+        : ""
+    } 
 />`;
 
   return Promise.resolve(component);

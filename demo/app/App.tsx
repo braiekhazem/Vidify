@@ -267,6 +267,13 @@ const App = () => {
                   }
                 : {}),
             }}
+            error={{
+              className: "hazem",
+              withRetry: true,
+              onRetry: () => console.log("retyr"),
+
+              // renderError: (src) => <div>hello there</div>,
+            }}
             src={url || src}
             crossOrigin=""
             thumbnail={poster}
@@ -280,9 +287,9 @@ const App = () => {
             autoPlay={autoPlay}
             onPlay={() => updateVideoInfo("playing", videoState?.playing)}
             onPause={() => updateVideoInfo("playing", videoState?.playing)}
-            onProgress={() =>
-              updateVideoInfo("currentTime", videoState.currentTime)
-            }
+            onProgress={() => {
+              updateVideoInfo("currentTime", videoState?.currentTime);
+            }}
             onClick={() => console.log("video clicked")}
             onError={() => updateVideoInfo("error", (videoInfo.error || 0) + 1)}
             onEnded={() => console.log("video end")}

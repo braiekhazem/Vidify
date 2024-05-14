@@ -15,6 +15,22 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "keywords": [
+    "vidify",
+    "react player",
+    "react",
+    "video player",
+    "media player",
+    "UI",
+    "customizable",
+    "component",
+    "TypeScript",
+    "seamless playback",
+    "dynamic source switching",
+    "keyboard shortcuts",
+    "accessibility",
+    "UI/UX"
+  ],
   "sideEffects": true,
   "files": [
     "/dist"

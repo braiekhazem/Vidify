@@ -6,12 +6,34 @@ import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
+function isFullScreen() {
+  return Boolean(
+    document.fullscreenElement ||
+      document.fullscreenElement ||
+      document.fullscreenElement ||
+      document.fullscreenElement
+  );
+}
+
+const DoFullScreen = (el: HTMLElement): void => {
+  if (!isFullScreen()) {
+    if (el === undefined) el = document.documentElement;
+    if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    } else if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    } else if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    } else if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    }
+  }
+};
+
 export const fullScreenMode = () => {
   const element: any = document.querySelector(".vf-video-wrapper"); //container element
   if (!document.fullscreenElement) {
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    }
+    DoFullScreen(element);
   } else if (document.exitFullscreen) {
     document.exitFullscreen().catch((err) => {
       console.error(

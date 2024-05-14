@@ -13,6 +13,7 @@ import classNames from "classnames";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { getAllowedControlBarItems } from "./../../utils/getAllowedControlBarItems";
 import { getVideoSrc } from "./../../utils/getVideoSrc";
+import VideoLoadError from "../VideoLoadError";
 
 const ASPECT_RATIO = 16 / 9;
 
@@ -50,6 +51,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     primaryColor = "#5f55ee",
     playsInline,
     preload,
+    error,
     crossOrigin = "anonymous",
     onClick,
     onClickNext,
@@ -73,7 +75,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const currentContainerRef = useRef<HTMLDivElement>(null);
 
-  const [videoState, setVideoState] = useState<VideoPlayerState>({
+  const defaultVideoState = {
     src,
     playing: autoPlay,
     volume:
@@ -101,7 +103,12 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     error: null,
     videoLoaded: false,
     playbackProgress: 0,
-  });
+  };
+
+  const [videoState, setVideoState] =
+    useState<VideoPlayerState>(defaultVideoState);
+
+  const currentSource = getVideoSrc(props, videoState);
 
   useEffect(() => {
     if (currentVideoRef.current)
@@ -135,9 +142,10 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     if (currentVideoRef.current) {
       let duration = currentVideoRef.current.duration;
       if (duration === Infinity) {
+        duration = 0;
         currentVideoRef.current.currentTime = 1e101;
         setTimeout(() => {
-          currentVideoRef.current!.currentTime = 0; // to reset the time, so it starts at the beginning
+          currentVideoRef.current!.currentTime = 0;
           duration = currentVideoRef.current!.duration;
           setVideoState((prev) => ({
             ...prev,
@@ -147,7 +155,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
             duration,
           }));
           onLoadedData && onLoadedData();
-        }, 100);
+        }, 600);
       } else {
         setVideoState((prev) => ({
           ...prev,
@@ -193,6 +201,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       error: true,
       loadingData: false,
     }));
+
     onError && onError();
   };
 
@@ -265,7 +274,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       controlBarElement={controlsBarRef.current}
     >
       <video
-        src={getVideoSrc(props, videoState)}
+        src={currentSource}
         id={id}
         poster={thumbnail || poster}
         width={block ? "100%" : width}
@@ -299,7 +308,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         onPlay={() => videoState.actions?.play()}
         onPuase={() => videoState.actions?.pause()}
       />
-      {videoState.videoLoaded && controller && (
+      {videoState.videoLoaded && controller && !videoState.error && (
         <ControlsBar
           ref={controlsBarRef}
           customControlBar={
@@ -352,9 +361,23 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         </div>
       )}
       {videoState.error && (
-        <div className={concatPrefixCls(prefixCls, "error")}>
-          Error : video not supported
-        </div>
+        <VideoLoadError
+          src={currentSource}
+          onRetry={() => {
+            currentVideoRef.current?.load();
+            setVideoState((prev) => ({
+              ...defaultVideoState,
+              loadingData: true,
+              currentSrcIndex: prev.currentSrcIndex,
+            }));
+            error?.onRetry?.(currentSource as string);
+          }}
+          className={error?.className}
+          withRetry={!!error?.withRetry}
+          customErrorMessage={error?.errorMessage}
+          customError={!!error?.renderError}
+          renderContent={(src) => error?.renderError?.(src as string)}
+        />
       )}
     </Wrapper>
   );

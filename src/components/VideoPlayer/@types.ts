@@ -17,6 +17,14 @@ export type contextmenuRender = (
   info: VideoPlayerState
 ) => ReactNode;
 
+export interface errorOptions {
+  withRetry?: boolean;
+  errorMessage?: string;
+  onRetry?: (src: string) => void;
+  className?: string;
+  renderError?: (src: string) => ReactNode;
+}
+
 export interface VideoPlayerProps {
   src: string | string[];
   defaultSrcIndex?: number;
@@ -29,6 +37,7 @@ export interface VideoPlayerProps {
   annotationStyle?: CSSProperties;
   width?: string;
   height?: string;
+  error?: errorOptions;
   durationType?: "remainingTime" | "default";
   placeholder?: string;
   title?: string;
