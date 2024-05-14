@@ -1,0 +1,19 @@
+{
+  "play": "Lire",
+  "pause": "Pause",
+  "skip_backword": "Reculer de 5 secondes",
+  "skip_forword": "Avancer de 5 secondes",
+  "volume": "Volume",
+  "duration": "Durée",
+  "download": "Télécharger",
+  "downloading": "Téléchargement",
+  "screenshot": "Capture d'écran",
+  "mini_player": "Mini lecteur",
+  "fullscreen": "Plein écran",
+  "next": "Suivant",
+  "previous": "Précédent",
+  "error_title": "Erreur : Impossible de charger la vidéo",
+  "Oops! It seems like there's no video source found.": "Oups! Il semble qu'aucune source vidéo n'a été trouvée.",
+  "Please ensure the video source URL is correct.": "Veuillez vous assurer que l'URL de la source vidéo est correcte.",
+  "retry": "Réessayer"
+}

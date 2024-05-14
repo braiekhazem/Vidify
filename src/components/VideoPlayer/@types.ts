@@ -32,6 +32,7 @@ export interface VideoPlayerProps {
   children?: React.ReactNode;
   className?: string;
   id?: string;
+  lang?: "ar" | "en" | "fr";
   primaryColor?: string;
   annotation?: ReactNode;
   annotationStyle?: CSSProperties;
@@ -85,6 +86,7 @@ export interface VideoPlayerState {
   duration: number;
   buffering: boolean;
   bufferingProgress: number;
+  lang: VideoPlayerProps["lang"];
   durationType: VideoPlayerProps["durationType"];
   currentTime: number;
   fullscreen: boolean;

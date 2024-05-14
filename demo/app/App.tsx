@@ -284,6 +284,7 @@ const App = () => {
             width={`${width}`}
             primaryColor={primaryColor}
             poster={poster}
+            lang="ar"
             autoPlay={autoPlay}
             onPlay={() => updateVideoInfo("playing", videoState?.playing)}
             onPause={() => updateVideoInfo("playing", videoState?.playing)}

@@ -1,0 +1,19 @@
+{
+  "play": "Play",
+  "pause": "Pause",
+  "skip_backword": "Skip Backword 5 Seconds",
+  "skip_forword": "Skip Forward 5 Seconds",
+  "volume": "Volume",
+  "duration": "Duration",
+  "download": "Download",
+  "downlaoding": "Downloading",
+  "screenshot": "Screenshot",
+  "mini_player": "Mini Player",
+  "fullscreen": "Fullscreen",
+  "next": "Next",
+  "previous": "Previous",
+  "error_title": "Error: Unable to load video",
+  "Oops! It seems like there's no video source found.": "Oops! It seems like there's no video source found.",
+  "Please ensure the video source URL is correct.": "Please ensure the video source URL is correct.",
+  "retry": "Retry"
+}

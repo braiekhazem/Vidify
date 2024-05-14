@@ -1,0 +1,19 @@
+{
+  "play": "تشغيل",
+  "pause": "إيقاف مؤقت",
+  "skip_backword": "تخطي للخلف 5 ثواني",
+  "skip_forword": "تخطي للأمام 5 ثواني",
+  "volume": "الصوت",
+  "duration": "المدة",
+  "download": "تنزيل",
+  "downloading": "جاري التنزيل",
+  "screenshot": "لقطة شاشة",
+  "mini_player": "مشغل صغير",
+  "fullscreen": "ملء الشاشة",
+  "next": "التالي",
+  "previous": "السابق",
+  "error_title": "خطأ: غير قادر على تحميل الفيديو",
+  "Oops! It seems like there's no video source found.": "عذرًا! يبدو أنه لم يتم العثور على مصدر الفيديو.",
+  "Please ensure the video source URL is correct.": "يرجى التأكد من صحة رابط مصدر الفيديو.",
+  "retry": "إعادة المحاولة"
+}

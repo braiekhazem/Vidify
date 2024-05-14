@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { PlayButtonProps } from "./@types";
 import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 const PlayButton: React.FC<PlayButtonProps> = (props) => {
   const {
@@ -10,6 +11,7 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
     videoState: { playing, rendered, videoLoaded },
   } = props;
 
+  const { t } = useTranslation(["video"]);
   const prefixCls = getPrefixCls("play-button");
 
   const onClickHandler = () => {
@@ -59,7 +61,7 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
       id={!rendered && !playing && videoLoaded ? `${prefixCls}-initial` : ""}
       onClick={onClickHandler}
       ref={iconContainerRef}
-      title={!rendered ? "play" : ""}
+      title={!rendered ? t("play") : ""}
     >
       {!playing ? (
         <svg

@@ -52,6 +52,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     playsInline,
     preload,
     error,
+    lang = "en",
     crossOrigin = "anonymous",
     onClick,
     onClickNext,
@@ -92,6 +93,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     durationType,
     rendered: false,
     speed: 1,
+    lang,
     currentSrcIndex: defaultSrcIndex,
     loadingData: false,
     bufferingProgress: 0,
@@ -124,8 +126,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   }, [currentVideoRef]);
 
   useEffect(() => {
-    setVideoState((prev) => ({ ...prev, src, durationType }));
-  }, [src, durationType]);
+    setVideoState((prev) => ({ ...prev, src, durationType, lang }));
+  }, [src, durationType, lang]);
 
   if (style) {
     style.width = style.width || customWidth;

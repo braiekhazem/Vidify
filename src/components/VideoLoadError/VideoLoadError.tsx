@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { concatPrefixCls } from "@src/utils/concatPrefixCls";
 import { ReactComponent as RetrySVG } from "../../global/assets/icons/error/retry.svg";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
+import { useTranslation } from "react-i18next";
 
 enum ErrorsTypes {
   NO_SRC,
@@ -33,6 +34,8 @@ const VideoLoadError: React.FC<VideoLoadErrorProps> = (props) => {
     renderContent,
   } = props;
 
+  const { t } = useTranslation(["video"]);
+
   const prefixCls = getPrefixCls("error");
 
   const classes = classNames(prefixCls, className);
@@ -47,13 +50,13 @@ const VideoLoadError: React.FC<VideoLoadErrorProps> = (props) => {
           renderContent(src)
         ) : (
           <Fragment>
-            <h3>Error: Unable to load video</h3>
-            <p>{messageError}</p>
+            <h3>{t("error_title")}</h3>
+            <p>{t(messageError)}</p>
             {withRetry && (
               <div
                 className={concatPrefixCls(prefixCls, "retry")}
                 onClick={onRetry}
-                title="retry"
+                title={t("retry")}
               >
                 <RetrySVG
                   width={DEFAULT_ICONS_SIZE}

@@ -1,3 +1,5 @@
+import "./i18n";
+
 export type {
   VideoPlayerProps,
   VideoPlayerState,

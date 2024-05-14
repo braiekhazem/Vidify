@@ -24,6 +24,7 @@ import { getPercentage } from "./../../utils/getPercentage";
 import Download from "../Download";
 import { vidifyShortcuts } from "./../../utils/managePlayerKeyDown";
 import { VideoPlayer } from "../VideoPlayer";
+import { useTranslation } from "react-i18next";
 
 const renderItem = (
   options: controlBarAllowedItems | null,
@@ -93,6 +94,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
     progressBar,
   } = props;
   const prefixCls = getPrefixCls("control-bar");
+  const { t } = useTranslation(["video"]);
 
   const renderButton = (node: ReactNode, tooltipContent: ReactNode) => {
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -153,7 +155,9 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   onClickPrev={() => actions?.previousVideo()}
                 />,
                 <div className={concatPrefixCls(prefixCls, "video-preview")}>
-                  <div>previous {vidifyShortcuts.prev_video}</div>
+                  <div>
+                    {t("previous")} {vidifyShortcuts.prev_video}
+                  </div>
                   <VideoPlayer
                     width="300px"
                     autoPlay
@@ -170,7 +174,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                 onPause={() => actions?.pause()}
                 play={videoState.playing}
               />,
-              `${videoState.playing ? "Puase" : "Play"} (${
+              `${videoState.playing ? t("pause") : t("play")} (${
                 vidifyShortcuts.play
               })`
             )}
@@ -185,7 +189,9 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   onClickNext={() => actions?.nextVideo()}
                 />,
                 <div className={concatPrefixCls(prefixCls, "video-preview")}>
-                  <div>next {vidifyShortcuts.next_video}</div>
+                  <div>
+                    {t("next")} {vidifyShortcuts.next_video}
+                  </div>
                   <VideoPlayer
                     width="300px"
                     autoPlay
@@ -206,7 +212,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                     actions?.updateCurrentTime(videoState.currentTime - sec)
                   }
                 />,
-                `Skip backward 5 seconds ←`
+                `${t("skip_backword")} ←`
               ),
               "skip"
             )}
@@ -219,7 +225,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                     actions?.updateCurrentTime(videoState.currentTime + sec)
                   }
                 />,
-                "Skip forward 5 seconds →"
+                `${t("skip_forword")}  →`
               ),
               "skip"
             )}
@@ -237,9 +243,10 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   volume={videoState.volume}
                   mute={videoState.muted}
                 />,
-                `Volume ${getPercentage(videoState.volume, 1).toFixed()}% (${
-                  vidifyShortcuts.mute
-                })`
+                `${t("volume")} ${getPercentage(
+                  videoState.volume,
+                  1
+                ).toFixed()}% (${vidifyShortcuts.mute})`
               )}
               {allowedItems.volumeSlider && (
                 <Slider
@@ -258,7 +265,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                 videoState.currentTime,
                 durationType
               ),
-              "duration"
+              t("duration")
             )}
 
             {leftCustomButtons?.map((customButton) => customButton.content)}
@@ -273,9 +280,9 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   onClick={() => actions?.download()}
                   downloading={videoState.downloading}
                 />,
-                `${videoState.downloading ? "downlaoding" : "downlaod"} (${
-                  vidifyShortcuts.download
-                })`
+                `${
+                  videoState.downloading ? t("downloading") : t("download")
+                } (${vidifyShortcuts.download})`
               ),
               `downlaod`
             )}
@@ -283,14 +290,14 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               allowedItems,
               renderButton(
                 <Screenshot onClick={() => actions?.screenShot()} />,
-                `screenshot (${vidifyShortcuts.screenshot})`
+                `${t("screenshot")} (${vidifyShortcuts.screenshot})`
               ),
               "screenshot"
             )}
             {/* {renderButton(<Speed />)} */}
             {/* {renderButton(<Subtitle />)}
                 {renderButton(<Settings />)} */}
-            {renderButton(<MiniPlayer video={videoRef} />, "mini player")}
+            {renderButton(<MiniPlayer video={videoRef} />, t("mini_player"))}
             {renderItem(
               allowedItems,
               renderButton(
@@ -298,7 +305,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   onFullScreen={() => actions?.setFullscreen(true)}
                   onCancelFullScreen={() => actions?.setFullscreen(false)}
                 />,
-                `fullscreen (${vidifyShortcuts.fullscreen})`
+                `${t("fullscreen")} (${vidifyShortcuts.fullscreen})`
               ),
               "fullscreen"
             )}
