@@ -8,6 +8,7 @@ export interface WrapperProps {
   className: string;
   currentVideoRef: React.Ref<any>;
   prefixCls: string;
+  customLoader?: ReactNode;
   title: string;
   onKeyDown: any;
   ref: any;

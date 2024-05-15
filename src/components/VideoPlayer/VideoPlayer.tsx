@@ -14,6 +14,7 @@ import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { getAllowedControlBarItems } from "./../../utils/getAllowedControlBarItems";
 import { getVideoSrc } from "./../../utils/getVideoSrc";
 import VideoLoadError from "../VideoLoadError";
+import i18n from "@src/i18n";
 
 const ASPECT_RATIO = 16 / 9;
 
@@ -36,6 +37,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     durationType = "default",
     // currentTime = 0,
     id,
+    customLoader,
     annotation,
     annotationStyle,
     width: customWidth = DEFAULT_VIDEO_WIDTH,
@@ -52,7 +54,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     playsInline,
     preload,
     error,
-    lang = "en",
+    lang,
     crossOrigin = "anonymous",
     onClick,
     onClickNext,
@@ -126,8 +128,12 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   }, [currentVideoRef]);
 
   useEffect(() => {
-    setVideoState((prev) => ({ ...prev, src, durationType, lang }));
-  }, [src, durationType, lang]);
+    setVideoState((prev) => ({ ...prev, src, durationType }));
+  }, [src, durationType]);
+
+  useEffect(() => {
+    if (lang) i18n.changeLanguage(lang);
+  }, [lang]);
 
   if (style) {
     style.width = style.width || customWidth;
@@ -270,6 +276,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       onDoubleClick={fullScreenHandler}
       onClick={onClickHandler}
       playing={videoState.playing}
+      customLoader={customLoader}
       tabIndex={0}
       title={title}
       style={containerstyle}

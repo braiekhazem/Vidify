@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { VideoPlayer, VideoPlayerState } from "../../src/index";
-import logo from "./../../assets/logo.svg";
+import { ReactComponent as Logo } from "./../../assets/logo.svg";
 import React from "react";
 import Header from "../components/Header";
 import DemoBox from "../components/DemoBox";
 import { defaultAllowedItems } from "../../src/utils/getAllowedControlBarItems";
 import { controlBarAllowedItems } from "../../src/components/ControlsBar/@types";
+import { Helmet } from "react-helmet";
 
 const defaultPoster =
   "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500";
@@ -232,6 +233,7 @@ const App = () => {
             defaultSrcIndex={0}
             preload=""
             durationType={videoInfo.durationType}
+            lang="ar"
             controller={{
               ...allowedItems,
               ...(customControlBar
@@ -278,13 +280,12 @@ const App = () => {
             crossOrigin=""
             thumbnail={poster}
             volume={0.7}
-            annotation={annotation ? <img src={logo} /> : false}
+            annotation={annotation ? <Logo /> : false}
             block={block}
             rounded={rounded}
             width={`${width}`}
             primaryColor={primaryColor}
             poster={poster}
-            lang="ar"
             autoPlay={autoPlay}
             onPlay={() => updateVideoInfo("playing", videoState?.playing)}
             onPause={() => updateVideoInfo("playing", videoState?.playing)}

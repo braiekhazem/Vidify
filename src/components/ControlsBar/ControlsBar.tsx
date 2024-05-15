@@ -8,7 +8,7 @@ import SoundIcon from "../SoundIcon";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { formatTime } from "./../../utils/formatDurationTime";
-// import Settings from "../Settings";
+import Settings from "../Settings";
 import FullScreen from "../FullScreen";
 // import Subtitle from "../Subtitle";
 import MiniPlayer from "../MiniPlayer";
@@ -295,8 +295,8 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               "screenshot"
             )}
             {/* {renderButton(<Speed />)} */}
-            {/* {renderButton(<Subtitle />)}
-                {renderButton(<Settings />)} */}
+            {/* {renderButton(<Subtitle />)} */}
+            {renderButton(<Settings />, "Setting")}
             {renderButton(<MiniPlayer video={videoRef} />, t("mini_player"))}
             {renderItem(
               allowedItems,

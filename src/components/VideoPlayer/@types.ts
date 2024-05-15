@@ -31,6 +31,7 @@ export interface VideoPlayerProps {
   startTime?: number;
   children?: React.ReactNode;
   className?: string;
+  customLoader?: ReactNode;
   id?: string;
   lang?: "ar" | "en" | "fr";
   primaryColor?: string;

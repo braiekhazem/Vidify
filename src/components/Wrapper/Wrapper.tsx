@@ -22,6 +22,7 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     currentVideoRef,
     playing,
     videoState: { loadingData },
+    customLoader,
     controlBarElement,
     ...rest
   } = props;
@@ -83,11 +84,15 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
       onMouseMove={handleMouseMove}
       onClick={onClick}
     >
-      {loadingData && (
+      {!loadingData && (
         <div
           className={`${concatPrefixCls(prefixCls, "loading-icon")} vf-center`}
         >
-          <SpinnerSVG width={60} height={60} color="#fff" />
+          {customLoader ? (
+            customLoader
+          ) : (
+            <SpinnerSVG width={60} height={60} color="#fff" />
+          )}
         </div>
       )}
       {children}
