@@ -16,6 +16,7 @@ $class-prefix-vidify: "vf-video";
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
+  direction: ltr;
 
   &-gradient-bottom {
     height: 98px;

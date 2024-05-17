@@ -341,7 +341,7 @@ const App = () => {
                 type="checkbox"
                 id="download"
                 defaultChecked
-                onChange={() => toggleAllowedItems("downlaod")}
+                onChange={() => toggleAllowedItems("download")}
               />
               Download
             </label>

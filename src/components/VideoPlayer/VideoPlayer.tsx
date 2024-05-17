@@ -256,7 +256,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   }, [videoState, currentVideoRef]);
 
   useEffect(() => {
-    if (ref) {
+    //@ts-ignore
+    if (ref && ref.current) {
       const { actions, ...rest } = videoState;
       //@ts-ignore
       ref.current.videoState = rest;

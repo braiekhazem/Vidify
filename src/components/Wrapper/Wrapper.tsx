@@ -84,7 +84,7 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
       onMouseMove={handleMouseMove}
       onClick={onClick}
     >
-      {!loadingData && (
+      {loadingData && (
         <div
           className={`${concatPrefixCls(prefixCls, "loading-icon")} vf-center`}
         >

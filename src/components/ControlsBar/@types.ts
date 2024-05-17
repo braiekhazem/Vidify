@@ -16,7 +16,7 @@ export interface controlBarAllowedItems {
   screenshot?: ItemType | boolean;
   fullscreen?: ItemType | boolean;
   volumeSlider?: ItemType | boolean;
-  downlaod?: ItemType | boolean;
+  download?: ItemType | boolean;
   duration?: ItemType | boolean;
   skip?: ItemType | boolean;
 }

@@ -284,7 +284,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                   videoState.downloading ? t("downloading") : t("download")
                 } (${vidifyShortcuts.download})`
               ),
-              `downlaod`
+              `download`
             )}
             {renderItem(
               allowedItems,
