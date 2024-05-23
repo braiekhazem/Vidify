@@ -6,6 +6,7 @@ export interface WrapperProps {
   playing: boolean;
   videoState: VideoPlayerState;
   className: string;
+  actions: VideoPlayerState["actions"];
   currentVideoRef: React.Ref<any>;
   prefixCls: string;
   customLoader?: ReactNode;

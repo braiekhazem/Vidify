@@ -296,7 +296,17 @@ const internalControlsBar: React.ForwardRefRenderFunction<
             )}
             {/* {renderButton(<Speed />)} */}
             {/* {renderButton(<Subtitle />)} */}
-            {renderButton(<Settings />, "Setting")}
+            {renderButton(
+              <Settings
+                onClick={() =>
+                  videoState.dropdownSettingsOpen
+                    ? actions?.closeDropdownSettings()
+                    : actions?.openDropdownSettings()
+                }
+                isActive={videoState.dropdownSettingsOpen}
+              />,
+              "Setting"
+            )}
             {renderButton(<MiniPlayer video={videoRef} />, t("mini_player"))}
             {renderItem(
               allowedItems,

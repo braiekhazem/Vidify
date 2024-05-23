@@ -46,6 +46,29 @@ export const playerManager: (
       }));
     },
 
+    openDropdownSettings() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        dropdownSettingsOpen: true,
+      }));
+    },
+
+    closeDropdownSettings() {
+      console.log("try to close");
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        dropdownSettingsOpen: false,
+      }));
+    },
+
+    toggleDropdownSettings() {
+      console.log("toggle");
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        dropdownSettingsOpen: !prev.dropdownSettingsOpen,
+      }));
+    },
+
     updateCurrentTime(newCurrentTime) {
       setState((prev: VideoPlayerState) => ({
         ...prev,

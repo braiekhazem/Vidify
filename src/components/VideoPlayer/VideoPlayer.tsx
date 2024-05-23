@@ -78,7 +78,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const currentContainerRef = useRef<HTMLDivElement>(null);
 
-  const defaultVideoState = {
+  const defaultVideoState: VideoPlayerState = {
     src,
     playing: autoPlay,
     volume:
@@ -99,6 +99,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     currentSrcIndex: defaultSrcIndex,
     loadingData: false,
     bufferingProgress: 0,
+    dropdownSettingsOpen: false,
     duration: 0,
     currentTime: 0,
     buffering: false,
@@ -271,6 +272,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       className={classes}
       prefixCls={prefixCls}
       videoState={videoState}
+      actions={videoState.actions}
       onKeyDown={keyDownHandler}
       currentVideoRef={currentVideoRef}
       ref={mergeRefs(containerRef, currentContainerRef)}

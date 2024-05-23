@@ -90,6 +90,7 @@ export interface VideoPlayerState {
   lang: VideoPlayerProps["lang"];
   durationType: VideoPlayerProps["durationType"];
   currentTime: number;
+  dropdownSettingsOpen: boolean;
   fullscreen: boolean;
   downloading: boolean;
   currentSrcIndex: number;
@@ -113,5 +114,8 @@ export interface VideoPlayerState {
     nextVideo: () => void;
     previousVideo: () => void;
     download: () => void;
+    closeDropdownSettings: () => void;
+    openDropdownSettings: () => void;
+    toggleDropdownSettings: () => void;
   };
 }

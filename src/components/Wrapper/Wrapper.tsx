@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
 import { useRefDimensions } from "../../hooks/useRefDimensions";
+import Dropdown from "@src/common/Dropdown/Dropdown";
 
 const small = 500;
 const xSmall = 400;
@@ -19,13 +20,16 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     prefixCls,
     className,
     onClick,
+    actions,
     currentVideoRef,
     playing,
-    videoState: { loadingData },
+    videoState,
     customLoader,
     controlBarElement,
     ...rest
   } = props;
+
+  const { loadingData, dropdownSettingsOpen } = videoState;
 
   const { width } = useRefDimensions(currentVideoRef);
   const [hide, setHide] = useState<boolean>(false);
@@ -84,6 +88,19 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
       onMouseMove={handleMouseMove}
       onClick={onClick}
     >
+      <Dropdown
+        placement={{ right: "12px", bottom: "67px" }}
+        width={226}
+        height={229}
+        open={dropdownSettingsOpen}
+        onOpenChange={(open) =>
+          open
+            ? actions?.openDropdownSettings()
+            : actions?.closeDropdownSettings()
+        }
+      >
+        <div>hello</div>
+      </Dropdown>
       {loadingData && (
         <div
           className={`${concatPrefixCls(prefixCls, "loading-icon")} vf-center`}
