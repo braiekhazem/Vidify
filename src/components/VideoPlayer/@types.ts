@@ -88,6 +88,7 @@ export interface VideoPlayerState {
   buffering: boolean;
   bufferingProgress: number;
   lang: VideoPlayerProps["lang"];
+  annotation: boolean;
   durationType: VideoPlayerProps["durationType"];
   currentTime: number;
   dropdownSettingsOpen: boolean;
@@ -117,5 +118,7 @@ export interface VideoPlayerState {
     closeDropdownSettings: () => void;
     openDropdownSettings: () => void;
     toggleDropdownSettings: () => void;
+    toggleAnnotation: () => void;
+    setSpeed: (speed: number) => void;
   };
 }

@@ -2,16 +2,18 @@ $class-prefix-dropdown: "vf-dropdown";
 
 .#{$class-prefix-dropdown} {
   position: absolute;
-  background-color: white;
-  z-index: 70;
+  background: rgba(28, 28, 28, 0.9);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  z-index: 110;
   will-change: width, height;
   border-radius: 12px;
   overflow: hidden;
-  transition: opacity 0.1s cubic-bezier(0, 0, 0.2, 1);
-  -webkit-transition: opacity 0.1s cubic-bezier(0, 0, 0.2, 1);
-  -moz-transition: opacity 0.1s cubic-bezier(0, 0, 0.2, 1);
-  -ms-transition: opacity 0.1s cubic-bezier(0, 0, 0.2, 1);
-  -o-transition: opacity 0.1s cubic-bezier(0, 0, 0.2, 1);
+  transition: height 0.7s linear;
+  -webkit-transition: height 0.7s linear;
+  -moz-transition: height 0.7s linear;
+  -ms-transition: height 0.7s linear;
+  -o-transition: height 0.7s linear;
+  color: var(--vf-color-white);
 }
 
 .#{$class-prefix-dropdown}-close {

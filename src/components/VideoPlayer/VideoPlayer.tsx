@@ -96,6 +96,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     rendered: false,
     speed: 1,
     lang,
+    annotation: true,
     currentSrcIndex: defaultSrcIndex,
     loadingData: false,
     bufferingProgress: 0,
@@ -361,7 +362,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
           "wrapper-gradient-top"
         )}`}
       ></div>
-      {annotation && (
+      {annotation && videoState.annotation && (
         <div
           className={`${concatPrefixCls(
             prefixCls,

@@ -1,10 +1,12 @@
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { WrapperProps } from "./@types";
 import classNames from "classnames";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
 import { useRefDimensions } from "../../hooks/useRefDimensions";
+import SettingsDropdown from "../SettingsDropdown";
 import Dropdown from "@src/common/Dropdown/Dropdown";
+import mergeRefs from "@src/utils/mergeRefs";
 
 const small = 500;
 const xSmall = 400;
@@ -29,11 +31,14 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     ...rest
   } = props;
 
-  const { loadingData, dropdownSettingsOpen } = videoState;
+  const { loadingData } = videoState;
 
-  const { width } = useRefDimensions(currentVideoRef);
+  const { width, height } = useRefDimensions(currentVideoRef);
   const [hide, setHide] = useState<boolean>(false);
   const [forceCancel, setForceCancel] = useState<boolean>(false);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [showMenu, setShowMenu] = useState(false);
+  const containerRef = useRef<any>(null);
 
   const classes = classNames(className, {
     [`${prefixCls}-hidden`]: playing && hide,
@@ -58,6 +63,24 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     }
   };
 
+  const handleContextMenu = (event: any) => {
+    event.preventDefault();
+
+    if (containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const relativeX = event.clientX - containerRect.left;
+      const relativeY = event.clientY - containerRect.top;
+
+      setCursorPosition({ x: relativeX, y: relativeY });
+      setShowMenu(true);
+    }
+  };
+
+  const handleClick = (e: any) => {
+    onClick && onClick(e);
+    setShowMenu(false);
+  };
+
   const handleMouseMove = () => setHide(false);
 
   useEffect(() => {
@@ -79,27 +102,33 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     }
   }, [controlBarElement]);
 
+  console.log({ showMenu, cursorPosition });
+
   return (
     <div
       {...rest}
       className={classes}
-      ref={ref}
+      ref={mergeRefs(ref, containerRef)}
       onMouseLeave={() => timeoutId && clearInterval(timeoutId)}
       onMouseMove={handleMouseMove}
-      onClick={onClick}
+      onClick={handleClick}
+      onContextMenu={handleContextMenu}
     >
+      <SettingsDropdown
+        videoState={videoState}
+        actions={videoState.actions}
+        currentVideoRef={currentVideoRef.current}
+        videoWidth={width + height}
+      />
       <Dropdown
-        placement={{ right: "12px", bottom: "67px" }}
-        width={226}
-        height={229}
-        open={dropdownSettingsOpen}
-        onOpenChange={(open) =>
-          open
-            ? actions?.openDropdownSettings()
-            : actions?.closeDropdownSettings()
-        }
+        open={showMenu}
+        onOpenChange={(open) => setShowMenu(open)}
+        placement={{
+          top: cursorPosition.y + "px",
+          left: cursorPosition.x + "px",
+        }}
       >
-        <div>hello</div>
+        context menu
       </Dropdown>
       {loadingData && (
         <div

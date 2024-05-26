@@ -54,7 +54,6 @@ export const playerManager: (
     },
 
     closeDropdownSettings() {
-      console.log("try to close");
       setState((prev: VideoPlayerState) => ({
         ...prev,
         dropdownSettingsOpen: false,
@@ -62,10 +61,23 @@ export const playerManager: (
     },
 
     toggleDropdownSettings() {
-      console.log("toggle");
       setState((prev: VideoPlayerState) => ({
         ...prev,
         dropdownSettingsOpen: !prev.dropdownSettingsOpen,
+      }));
+    },
+
+    toggleAnnotation() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        annotation: !prev.annotation,
+      }));
+    },
+
+    setSpeed(speed) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        speed,
       }));
     },
 

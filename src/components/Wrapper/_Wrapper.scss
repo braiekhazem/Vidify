@@ -90,6 +90,10 @@ $class-prefix-vidify: "vf-video";
     -o-transform: translateY(100%) !important;
   }
 
+  .vf-dropdown {
+    opacity: 0;
+  }
+
   .vf-video-wrapper-gradient-bottom {
     opacity: 0 !important;
   }

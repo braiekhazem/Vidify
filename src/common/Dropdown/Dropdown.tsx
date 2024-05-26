@@ -2,8 +2,9 @@ import { getPrefixCls } from "@src/utils/getPrefixCls";
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { DropdownProps } from "./@types";
+import mergeRefs from "@src/utils/mergeRefs";
 
-const Dropdown: React.FC<DropdownProps> = (props) => {
+const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
   const {
     className,
     children,
@@ -33,7 +34,6 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        console.log("bir");
         setSelfOpen(false);
         if (onOpenChange) onOpenChange(false);
       }
@@ -45,15 +45,22 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
     };
   }, [onOpenChange]);
 
+  // useEffect(() => {
+  //   if (dropdownRef.current) {
+  //     const height = dropdownRef.current.scrollHeight;
+  //     dropdownRef.current.style.height = `${height}px`;
+  //   }
+  // }, [selftOpen, children]);
+
   return (
     <div
       className={classes}
       style={{ ...placement, width, height }}
-      ref={dropdownRef}
+      ref={mergeRefs(dropdownRef, ref)}
     >
       {children}
     </div>
   );
-};
+});
 
 export default Dropdown;
