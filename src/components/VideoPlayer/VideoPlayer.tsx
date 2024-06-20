@@ -15,6 +15,7 @@ import { getAllowedControlBarItems } from "./../../utils/getAllowedControlBarIte
 import { getVideoSrc } from "./../../utils/getVideoSrc";
 import VideoLoadError from "../VideoLoadError";
 import i18n from "@src/i18n";
+import { DEFAULT_CONTEXT_MENU_ITEMS } from "../Wrapper/Wrapper";
 
 const ASPECT_RATIO = 16 / 9;
 
@@ -36,6 +37,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     title = "",
     durationType = "default",
     // currentTime = 0,
+    contextMenu = DEFAULT_CONTEXT_MENU_ITEMS,
+    enableContextMenu = true,
     id,
     customLoader,
     annotation,
@@ -282,6 +285,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       playing={videoState.playing}
       customLoader={customLoader}
       tabIndex={0}
+      contextMenu={contextMenu}
+      enableContextMenu={enableContextMenu}
       title={title}
       style={containerstyle}
       controlBarElement={controlsBarRef.current}

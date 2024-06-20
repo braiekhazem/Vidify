@@ -322,3 +322,38 @@ $class-prefix-vidify: "vf-video";
     }
   }
 }
+
+$class-prefix-context-menu: "vf-context-menu";
+
+.#{$class-prefix-context-menu} {
+  padding: 8px 0;
+  overflow-y: auto;
+  &-item {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    padding: 0 8px;
+    cursor: pointer;
+    column-gap: 7px;
+    font-size: 13px;
+    font-weight: 400;
+    &:hover {
+      background-color: var(--vf-dropdown-menu-item-hover);
+    }
+    &-icon {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
+      & > * {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &-label {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}

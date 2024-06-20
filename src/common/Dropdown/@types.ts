@@ -12,10 +12,10 @@ export interface DropdownProps {
   open?: boolean;
   menu?: DropdownMenuItems[];
   placement?: {
-    top?: string;
-    left?: string;
-    right?: string;
-    bottom?: string;
+    top?: number;
+    left?: number;
+    right?: number;
+    bottom?: number;
   };
   width?: number;
   height?: number;

@@ -81,6 +81,13 @@ export const playerManager: (
       }));
     },
 
+    togglekeyboardModal(open) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        keyboardOpened: open,
+      }));
+    },
+
     updateCurrentTime(newCurrentTime) {
       setState((prev: VideoPlayerState) => ({
         ...prev,

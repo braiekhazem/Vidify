@@ -173,7 +173,7 @@ const SettingsDropdown: React.FC<SettingsDropdownProps> = (props) => {
 
   return (
     <Dropdown
-      placement={{ right: "12px", bottom: "67px" }}
+      placement={{ right: 12, bottom: 67 }}
       width={226}
       open={isOpen}
       ref={dropdownRef}

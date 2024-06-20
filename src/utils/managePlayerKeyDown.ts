@@ -1,7 +1,19 @@
 import { fullScreenMode } from "./../components/FullScreen/FullScreen";
 import { VideoPlayerState } from "@src/components/VideoPlayer/@types";
 
-export const vidifyShortcuts = {
+export const vidifyShortcuts: {
+  play: string;
+  fullscreen: string;
+  screenshot: string;
+  download: string;
+  mute: string;
+  next_video: string;
+  prev_video: string;
+  rewind: string;
+  forward: string;
+  volume_up: string;
+  volume_down: string;
+} = {
   play: "k",
   fullscreen: "f",
   screenshot: "SHIFT+S",
@@ -9,6 +21,10 @@ export const vidifyShortcuts = {
   mute: "m",
   next_video: "SHIFT+P",
   prev_video: "SHIFT+N",
+  rewind: "←",
+  forward: "→",
+  volume_up: "↑",
+  volume_down: "↓",
 };
 
 export const managePlayerKeyDown = (

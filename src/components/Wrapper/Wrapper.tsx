@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
-import { WrapperProps } from "./@types";
+import { ContextMenuProps, WrapperProps, itemMenu } from "./@types";
 import classNames from "classnames";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
@@ -7,11 +7,110 @@ import { useRefDimensions } from "../../hooks/useRefDimensions";
 import SettingsDropdown from "../SettingsDropdown";
 import Dropdown from "@src/common/Dropdown/Dropdown";
 import mergeRefs from "@src/utils/mergeRefs";
+import { getPrefixCls } from "@src/utils/getPrefixCls";
+import ShortCutModal from "../Modals/ShortCutModal";
 
 const small = 500;
 const xSmall = 400;
 const maxSmall = 350;
 const medium = 630;
+
+export const DEFAULT_CONTEXT_MENU_ITEMS: itemMenu[] = [
+  {
+    label: "custom1",
+    icon: "icon",
+    onClick: () => {
+      console.log("click");
+    },
+    className: "test",
+    link: "https://app.tamtasks.com/spaces/list/12816998-0ef7-421d-8658-0b2ff3ad0daa",
+  },
+  {
+    label: "custom2",
+    icon: "icon",
+    onClick: () => {
+      console.log("click");
+    },
+    className: "test",
+  },
+  {
+    label: "custom3",
+    icon: "icon",
+    onClick: () => {
+      console.log("click");
+    },
+    className: "test2",
+  },
+];
+
+const InternalContextMenu: React.ForwardRefRenderFunction<
+  HTMLDivElement,
+  ContextMenuProps
+> = (props, ref) => {
+  const {
+    videoState,
+    className,
+    onClick,
+    style = {},
+    closeMenu,
+    items = DEFAULT_CONTEXT_MENU_ITEMS,
+  } = props;
+  const prefixCls = getPrefixCls("context-menu");
+  const classes = classNames(prefixCls, className);
+
+  const onClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    onClick?.();
+  };
+
+  const keyBoardItem: itemMenu = {
+    label: "keyboard",
+    icon: "icon",
+    onClick: () =>
+      videoState.actions?.togglekeyboardModal(!videoState.keyboardOpened),
+  };
+
+  return (
+    <div
+      className={classes}
+      style={{ width: 200, ...style }}
+      onClick={onClickHandler}
+      ref={ref}
+    >
+      {[...items, keyBoardItem]?.map((item, index) => {
+        const { icon, label, link, className, style, onClick } = item;
+
+        return (
+          <div
+            className={`${concatPrefixCls(prefixCls, "item")} ${className}`}
+            onClick={(e) => {
+              onClick?.(e);
+              closeMenu();
+              if (link) window.open(link, "_blank");
+            }}
+            key={index}
+            style={style}
+          >
+            {icon && (
+              <div className={concatPrefixCls(prefixCls, "item-icon")}>
+                {icon}
+              </div>
+            )}
+            {label && (
+              <div className={concatPrefixCls(prefixCls, "item-label")}>
+                {label}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const ContextMenu = React.forwardRef<HTMLDivElement, ContextMenuProps>(
+  InternalContextMenu
+);
 
 const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
   props,
@@ -26,6 +125,8 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     currentVideoRef,
     playing,
     videoState,
+    contextMenu,
+    enableContextMenu,
     customLoader,
     controlBarElement,
     ...rest
@@ -65,8 +166,7 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
 
   const handleContextMenu = (event: any) => {
     event.preventDefault();
-
-    if (containerRef.current) {
+    if (containerRef.current && enableContextMenu) {
       const containerRect = containerRef.current.getBoundingClientRect();
       const relativeX = event.clientX - containerRect.left;
       const relativeY = event.clientY - containerRect.top;
@@ -114,22 +214,30 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
       onClick={handleClick}
       onContextMenu={handleContextMenu}
     >
+      <Dropdown
+        open={showMenu}
+        onOpenChange={(open) => setShowMenu(open)}
+        placement={{
+          top: cursorPosition.y,
+          left: cursorPosition.x,
+        }}
+      >
+        <ContextMenu
+          videoState={videoState}
+          closeMenu={() => setShowMenu(false)}
+          items={contextMenu}
+        />
+      </Dropdown>
       <SettingsDropdown
         videoState={videoState}
         actions={videoState.actions}
         currentVideoRef={currentVideoRef.current}
         videoWidth={width + height}
       />
-      <Dropdown
-        open={showMenu}
-        onOpenChange={(open) => setShowMenu(open)}
-        placement={{
-          top: cursorPosition.y + "px",
-          left: cursorPosition.x + "px",
-        }}
-      >
-        context menu
-      </Dropdown>
+      <ShortCutModal
+        videoState={videoState}
+        toggleModal={(open) => videoState.actions?.togglekeyboardModal(open)}
+      />
       {loadingData && (
         <div
           className={`${concatPrefixCls(prefixCls, "loading-icon")} vf-center`}

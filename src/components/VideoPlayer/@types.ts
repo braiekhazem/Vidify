@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode } from "react";
 import { controlBarAllowedItems } from "../ControlsBar/@types";
+import { itemMenu } from "../Wrapper/@types";
 
 export interface customButton {
   placement: "left" | "right";
@@ -34,6 +35,8 @@ export interface VideoPlayerProps {
   customLoader?: ReactNode;
   id?: string;
   lang?: "ar" | "en" | "fr";
+  contextMenu?: itemMenu[];
+  enableContextMenu?: boolean;
   primaryColor?: string;
   annotation?: ReactNode;
   annotationStyle?: CSSProperties;
@@ -86,6 +89,7 @@ export interface VideoPlayerState {
   volume: number;
   duration: number;
   buffering: boolean;
+  keyboardOpened?: boolean;
   bufferingProgress: number;
   lang: VideoPlayerProps["lang"];
   annotation: boolean;
@@ -120,5 +124,6 @@ export interface VideoPlayerState {
     toggleDropdownSettings: () => void;
     toggleAnnotation: () => void;
     setSpeed: (speed: number) => void;
+    togglekeyboardModal: (open: boolean) => void;
   };
 }

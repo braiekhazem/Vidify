@@ -15,7 +15,10 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
     onOpenChange,
   } = props;
 
-  const [selftOpen, setSelfOpen] = useState<boolean>(open);
+  const parentElement = document.querySelector(".vf-video-wrapper");
+
+  const [selfOpen, setSelfOpen] = useState<boolean>(open);
+  const [dropdownStyles, setDropdownStyles] = useState<React.CSSProperties>({});
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,8 +28,46 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
   const prefixCls = getPrefixCls("dropdown");
 
   const classes = classNames(prefixCls, className, {
-    [`${prefixCls}-close`]: !selftOpen,
+    [`${prefixCls}-close`]: !selfOpen,
   });
+
+  const updateDropdownPosition = () => {
+    if (!parentElement || !dropdownRef.current) return;
+
+    const parentRect = parentElement.getBoundingClientRect();
+    const dropdownRect = dropdownRef.current.getBoundingClientRect();
+    let newPlacement: DropdownProps["placement"] = { ...placement };
+
+    if (placement.top !== undefined) {
+      newPlacement.top = Math.max(
+        0,
+        Math.min(placement.top, parentRect.height - dropdownRect.height)
+      );
+    }
+    if (placement.left !== undefined) {
+      newPlacement.left = Math.max(
+        0,
+        Math.min(placement.left, parentRect.width - dropdownRect.width)
+      );
+    }
+    if (placement.bottom !== undefined) {
+      newPlacement.bottom = Math.max(
+        0,
+        Math.min(placement.bottom, parentRect.height - dropdownRect.height)
+      );
+    }
+    if (placement.right !== undefined) {
+      newPlacement.right = Math.max(
+        0,
+        Math.min(placement.right, parentRect.width - dropdownRect.width)
+      );
+    }
+    setDropdownStyles(newPlacement);
+  };
+
+  useEffect(() => {
+    updateDropdownPosition();
+  }, [placement, dropdownRef.current, selfOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -45,17 +86,10 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
     };
   }, [onOpenChange]);
 
-  // useEffect(() => {
-  //   if (dropdownRef.current) {
-  //     const height = dropdownRef.current.scrollHeight;
-  //     dropdownRef.current.style.height = `${height}px`;
-  //   }
-  // }, [selftOpen, children]);
-
   return (
     <div
       className={classes}
-      style={{ ...placement, width, height }}
+      style={{ ...dropdownStyles, width, height }}
       ref={mergeRefs(dropdownRef, ref)}
     >
       {children}

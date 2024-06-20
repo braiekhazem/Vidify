@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { SettingsProps } from "./@types";
-import { ReactComponent as SettingsSVG } from "../../global/assets/icons/settings/Settings.svg";
+import { ReactComponent as SettingsSVG } from "../../global/assets/icons/settings/settings.svg";
 import { getPrefixCls } from "./../../utils/getPrefixCls";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
