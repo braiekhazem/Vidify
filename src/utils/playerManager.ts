@@ -1,5 +1,6 @@
 import { VideoPlayerState } from "@src/components/VideoPlayer/@types";
 import { downloadFile } from "./downloadFile";
+import { DEFAULT_VIDEO_FILTER } from "@src/components/Modals/FilterModal/FilterModal";
 
 export const playerManager: (
   setState: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
@@ -85,6 +86,30 @@ export const playerManager: (
       setState((prev: VideoPlayerState) => ({
         ...prev,
         keyboardOpened: open,
+      }));
+    },
+
+    toggleFilterModal(open) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        filterOpened: open,
+      }));
+    },
+
+    setVideoFilter(key, value) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        videoFilter: {
+          ...prev.videoFilter,
+          [key]: { ...prev.videoFilter[key], value },
+        },
+      }));
+    },
+
+    resetVideoFilters() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        videoFilter: DEFAULT_VIDEO_FILTER,
       }));
     },
 

@@ -3,12 +3,14 @@ import { ContextMenuProps, WrapperProps, itemMenu } from "./@types";
 import classNames from "classnames";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
+import { ReactComponent as KeyboardSVG } from "../../global/assets/icons/settings/keyboard.svg";
 import { useRefDimensions } from "../../hooks/useRefDimensions";
 import SettingsDropdown from "../SettingsDropdown";
 import Dropdown from "@src/common/Dropdown/Dropdown";
 import mergeRefs from "@src/utils/mergeRefs";
 import { getPrefixCls } from "@src/utils/getPrefixCls";
 import ShortCutModal from "../Modals/ShortCutModal";
+import FilterModal from "../Modals/FilterModal";
 
 const small = 500;
 const xSmall = 400;
@@ -65,7 +67,7 @@ const InternalContextMenu: React.ForwardRefRenderFunction<
 
   const keyBoardItem: itemMenu = {
     label: "keyboard",
-    icon: "icon",
+    icon: <KeyboardSVG />,
     onClick: () =>
       videoState.actions?.togglekeyboardModal(!videoState.keyboardOpened),
   };
@@ -234,9 +236,14 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
         currentVideoRef={currentVideoRef.current}
         videoWidth={width + height}
       />
+
       <ShortCutModal
         videoState={videoState}
         toggleModal={(open) => videoState.actions?.togglekeyboardModal(open)}
+      />
+      <FilterModal
+        videoState={videoState}
+        currentVideoRef={currentVideoRef.current}
       />
       {loadingData && (
         <div

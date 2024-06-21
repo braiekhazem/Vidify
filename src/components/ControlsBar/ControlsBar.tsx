@@ -138,190 +138,188 @@ const internalControlsBar: React.ForwardRefRenderFunction<
     (button) => button.placement === "right"
   );
 
+  const renderProgressBar = progressBar && (
+    <ProgressBar videoState={videoState} />
+  );
+
+  const renderDefaultControls = (
+    <>
+      <div className={`${prefixCls}-left`}>
+        {typeof videoState.src !== "string" &&
+          videoState.currentSrcIndex !== 0 &&
+          renderButton(
+            <ArrowNavigation
+              type="prev"
+              disabled={videoState.currentSrcIndex === 0}
+              onClickPrev={() => actions?.previousVideo()}
+            />,
+            <div className={concatPrefixCls(prefixCls, "video-preview")}>
+              <div>
+                {t("previous")} {vidifyShortcuts.prev_video}
+              </div>
+              <VideoPlayer
+                width="300px"
+                autoPlay
+                controller={false}
+                src={videoState.src[videoState.currentSrcIndex - 1] as string}
+              />
+            </div>
+          )}
+        {renderButton(
+          <ControlIcon
+            onPlay={() => actions?.play()}
+            onPause={() => actions?.pause()}
+            play={videoState.playing}
+          />,
+          `${videoState.playing ? t("pause") : t("play")} (${
+            vidifyShortcuts.play
+          })`
+        )}
+        {typeof videoState.src !== "string" &&
+          !(videoState.currentSrcIndex + 1 > videoState.src.length - 1) &&
+          renderButton(
+            <ArrowNavigation
+              type="next"
+              disabled={
+                videoState.currentSrcIndex + 1 > videoState.src.length - 1
+              }
+              onClickNext={() => actions?.nextVideo()}
+            />,
+            <div className={concatPrefixCls(prefixCls, "video-preview")}>
+              <div>
+                {t("next")} {vidifyShortcuts.next_video}
+              </div>
+              <VideoPlayer
+                width="300px"
+                autoPlay
+                controller={false}
+                src={videoState.src[videoState.currentSrcIndex + 1] as string}
+              />
+            </div>
+          )}
+
+        {renderItem(
+          null,
+          renderButton(
+            <SecondsForward
+              isNext={false}
+              onClick={(_, sec) =>
+                actions?.updateCurrentTime(videoState.currentTime - sec)
+              }
+            />,
+            `${t("skip_backword")} ←`
+          ),
+          "skip"
+        )}
+        {renderItem(
+          null,
+          renderButton(
+            <SecondsForward
+              isNext={true}
+              onClick={(_, sec) =>
+                actions?.updateCurrentTime(videoState.currentTime + sec)
+              }
+            />,
+            `${t("skip_forword")}  →`
+          ),
+          "skip"
+        )}
+
+        <div className={concatPrefixCls(prefixCls, "volume-area")}>
+          {renderButton(
+            <SoundIcon
+              onClick={(_, volume) => actions?.setVolume(volume)}
+              onMute={() => actions?.mute()}
+              onVolume={() =>
+                actions?.setVolume(videoState.volume ? videoState.volume : 1)
+              }
+              volume={videoState.volume}
+              mute={videoState.muted}
+            />,
+            `${t("volume")} ${getPercentage(
+              videoState.volume,
+              1
+            ).toFixed()}% (${vidifyShortcuts.mute})`
+          )}
+          {allowedItems.volumeSlider && (
+            <Slider
+              className="vf-slider"
+              min={0}
+              max={1}
+              step={0.1}
+              value={videoState.muted ? 0 : videoState.volume}
+              onChange={(volume) => actions?.setVolume(volume as number)}
+            />
+          )}
+        </div>
+        {renderButton(
+          renderVideoDuration(
+            videoState.duration,
+            videoState.currentTime,
+            durationType
+          ),
+          t("duration")
+        )}
+
+        {leftCustomButtons?.map((customButton) => customButton.content)}
+      </div>
+      <div className={`${prefixCls}-right`}>
+        {rightCustomButtons?.map((customButton) => customButton.content)}
+
+        {renderItem(
+          allowedItems,
+          renderButton(
+            <Download
+              onClick={() => actions?.download()}
+              downloading={videoState.downloading}
+            />,
+            `${videoState.downloading ? t("downloading") : t("download")} (${
+              vidifyShortcuts.download
+            })`
+          ),
+          `download`
+        )}
+        {renderItem(
+          allowedItems,
+          renderButton(
+            <Screenshot onClick={() => actions?.screenShot()} />,
+            `${t("screenshot")} (${vidifyShortcuts.screenshot})`
+          ),
+          "screenshot"
+        )}
+        {/* {renderButton(<Speed />)} */}
+        {/* {renderButton(<Subtitle />)} */}
+        {renderButton(
+          <Settings
+            onClick={() =>
+              videoState.dropdownSettingsOpen
+                ? actions?.closeDropdownSettings()
+                : actions?.openDropdownSettings()
+            }
+            isActive={videoState.dropdownSettingsOpen}
+          />,
+          "Setting"
+        )}
+        {renderButton(<MiniPlayer video={videoRef} />, t("mini_player"))}
+        {renderItem(
+          allowedItems,
+          renderButton(
+            <FullScreen
+              onFullScreen={() => actions?.setFullscreen(true)}
+              onCancelFullScreen={() => actions?.setFullscreen(false)}
+            />,
+            `${t("fullscreen")} (${vidifyShortcuts.fullscreen})`
+          ),
+          "fullscreen"
+        )}
+      </div>
+    </>
+  );
+
   return (
     <div className={classes} ref={ref}>
-      {progressBar && <ProgressBar videoState={videoState} />}
-      {customControlBar ? (
-        customControlBar
-      ) : (
-        <>
-          <div className={`${prefixCls}-left`}>
-            {typeof videoState.src !== "string" &&
-              videoState.currentSrcIndex !== 0 &&
-              renderButton(
-                <ArrowNavigation
-                  type="prev"
-                  disabled={videoState.currentSrcIndex === 0}
-                  onClickPrev={() => actions?.previousVideo()}
-                />,
-                <div className={concatPrefixCls(prefixCls, "video-preview")}>
-                  <div>
-                    {t("previous")} {vidifyShortcuts.prev_video}
-                  </div>
-                  <VideoPlayer
-                    width="300px"
-                    autoPlay
-                    controller={false}
-                    src={
-                      videoState.src[videoState.currentSrcIndex - 1] as string
-                    }
-                  />
-                </div>
-              )}
-            {renderButton(
-              <ControlIcon
-                onPlay={() => actions?.play()}
-                onPause={() => actions?.pause()}
-                play={videoState.playing}
-              />,
-              `${videoState.playing ? t("pause") : t("play")} (${
-                vidifyShortcuts.play
-              })`
-            )}
-            {typeof videoState.src !== "string" &&
-              !(videoState.currentSrcIndex + 1 > videoState.src.length - 1) &&
-              renderButton(
-                <ArrowNavigation
-                  type="next"
-                  disabled={
-                    videoState.currentSrcIndex + 1 > videoState.src.length - 1
-                  }
-                  onClickNext={() => actions?.nextVideo()}
-                />,
-                <div className={concatPrefixCls(prefixCls, "video-preview")}>
-                  <div>
-                    {t("next")} {vidifyShortcuts.next_video}
-                  </div>
-                  <VideoPlayer
-                    width="300px"
-                    autoPlay
-                    controller={false}
-                    src={
-                      videoState.src[videoState.currentSrcIndex + 1] as string
-                    }
-                  />
-                </div>
-              )}
-
-            {renderItem(
-              null,
-              renderButton(
-                <SecondsForward
-                  isNext={false}
-                  onClick={(_, sec) =>
-                    actions?.updateCurrentTime(videoState.currentTime - sec)
-                  }
-                />,
-                `${t("skip_backword")} ←`
-              ),
-              "skip"
-            )}
-            {renderItem(
-              null,
-              renderButton(
-                <SecondsForward
-                  isNext={true}
-                  onClick={(_, sec) =>
-                    actions?.updateCurrentTime(videoState.currentTime + sec)
-                  }
-                />,
-                `${t("skip_forword")}  →`
-              ),
-              "skip"
-            )}
-
-            <div className={concatPrefixCls(prefixCls, "volume-area")}>
-              {renderButton(
-                <SoundIcon
-                  onClick={(_, volume) => actions?.setVolume(volume)}
-                  onMute={() => actions?.mute()}
-                  onVolume={() =>
-                    actions?.setVolume(
-                      videoState.volume ? videoState.volume : 1
-                    )
-                  }
-                  volume={videoState.volume}
-                  mute={videoState.muted}
-                />,
-                `${t("volume")} ${getPercentage(
-                  videoState.volume,
-                  1
-                ).toFixed()}% (${vidifyShortcuts.mute})`
-              )}
-              {allowedItems.volumeSlider && (
-                <Slider
-                  className="vf-slider"
-                  min={0}
-                  max={1}
-                  step={0.1}
-                  value={videoState.muted ? 0 : videoState.volume}
-                  onChange={(volume) => actions?.setVolume(volume as number)}
-                />
-              )}
-            </div>
-            {renderButton(
-              renderVideoDuration(
-                videoState.duration,
-                videoState.currentTime,
-                durationType
-              ),
-              t("duration")
-            )}
-
-            {leftCustomButtons?.map((customButton) => customButton.content)}
-          </div>
-          <div className={`${prefixCls}-right`}>
-            {rightCustomButtons?.map((customButton) => customButton.content)}
-
-            {renderItem(
-              allowedItems,
-              renderButton(
-                <Download
-                  onClick={() => actions?.download()}
-                  downloading={videoState.downloading}
-                />,
-                `${
-                  videoState.downloading ? t("downloading") : t("download")
-                } (${vidifyShortcuts.download})`
-              ),
-              `download`
-            )}
-            {renderItem(
-              allowedItems,
-              renderButton(
-                <Screenshot onClick={() => actions?.screenShot()} />,
-                `${t("screenshot")} (${vidifyShortcuts.screenshot})`
-              ),
-              "screenshot"
-            )}
-            {/* {renderButton(<Speed />)} */}
-            {/* {renderButton(<Subtitle />)} */}
-            {renderButton(
-              <Settings
-                onClick={() =>
-                  videoState.dropdownSettingsOpen
-                    ? actions?.closeDropdownSettings()
-                    : actions?.openDropdownSettings()
-                }
-                isActive={videoState.dropdownSettingsOpen}
-              />,
-              "Setting"
-            )}
-            {renderButton(<MiniPlayer video={videoRef} />, t("mini_player"))}
-            {renderItem(
-              allowedItems,
-              renderButton(
-                <FullScreen
-                  onFullScreen={() => actions?.setFullscreen(true)}
-                  onCancelFullScreen={() => actions?.setFullscreen(false)}
-                />,
-                `${t("fullscreen")} (${vidifyShortcuts.fullscreen})`
-              ),
-              "fullscreen"
-            )}
-          </div>
-        </>
-      )}
+      {renderProgressBar}
+      {customControlBar || renderDefaultControls}
     </div>
   );
 };

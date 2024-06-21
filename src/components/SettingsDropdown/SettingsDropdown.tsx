@@ -12,12 +12,18 @@ import { ReactComponent as AnnotationSVG } from "../../global/assets/icons/setti
 import { ReactComponent as AngleRightSVG } from "../../global/assets/icons/settings/angle-right.svg";
 import { ReactComponent as AngleLeftSVG } from "../../global/assets/icons/settings/angle-left.svg";
 import { ReactComponent as CheckSVG } from "../../global/assets/icons/settings/check.svg";
+import { ReactComponent as FilterSVG } from "../../global/assets/icons/settings/filter.svg";
 import Slider from "rc-slider";
 
 const SettingsTab: React.FC<TabProps> = (props) => {
   const { className, prefixCls, setActiveTab, actions, videoState } = props;
 
   const toggleAnnotationHandler = () => actions?.toggleAnnotation();
+
+  const openFilterHandler = () => {
+    actions?.toggleFilterModal(!videoState.filterOpened);
+    actions?.closeDropdownSettings();
+  };
 
   const setSpeedTabnHandler = () => setActiveTab(1);
 
@@ -60,6 +66,16 @@ const SettingsTab: React.FC<TabProps> = (props) => {
         <div className={concatPrefixCls(prefixCls, "content")}>
           <Switch checked={videoState.annotation} />
         </div>
+      </div>
+      <div
+        className={concatPrefixCls(prefixCls, "item")}
+        onClick={openFilterHandler}
+      >
+        <div className={concatPrefixCls(prefixCls, "icon")}>
+          <FilterSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+        </div>
+
+        <div className={concatPrefixCls(prefixCls, "label")}>Filter</div>
       </div>
     </div>
   );

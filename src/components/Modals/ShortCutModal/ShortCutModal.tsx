@@ -11,7 +11,6 @@ import { vidifyShortcuts } from "@src/utils/managePlayerKeyDown";
 const ShortCutModal: React.FC<ShortCutModalProps> = (props) => {
   const { videoState, toggleModal } = props;
   const { keyboardOpened: isOpen = false } = videoState;
-  console.log({ isOpen });
 
   const { t } = useTranslation();
 

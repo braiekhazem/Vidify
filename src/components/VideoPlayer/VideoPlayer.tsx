@@ -16,6 +16,7 @@ import { getVideoSrc } from "./../../utils/getVideoSrc";
 import VideoLoadError from "../VideoLoadError";
 import i18n from "@src/i18n";
 import { DEFAULT_CONTEXT_MENU_ITEMS } from "../Wrapper/Wrapper";
+import { DEFAULT_VIDEO_FILTER } from "../Modals/FilterModal/FilterModal";
 
 const ASPECT_RATIO = 16 / 9;
 
@@ -97,6 +98,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     loop,
     durationType,
     rendered: false,
+    videoFilter: DEFAULT_VIDEO_FILTER,
     speed: 1,
     lang,
     annotation: true,
@@ -319,6 +321,15 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         onError={handleVideoError}
         autoPlay={autoPlay}
         muted={videoState.muted}
+        style={{
+          filter: `
+            brightness(${videoState.videoFilter.brightness.value}%) 
+            contrast(${videoState.videoFilter.contrast.value}%) 
+            saturate(${videoState.videoFilter.saturation.value}%) 
+            blur(${videoState.videoFilter.blur.value}px)
+          `,
+          opacity: `${videoState.videoFilter.opacity.value}%`,
+        }}
       />
 
       <PlayButton

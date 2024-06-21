@@ -14,6 +14,21 @@ $class-prefix-dropdown: "vf-dropdown";
   -ms-transition: height 0.7s linear;
   -o-transition: height 0.7s linear;
   color: var(--vf-color-white);
+
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
+    border-radius: 4px;
+  }
+
+  &:hover {
+    --scrollbar-color: #8c8c8cc7;
+  }
 }
 
 .#{$class-prefix-dropdown}-close {

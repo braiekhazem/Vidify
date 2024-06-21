@@ -67,7 +67,7 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
 
   useEffect(() => {
     updateDropdownPosition();
-  }, [placement, dropdownRef.current, selfOpen]);
+  }, [selfOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -85,6 +85,8 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onOpenChange]);
+
+  if (!selfOpen) return null;
 
   return (
     <div

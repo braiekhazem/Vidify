@@ -26,6 +26,20 @@ export interface errorOptions {
   renderError?: (src: string) => ReactNode;
 }
 
+export interface IFilterItem {
+  value: number;
+  min: number;
+  max: number;
+}
+
+export interface IVideoFilter {
+  opacity: IFilterItem;
+  contrast: IFilterItem;
+  saturation: IFilterItem;
+  brightness: IFilterItem;
+  blur: IFilterItem;
+}
+
 export interface VideoPlayerProps {
   src: string | string[];
   defaultSrcIndex?: number;
@@ -90,6 +104,8 @@ export interface VideoPlayerState {
   duration: number;
   buffering: boolean;
   keyboardOpened?: boolean;
+  filterOpened?: boolean;
+  videoFilter: IVideoFilter;
   bufferingProgress: number;
   lang: VideoPlayerProps["lang"];
   annotation: boolean;
@@ -125,5 +141,8 @@ export interface VideoPlayerState {
     toggleAnnotation: () => void;
     setSpeed: (speed: number) => void;
     togglekeyboardModal: (open: boolean) => void;
+    toggleFilterModal: (open: boolean) => void;
+    setVideoFilter: (key: keyof IVideoFilter, value: number) => void;
+    resetVideoFilters: () => void;
   };
 }
