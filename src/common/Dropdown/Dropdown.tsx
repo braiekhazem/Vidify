@@ -93,6 +93,7 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
       className={classes}
       style={{ ...dropdownStyles, width, height }}
       ref={mergeRefs(dropdownRef, ref)}
+      onClick={(e) => e.stopPropagation()}
     >
       {children}
     </div>

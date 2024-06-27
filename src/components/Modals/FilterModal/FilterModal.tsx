@@ -53,7 +53,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
       width={350}
       ref={dropdownRef}
     >
-      <div className={classes}>
+      <div className={classes} onContextMenu={(e) => e.stopPropagation()}>
         <CloseSVG
           width={20}
           height={20}
@@ -85,6 +85,17 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
             </div>
           );
         })}
+        {/* <div
+          className={`${concatPrefixCls(prefixCls, "item")} ${concatPrefixCls(
+            prefixCls,
+            "item-rotation"
+          )}`}
+          onClick={() => actions?.setRotation()}
+        >
+          <p>
+            Rotation: <span>{1}</span>
+          </p>
+        </div> */}
 
         <button
           className={concatPrefixCls(prefixCls, "reset-button")}

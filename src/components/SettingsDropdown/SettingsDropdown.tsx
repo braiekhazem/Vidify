@@ -179,7 +179,7 @@ const SettingsDropdown: React.FC<SettingsDropdownProps> = (props) => {
       }
     };
 
-    if (isOpen) adjustDropdownHeight();
+    if (isOpen && activeTab === 1) adjustDropdownHeight();
     else setDropdownHeight(null);
   }, [activeTab, videoWidth, isOpen, currentVideoRef]);
 

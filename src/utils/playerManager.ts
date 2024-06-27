@@ -113,6 +113,21 @@ export const playerManager: (
       }));
     },
 
+    setRotation(rotation) {
+      setState((prev: VideoPlayerState) => {
+        rotation =
+          rotation ||
+          ((prev.rotation === 4
+            ? 1
+            : prev.rotation + 1) as VideoPlayerState["rotation"]);
+
+        return {
+          ...prev,
+          rotation,
+        };
+      });
+    },
+
     updateCurrentTime(newCurrentTime) {
       setState((prev: VideoPlayerState) => ({
         ...prev,

@@ -87,6 +87,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
     videoRef,
     videoState,
     actions,
+    customIcons,
     allowedItems,
     durationType,
     customButtons,
@@ -150,6 +151,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
           renderButton(
             <ArrowNavigation
               type="prev"
+              icon={customIcons?.previous}
               disabled={videoState.currentSrcIndex === 0}
               onClickPrev={() => actions?.previousVideo()}
             />,
@@ -170,6 +172,8 @@ const internalControlsBar: React.ForwardRefRenderFunction<
             onPlay={() => actions?.play()}
             onPause={() => actions?.pause()}
             play={videoState.playing}
+            icon={customIcons?.play}
+            pauseIcon={customIcons?.pause}
           />,
           `${videoState.playing ? t("pause") : t("play")} (${
             vidifyShortcuts.play
@@ -183,6 +187,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               disabled={
                 videoState.currentSrcIndex + 1 > videoState.src.length - 1
               }
+              icon={customIcons?.next}
               onClickNext={() => actions?.nextVideo()}
             />,
             <div className={concatPrefixCls(prefixCls, "video-preview")}>
@@ -206,6 +211,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               onClick={(_, sec) =>
                 actions?.updateCurrentTime(videoState.currentTime - sec)
               }
+              icon={customIcons?.previousForward}
             />,
             `${t("skip_backword")} ←`
           ),
@@ -219,6 +225,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               onClick={(_, sec) =>
                 actions?.updateCurrentTime(videoState.currentTime + sec)
               }
+              icon={customIcons?.nextForward}
             />,
             `${t("skip_forword")}  →`
           ),
@@ -235,6 +242,8 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               }
               volume={videoState.volume}
               mute={videoState.muted}
+              muteIcon={customIcons?.mute}
+              volumeIcon={customIcons?.volume}
             />,
             `${t("volume")} ${getPercentage(
               videoState.volume,
@@ -272,6 +281,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
             <Download
               onClick={() => actions?.download()}
               downloading={videoState.downloading}
+              icon={customIcons?.download}
             />,
             `${videoState.downloading ? t("downloading") : t("download")} (${
               vidifyShortcuts.download
@@ -282,7 +292,10 @@ const internalControlsBar: React.ForwardRefRenderFunction<
         {renderItem(
           allowedItems,
           renderButton(
-            <Screenshot onClick={() => actions?.screenShot()} />,
+            <Screenshot
+              onClick={() => actions?.screenShot()}
+              icon={customIcons?.screenShot}
+            />,
             `${t("screenshot")} (${vidifyShortcuts.screenshot})`
           ),
           "screenshot"
@@ -296,17 +309,23 @@ const internalControlsBar: React.ForwardRefRenderFunction<
                 ? actions?.closeDropdownSettings()
                 : actions?.openDropdownSettings()
             }
+            icon={customIcons?.settings}
             isActive={videoState.dropdownSettingsOpen}
           />,
           "Setting"
         )}
-        {renderButton(<MiniPlayer video={videoRef} />, t("mini_player"))}
+        {renderButton(
+          <MiniPlayer video={videoRef} icon={customIcons?.picInPic} />,
+          t("mini_player")
+        )}
         {renderItem(
           allowedItems,
           renderButton(
             <FullScreen
               onFullScreen={() => actions?.setFullscreen(true)}
               onCancelFullScreen={() => actions?.setFullscreen(false)}
+              icon={customIcons?.fullscreen}
+              exitFullScreenIcon={customIcons?.exitFullscreen}
             />,
             `${t("fullscreen")} (${vidifyShortcuts.fullscreen})`
           ),

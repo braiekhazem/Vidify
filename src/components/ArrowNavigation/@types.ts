@@ -4,4 +4,5 @@ export interface ArrowNavigationProps {
   onClickPrev?: () => void;
   disabled: boolean;
   className?: string;
+  icon?: React.ReactNode;
 }

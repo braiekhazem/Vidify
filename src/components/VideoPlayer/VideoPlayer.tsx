@@ -23,6 +23,7 @@ const ASPECT_RATIO = 16 / 9;
 const DEFAULT_VIDEO_WIDTH = 800;
 const DEFAULT_VIDEO_HEIGHT = Math.round(DEFAULT_VIDEO_WIDTH / ASPECT_RATIO);
 export const DEFAULT_ICONS_SIZE = 26;
+export const rotationDegrees = [0, 90, 180, 270];
 
 const InternalVideoPlayer: React.ForwardRefRenderFunction<
   HTMLVideoElement,
@@ -51,6 +52,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     controller = true,
     thumbnail,
     poster,
+    customIcons,
     loop = false,
     block = false,
     rounded = true,
@@ -96,6 +98,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       autoPlay ||
       muted,
     loop,
+    rotation: 1,
     durationType,
     rendered: false,
     videoFilter: DEFAULT_VIDEO_FILTER,
@@ -329,6 +332,11 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
             blur(${videoState.videoFilter.blur.value}px)
           `,
           opacity: `${videoState.videoFilter.opacity.value}%`,
+          transformOrigin: "center",
+          transform: `
+           
+         
+          `,
         }}
       />
 
@@ -350,6 +358,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
                   controller(videoState.actions, videoState))
               : null
           }
+          customIcons={customIcons}
           videoRef={currentVideoRef?.current}
           videoState={videoState}
           actions={videoState.actions}

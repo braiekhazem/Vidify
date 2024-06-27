@@ -27,6 +27,20 @@ $class-prefix-filter: "vf-filter";
     }
   }
 
+  &-item-rotation {
+    cursor: pointer;
+    padding: 0 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    p {
+      margin: 0;
+    }
+    &:hover {
+      background-color: var(--vf-dropdown-menu-item-hover);
+    }
+  }
+
   &-slider.vf-slider {
     width: 100% !important;
   }

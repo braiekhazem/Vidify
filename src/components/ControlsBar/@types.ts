@@ -24,6 +24,7 @@ export interface ControlsBarProps {
   videoRef: any;
   customControlBar: ReactNode | null;
   videoState: VideoPlayerState;
+  customIcons: VideoPlayerProps["customIcons"];
   actions: VideoPlayerState["actions"];
   allowedItems: controlBarAllowedItems;
   progressBar: ReactNode | boolean;

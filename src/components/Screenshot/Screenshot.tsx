@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 const Screenshot: React.FC<ScreenshotProps> = (props) => {
-  const { className, onClick } = props;
+  const { className, onClick, icon } = props;
 
   const onClickHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -21,7 +21,9 @@ const Screenshot: React.FC<ScreenshotProps> = (props) => {
 
   return (
     <div className={classes} onClick={onClickHandler}>
-      <ScreenShotSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      {icon || (
+        <ScreenShotSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      )}
     </div>
   );
 };

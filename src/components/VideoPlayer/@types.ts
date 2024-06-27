@@ -40,6 +40,23 @@ export interface IVideoFilter {
   blur: IFilterItem;
 }
 
+export interface ICustomIcons {
+  play?: ReactNode;
+  pause?: ReactNode;
+  volume?: ReactNode;
+  mute?: ReactNode;
+  nextForward?: ReactNode;
+  previousForward?: ReactNode;
+  fullscreen?: ReactNode;
+  exitFullscreen?: ReactNode;
+  download?: ReactNode;
+  settings?: ReactNode;
+  next?: ReactNode;
+  previous?: ReactNode;
+  picInPic?: ReactNode;
+  screenShot?: ReactNode;
+}
+
 export interface VideoPlayerProps {
   src: string | string[];
   defaultSrcIndex?: number;
@@ -47,6 +64,7 @@ export interface VideoPlayerProps {
   children?: React.ReactNode;
   className?: string;
   customLoader?: ReactNode;
+  customIcons?: ICustomIcons;
   id?: string;
   lang?: "ar" | "en" | "fr";
   contextMenu?: itemMenu[];
@@ -96,6 +114,7 @@ export interface VideoPlayerProps {
 }
 
 export interface VideoPlayerState {
+  [x: string]: any;
   playing: boolean;
   src: VideoPlayerProps["src"];
   loop: boolean;
@@ -105,6 +124,7 @@ export interface VideoPlayerState {
   buffering: boolean;
   keyboardOpened?: boolean;
   filterOpened?: boolean;
+  rotation: 1 | 2 | 3 | 4;
   videoFilter: IVideoFilter;
   bufferingProgress: number;
   lang: VideoPlayerProps["lang"];
@@ -144,5 +164,6 @@ export interface VideoPlayerState {
     toggleFilterModal: (open: boolean) => void;
     setVideoFilter: (key: keyof IVideoFilter, value: number) => void;
     resetVideoFilters: () => void;
+    setRotation: (r?: VideoPlayerState["rotation"]) => void;
   };
 }

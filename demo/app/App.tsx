@@ -234,6 +234,22 @@ const App = () => {
             preload=""
             durationType={videoInfo.durationType}
             lang="ar"
+            // customIcons={{
+            //   next: <div>hello</div>,
+            //   previous: <div>hello2</div>,
+            //   previousForward: <div>h3</div>,
+            //   nextForward: <div>h4</div>,
+            //   download: <div>h5</div>,
+            //   screenShot: <div>h6</div>,
+            //   settings: <div>h7</div>,
+            //   picInPic: <div>h8</div>,
+            //   fullscreen: <div>h9</div>,
+            //   exitFullscreen: <div>h10</div>,
+            //   play: <div>h11</div>,
+            //   pause: <Logo width="100px" />,
+            //   mute: <div>h13</div>,
+            //   volume: <div>h14</div>,
+            // }}
             controller={{
               ...allowedItems,
               ...(customControlBar
@@ -279,13 +295,14 @@ const App = () => {
             enableContextMenu={true}
             contextMenu={[
               {
-                label: "qsdqsd qsdqsd qsdqsdqsudhqsd qsdqsdqsd qsdqsdqsd",
+                label: "Filter",
                 icon: (
                   <div>
                     <Logo />
                   </div>
                 ),
-                onClick: () => console.log("hello there"),
+                onClick: () =>
+                  videoActions?.toggleFilterModal(!videoState?.filterModal),
               },
               {
                 label: "Tam task",

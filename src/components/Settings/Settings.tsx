@@ -5,7 +5,7 @@ import { getPrefixCls } from "./../../utils/getPrefixCls";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 const Settings: FC<SettingsProps> = (props) => {
-  const { onClick, isActive } = props;
+  const { onClick, icon } = props;
 
   const onClickHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -16,11 +16,12 @@ const Settings: FC<SettingsProps> = (props) => {
   };
 
   const prefixCls = getPrefixCls("settings-button");
-  console.log({ isActive });
 
   return (
     <div className={prefixCls} onClick={onClickHandler}>
-      <SettingsSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      {icon || (
+        <SettingsSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      )}
     </div>
   );
 };

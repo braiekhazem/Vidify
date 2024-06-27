@@ -15,6 +15,8 @@ const SoundIcon = React.forwardRef<HTMLDivElement, SoundIconProps>(
       volume = 100,
       mute = false,
       className,
+      volumeIcon,
+      muteIcon,
     } = props;
 
     const [selfMute, setSelfMute] = useState<boolean>(mute);
@@ -42,9 +44,20 @@ const SoundIcon = React.forwardRef<HTMLDivElement, SoundIconProps>(
 
     const Icon = selfMute ? MuteSVG : SoundSVG;
 
+    const originalIcon = (
+      <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+    );
+
+    const renderIcon = () => {
+      if (selfMute) {
+        return muteIcon || originalIcon;
+      }
+      return volumeIcon || originalIcon;
+    };
+
     return (
       <div className={classes} ref={ref} onClick={onClickHandler}>
-        <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+        {renderIcon()}
       </div>
     );
   }
