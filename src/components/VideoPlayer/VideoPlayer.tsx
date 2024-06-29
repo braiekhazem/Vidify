@@ -32,6 +32,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 > = (props, ref) => {
   const {
     src,
+    defaultPlaybackSpeed = 1,
     defaultSrcIndex = 0,
     className,
     containerRef,
@@ -106,7 +107,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     durationType,
     rendered: false,
     videoFilter: DEFAULT_VIDEO_FILTER,
-    speed: 1,
+    speed: defaultPlaybackSpeed,
     lang,
     annotation: true,
     currentSrcIndex: defaultSrcIndex,

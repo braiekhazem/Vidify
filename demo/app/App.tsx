@@ -234,6 +234,7 @@ const App = () => {
             preload=""
             durationType={videoInfo.durationType}
             lang="ar"
+            defaultPlaybackSpeed={3}
             // playOn={["focus", "visible"]}
             // customIcons={{
             //   next: <div>hello</div>,
@@ -251,6 +252,7 @@ const App = () => {
             //   mute: <div>h13</div>,
             //   volume: <div>h14</div>,
             // }}
+            // customLoader={<div>loading...</div>}
             controller={{
               ...allowedItems,
               ...(customControlBar

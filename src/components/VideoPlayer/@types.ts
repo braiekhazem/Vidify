@@ -87,6 +87,7 @@ export interface VideoPlayerProps {
   lang?: "ar" | "en" | "fr";
   playOn?: PlayOnOptions[];
   contextMenu?: itemMenu[];
+  defaultPlaybackSpeed?: number;
   enableContextMenu?: boolean;
   primaryColor?: string;
   annotation?: ReactNode;
