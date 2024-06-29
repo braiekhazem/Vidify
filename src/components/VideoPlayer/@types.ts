@@ -57,6 +57,24 @@ export interface ICustomIcons {
   screenShot?: ReactNode;
 }
 
+type PlayOnOptions =
+  /**
+   * Play the video when the element is clicked.
+   */
+  | "click"
+  /**
+   * Play the video when the element is hovered over.
+   */
+  | "hover"
+  /**
+   * Play the video when the element gains focus.
+   */
+  | "focus"
+  /**
+   * Play the video when the element becomes visible in the viewport.
+   */
+  | "visible";
+
 export interface VideoPlayerProps {
   src: string | string[];
   defaultSrcIndex?: number;
@@ -67,6 +85,7 @@ export interface VideoPlayerProps {
   customIcons?: ICustomIcons;
   id?: string;
   lang?: "ar" | "en" | "fr";
+  playOn?: PlayOnOptions[];
   contextMenu?: itemMenu[];
   enableContextMenu?: boolean;
   primaryColor?: string;

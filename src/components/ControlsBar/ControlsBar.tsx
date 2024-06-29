@@ -161,6 +161,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               </div>
               <VideoPlayer
                 width="300px"
+                style={{ maxWidth: "300px" }}
                 autoPlay
                 controller={false}
                 src={videoState.src[videoState.currentSrcIndex - 1] as string}
@@ -196,6 +197,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
               </div>
               <VideoPlayer
                 width="300px"
+                style={{ maxWidth: "300px" }}
                 autoPlay
                 controller={false}
                 src={videoState.src[videoState.currentSrcIndex + 1] as string}
@@ -312,7 +314,7 @@ const internalControlsBar: React.ForwardRefRenderFunction<
             icon={customIcons?.settings}
             isActive={videoState.dropdownSettingsOpen}
           />,
-          "Setting"
+          t("settings")
         )}
         {renderButton(
           <MiniPlayer video={videoRef} icon={customIcons?.picInPic} />,

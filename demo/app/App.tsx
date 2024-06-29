@@ -234,6 +234,7 @@ const App = () => {
             preload=""
             durationType={videoInfo.durationType}
             lang="ar"
+            // playOn={["focus", "visible"]}
             // customIcons={{
             //   next: <div>hello</div>,
             //   previous: <div>hello2</div>,

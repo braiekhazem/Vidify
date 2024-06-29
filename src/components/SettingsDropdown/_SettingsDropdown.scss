@@ -84,8 +84,9 @@ $class-prefix-menu: "vf-panel-menu";
   }
 
   &-label {
-    font-size: 13px;
+    font-size: 12px;
     flex: 1;
+    white-space: nowrap;
   }
 }
 

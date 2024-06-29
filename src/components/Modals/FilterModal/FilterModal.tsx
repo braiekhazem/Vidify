@@ -7,6 +7,7 @@ import { ReactComponent as CloseSVG } from "../../../global/assets/icons/setting
 import { concatPrefixCls } from "@src/utils/concatPrefixCls";
 import Slider from "rc-slider";
 import { IVideoFilter } from "@src/components/VideoPlayer/@types";
+import { useTranslation } from "react-i18next";
 
 export const DEFAULT_VIDEO_FILTER: IVideoFilter = {
   opacity: {
@@ -39,7 +40,7 @@ export const DEFAULT_VIDEO_FILTER: IVideoFilter = {
 const FilterModal: React.FC<FilterModalProps> = (props) => {
   const { videoState } = props;
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+  const { t } = useTranslation(["video"]);
   const { filterOpened = false, actions, videoFilter } = videoState;
 
   const prefixCls = getPrefixCls("filter");
@@ -67,7 +68,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
           return (
             <div className={concatPrefixCls(prefixCls, "item")} key={i}>
               <p>
-                {filterKey} <span>{filterInfo?.value || 0}</span>
+                {t(filterKey)} <span>{filterInfo?.value || 0}</span>
               </p>
               <Slider
                 className={`${concatPrefixCls(prefixCls, "slider")} vf-slider`}
@@ -96,13 +97,9 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
             Rotation: <span>{1}</span>
           </p>
         </div> */}
-
-        <button
-          className={concatPrefixCls(prefixCls, "reset-button")}
-          onClick={actions?.resetVideoFilters}
-        >
-          Reset All
-        </button>
+        <div className={concatPrefixCls(prefixCls, "reset-button")}>
+          <button onClick={actions?.resetVideoFilters}>{t("reset")}</button>
+        </div>
       </div>
     </Dropdown>
   );

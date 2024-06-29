@@ -12,7 +12,7 @@ const ShortCutModal: React.FC<ShortCutModalProps> = (props) => {
   const { videoState, toggleModal } = props;
   const { keyboardOpened: isOpen = false } = videoState;
 
-  const { t } = useTranslation();
+  const { t } = useTranslation(["video"]);
 
   const prefixCls = getPrefixCls("shortcuts");
 
@@ -27,13 +27,13 @@ const ShortCutModal: React.FC<ShortCutModalProps> = (props) => {
     >
       <div className={classes} onContextMenu={(e) => e.stopPropagation()}>
         <div className={concatPrefixCls(prefixCls, "header")}>
-          <p>{t("Keyboard shortcuts")}</p>
+          <p>{t("keyboard_shortcuts")}</p>
           <CloseSVG width={20} height={20} onClick={() => toggleModal(false)} />
         </div>
         <div className={concatPrefixCls(prefixCls, "content")}>
           {Object.keys(vidifyShortcuts).map((shortcut, i) => (
             <div className={concatPrefixCls(prefixCls, "item")} key={i}>
-              <p>{shortcut}</p>
+              <p>{t(shortcut)}</p>
               <div>
                 {vidifyShortcuts[shortcut as keyof typeof vidifyShortcuts]}
               </div>

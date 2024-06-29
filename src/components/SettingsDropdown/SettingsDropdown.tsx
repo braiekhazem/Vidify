@@ -14,9 +14,11 @@ import { ReactComponent as AngleLeftSVG } from "../../global/assets/icons/settin
 import { ReactComponent as CheckSVG } from "../../global/assets/icons/settings/check.svg";
 import { ReactComponent as FilterSVG } from "../../global/assets/icons/settings/filter.svg";
 import Slider from "rc-slider";
+import { useTranslation } from "react-i18next";
 
 const SettingsTab: React.FC<TabProps> = (props) => {
   const { className, prefixCls, setActiveTab, actions, videoState } = props;
+  const { t } = useTranslation(["video"]);
 
   const toggleAnnotationHandler = () => actions?.toggleAnnotation();
 
@@ -41,10 +43,10 @@ const SettingsTab: React.FC<TabProps> = (props) => {
         </div>
 
         <div className={concatPrefixCls(prefixCls, "label")}>
-          Playback speed
+          {t("playback_speed")}
         </div>
         <div className={concatPrefixCls(prefixCls, "content")}>
-          {videoState.speed === 1 ? "Normal" : videoState.speed}
+          {videoState.speed === 1 ? t("normal") : videoState.speed}
           <AngleRightSVG
             width={DEFAULT_ICONS_SIZE}
             height={DEFAULT_ICONS_SIZE}
@@ -62,7 +64,9 @@ const SettingsTab: React.FC<TabProps> = (props) => {
           />
         </div>
 
-        <div className={concatPrefixCls(prefixCls, "label")}>Annotation</div>
+        <div className={concatPrefixCls(prefixCls, "label")}>
+          {t("annotations")}
+        </div>
         <div className={concatPrefixCls(prefixCls, "content")}>
           <Switch checked={videoState.annotation} />
         </div>
@@ -75,7 +79,7 @@ const SettingsTab: React.FC<TabProps> = (props) => {
           <FilterSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
         </div>
 
-        <div className={concatPrefixCls(prefixCls, "label")}>Filter</div>
+        <div className={concatPrefixCls(prefixCls, "label")}>{t("filter")}</div>
       </div>
     </div>
   );
@@ -83,7 +87,7 @@ const SettingsTab: React.FC<TabProps> = (props) => {
 
 const SpeedTab: React.FC<TabProps> = (props) => {
   const { className, prefixCls, setActiveTab, actions, videoState } = props;
-
+  const { t } = useTranslation(["video"]);
   const backToPreviousTab = () => setActiveTab(0);
 
   const classes = classNames(className, concatPrefixCls(prefixCls, "speed"));
@@ -92,7 +96,7 @@ const SpeedTab: React.FC<TabProps> = (props) => {
     { label: "0.25", value: 0.25 },
     { label: "0.5", value: 0.5 },
     { label: "0.75", value: 0.75 },
-    { label: "Normal", value: 1.0 },
+    { label: t("normal"), value: 1.0 },
     { label: "1.25", value: 1.25 },
     { label: "1.5", value: 1.5 },
     { label: "1.75", value: 1.75 },
@@ -106,7 +110,7 @@ const SpeedTab: React.FC<TabProps> = (props) => {
         onClick={backToPreviousTab}
       >
         <AngleLeftSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />{" "}
-        <p>Playback speed</p>
+        <p>{t("playback_speed")}</p>
       </div>
       {speeds.map((speed, i) => (
         <div

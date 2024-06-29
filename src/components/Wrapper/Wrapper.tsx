@@ -11,6 +11,7 @@ import mergeRefs from "@src/utils/mergeRefs";
 import { getPrefixCls } from "@src/utils/getPrefixCls";
 import ShortCutModal from "../Modals/ShortCutModal";
 import FilterModal from "../Modals/FilterModal";
+import { useTranslation } from "react-i18next";
 
 const small = 500;
 const xSmall = 400;
@@ -59,6 +60,7 @@ const InternalContextMenu: React.ForwardRefRenderFunction<
   } = props;
   const prefixCls = getPrefixCls("context-menu");
   const classes = classNames(prefixCls, className);
+  const { t } = useTranslation(["video"]);
 
   const onClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
@@ -66,7 +68,7 @@ const InternalContextMenu: React.ForwardRefRenderFunction<
   };
 
   const keyBoardItem: itemMenu = {
-    label: "keyboard",
+    label: t("keyboard_shortcuts"),
     icon: <KeyboardSVG />,
     onClick: () =>
       videoState.actions?.togglekeyboardModal(!videoState.keyboardOpened),
@@ -203,8 +205,6 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
       });
     }
   }, [controlBarElement]);
-
-  console.log({ showMenu, cursorPosition });
 
   return (
     <div

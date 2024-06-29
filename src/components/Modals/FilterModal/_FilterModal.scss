@@ -46,18 +46,19 @@ $class-prefix-filter: "vf-filter";
   }
 
   &-reset-button {
-    padding: 3px 5px;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-left: calc(100% - 70px);
-    margin-top: 7px;
-    background-color: var(--vf-color-white);
-    color: var(--vf-color-black);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    button {
+      background-color: var(--vf-color-white);
+      color: var(--vf-color-black);
+      border: 1px solid var(--vf-color-black);
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 10px;
+    }
   }
 }

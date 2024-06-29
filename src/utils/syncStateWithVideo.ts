@@ -8,7 +8,7 @@ export const syncStateWithVideo = (
   if (!videoLoaded) return;
 
   if (playing) {
-    video.play();
+    video.play().catch((e) => console.error("Vidify: Error playing video", e));
   } else {
     video.pause();
   }

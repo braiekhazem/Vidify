@@ -17,6 +17,7 @@ import VideoLoadError from "../VideoLoadError";
 import i18n from "@src/i18n";
 import { DEFAULT_CONTEXT_MENU_ITEMS } from "../Wrapper/Wrapper";
 import { DEFAULT_VIDEO_FILTER } from "../Modals/FilterModal/FilterModal";
+import useHover from "@src/hooks/useHover";
 
 const ASPECT_RATIO = 16 / 9;
 
@@ -42,6 +43,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     contextMenu = DEFAULT_CONTEXT_MENU_ITEMS,
     enableContextMenu = true,
     id,
+    playOn = ["click"],
     customLoader,
     annotation,
     annotationStyle,
@@ -83,6 +85,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   const controlsBarRef = useRef<HTMLDivElement>(null);
 
   const currentContainerRef = useRef<HTMLDivElement>(null);
+
+  const [hovered, eventHandlers] = useHover();
 
   const defaultVideoState: VideoPlayerState = {
     src,
@@ -225,11 +229,12 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const onClickHandler = (event: SyntheticEvent<Element, Event>) => {
     if (event.target === currentVideoRef.current)
-      if (videoState.playing) {
-        videoState.actions?.pause();
-      } else {
-        videoState.actions?.play();
-      }
+      if (playOn.includes("click"))
+        if (videoState.playing) {
+          videoState.actions?.pause();
+        } else {
+          videoState.actions?.play();
+        }
 
     onClick && onClick(event);
   };
@@ -266,6 +271,45 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   }, [videoState, currentVideoRef]);
 
   useEffect(() => {
+    if (playOn.includes("hover") && currentVideoRef.current)
+      if (hovered && !videoState.playing) {
+        setTimeout(() => {
+          videoState.actions?.play();
+        }, 300);
+      } else if (!hovered && videoState.playing) {
+        videoState.actions?.pause();
+      }
+  }, [hovered]);
+
+  useEffect(() => {
+    if (currentVideoRef.current) {
+      if (playOn.includes("visible")) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              videoState.actions?.play();
+            } else {
+              videoState.actions?.pause();
+            }
+          });
+        });
+        observer.observe(currentVideoRef.current);
+      }
+
+      if (playOn.includes("focus")) {
+        currentVideoRef.current.addEventListener(
+          "focus",
+          () => videoState.actions?.play()
+        );
+        currentVideoRef.current.addEventListener(
+          "blur",
+          () => videoState.actions?.pause()
+        );
+      }
+    }
+  }, [currentContainerRef.current]);
+
+  useEffect(() => {
     //@ts-ignore
     if (ref && ref.current) {
       const { actions, ...rest } = videoState;
@@ -299,6 +343,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       <video
         src={currentSource}
         id={id}
+        tabIndex={0}
         poster={thumbnail || poster}
         width={block ? "100%" : width}
         ref={mergeRefs(ref, currentVideoRef)}
@@ -332,12 +377,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
             blur(${videoState.videoFilter.blur.value}px)
           `,
           opacity: `${videoState.videoFilter.opacity.value}%`,
-          transformOrigin: "center",
-          transform: `
-           
-         
-          `,
         }}
+        {...eventHandlers}
       />
 
       <PlayButton
