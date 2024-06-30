@@ -1,12 +1,12 @@
 import React from "react";
 import { ShortCutModalProps } from "./@types";
-import Dropdown from "@src/common/Dropdown/Dropdown";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import Dropdown from "../../../common/Dropdown";
+import { getPrefixCls } from "../../../utils/getPrefixCls";
 import classNames from "classnames";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "../../../utils/concatPrefixCls";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as CloseSVG } from "../../../global/assets/icons/settings/close.svg";
-import { vidifyShortcuts } from "@src/utils/managePlayerKeyDown";
+import { vidifyShortcuts } from "../../../utils/managePlayerKeyDown";
 
 const ShortCutModal: React.FC<ShortCutModalProps> = (props) => {
   const { videoState, toggleModal } = props;

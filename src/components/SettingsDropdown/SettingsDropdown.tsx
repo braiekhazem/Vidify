@@ -1,9 +1,8 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { SettingsDropdownProps, SpeedType, TabProps, TabsType } from "./@types";
-import Dropdown from "@src/common/Dropdown/Dropdown";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "../../utils/getPrefixCls";
 import classNames from "classnames";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "../../utils/concatPrefixCls";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 import Switch from "rc-switch";
 import "rc-switch/assets/index.css";
@@ -15,6 +14,7 @@ import { ReactComponent as CheckSVG } from "../../global/assets/icons/settings/c
 import { ReactComponent as FilterSVG } from "../../global/assets/icons/settings/filter.svg";
 import Slider from "rc-slider";
 import { useTranslation } from "react-i18next";
+import Dropdown from "../../common/Dropdown";
 
 const SettingsTab: React.FC<TabProps> = (props) => {
   const { className, prefixCls, setActiveTab, actions, videoState } = props;
