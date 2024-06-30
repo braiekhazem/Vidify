@@ -6,12 +6,34 @@ import { getPrefixCls } from "./../../utils/getPrefixCls";
 import classNames from "classnames";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
+function isFullScreen() {
+  return Boolean(
+    document.fullscreenElement ||
+      document.fullscreenElement ||
+      document.fullscreenElement ||
+      document.fullscreenElement
+  );
+}
+
+const DoFullScreen = (el: HTMLElement): void => {
+  if (!isFullScreen()) {
+    if (el === undefined) el = document.documentElement;
+    if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    } else if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    } else if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    } else if (document.fullscreenEnabled) {
+      el.requestFullscreen();
+    }
+  }
+};
+
 export const fullScreenMode = () => {
   const element: any = document.querySelector(".vf-video-wrapper"); //container element
   if (!document.fullscreenElement) {
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    }
+    DoFullScreen(element);
   } else if (document.exitFullscreen) {
     document.exitFullscreen().catch((err) => {
       console.error(
@@ -22,7 +44,13 @@ export const fullScreenMode = () => {
 };
 
 export const FullScreen: React.FC<FullScreenProps> = (props) => {
-  const { onCancelFullScreen, onFullScreen, className } = props;
+  const {
+    onCancelFullScreen,
+    onFullScreen,
+    className,
+    icon,
+    exitFullScreenIcon,
+  } = props;
 
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
@@ -49,9 +77,20 @@ export const FullScreen: React.FC<FullScreenProps> = (props) => {
 
   const Icon = isFullscreen ? CancelFullscreenSVG : FullscreenSVG;
 
+  const originalIcon = (
+    <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+  );
+
+  const renderIcon = () => {
+    if (isFullscreen) {
+      return exitFullScreenIcon || originalIcon;
+    }
+    return icon || originalIcon;
+  };
+
   return (
     <div className={classes} onClick={fullScreenMode}>
-      <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      {renderIcon()}
     </div>
   );
 };

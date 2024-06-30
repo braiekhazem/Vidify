@@ -18,6 +18,7 @@
 
 - 📹 Video player component that provides consistent UI/UX on different browsers.
 - 🎨 Super customizable layout.
+- 🎥 Enhanced Playback Speed Control with Custom Options
 - 📝 Provide tools for users to add annotations.
 - 🔄 Vidify supports passing an array of video sources.
 - 📱 Flexbox css with SVG icons. Mobile friendly.
@@ -27,6 +28,13 @@
 - 🛠️ Customize the control bar, progress bar, and more to match your a- pplication's design and user experience requirements.
 - 🎮 Define states and actions to control Vidify with your own user interface elements.
 - 📋 Vidify supports customizable ccontrol bar for enhanced user interaction.
+- 🎬 Interactive Play Triggers (Hover, Click...).
+- 🚫 Tailored Error Components for Enhanced User Experience
+- 🎨 Customizable UI icons.
+- 🌐 Multilingual Support (en, ar, fr) for Global Reach.
+- 🎞 Dynamic Video Filter Customization (Opacity, Saturation, Blur...).
+- 🍔 Context Menu Customization for Precise User Interactions.
+- ⏳ Custom Loader Options for Smooth User Engagement.
 - 💻 Written in TypeScript.
 
 ![screenshot](https://res.cloudinary.com/dj6kxvxqb/image/upload/v1715112645/Screen_Shot_2024-05-07_at_9.05.31_PM_v2jemq.png)
@@ -66,10 +74,10 @@ export default MyVideoPlayer;
 | shift + N   | Previous video    |
 | shift + D   | Download          |
 | shift + S   | Screenshot        |
-| ←          | Rewind            |
-| →          | Forward           |
-| ↑          | Volume up         |
-| ↓          | Volume down       |
+| ←           | Rewind            |
+| →           | Forward           |
+| ↑           | Volume up         |
+| ↓           | Volume down       |
 | M           | Toggle mute       |
 | F           | Toggle fullscreen |
 
@@ -91,38 +99,46 @@ export default MyVideoPlayer;
 
 ### 🛠️ Vidify Props
 
-| Prop            | Type                                               | Description                                                                       |
-| --------------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| src             | string\| string[]                                  | The source(s) of the video file(s).                                               |
-| defaultSrcIndex | number                                             | The index of the default source to play.                                          |
-| startTime       | number                                             | The time (in seconds) to start playing the video from.                            |
-| children        | React.ReactNode                                    | Child elements to be rendered within the video player component.                  |
-| className       | string                                             | Additional CSS class(es) to apply to the video player component.                  |
-| id              | string                                             | The unique identifier of the video player component.                              |
-| primaryColor    | string                                             | The primary color used for styling the video player interface.                    |
-| annotation      | ReactNode                                          | Additional content (such as text or icons) to be displayed on the video player.   |
-| annotationStyle | CSSProperties                                      | CSS styles to apply to the annotation content.                                    |
-| width           | string                                             | The width of the video player.                                                    |
-| height          | string                                             | The height of the video player.                                                   |
-| durationType    | "remainingTime"\| "default"                        | The type of duration display for the video player.                                |
-| placeholder     | string                                             | The URL of an image to display as a placeholder before the video loads.           |
-| title           | string                                             | The title of the video player.                                                    |
-| style           | CSSProperties                                      | Custom CSS styles to apply to the video player.                                   |
-| controller      | contextmenu\| boolean \| contextmenuRender         | Configurations for the control bar of the video player.                           |
-| volume          | number                                             | The volume level of the video player (0 to 1).                                    |
-| paused          | boolean                                            | Whether the video is paused or not.                                               |
-| poster          | string                                             | The URL of an image to display as the video poster.                               |
-| thumbnail       | string                                             | The URL of an image to display as the video thumbnail.                            |
-| autoPlay        | boolean                                            | Whether the video should automatically start playing when loaded.                 |
-| playbackRate    | number                                             | The playback rate of the video (e.g., 1 for normal speed, 2 for double speed).    |
-| playsInline     | boolean                                            | Whether the video should play inline (e.g., in the same layout as other content). |
-| preload         | string                                             | Specifies how the video should be loaded when the page loads.                     |
-| crossOrigin     | "anonymous"\| "use-credentials" \| "" \| undefined | The CORS setting for the video resource.                                          |
-| loop            | boolean                                            | Whether the video should loop playback.                                           |
-| muted           | boolean                                            | Whether the video should be muted.                                                |
-| containerRef    | React.Ref`<any>`                                 | Reference to the container element of the video player.                           |
-| block           | boolean                                            | Whether the video player should be displayed full width or not.                   |
-| rounded         | boolean                                            |                                                                                   |
+| Prop                 | Type                                                | Description                                                                       |
+| -------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------- |
+| src                  | string \| string[]                                  | The source(s) of the video file(s).                                               |
+| defaultSrcIndex      | number                                              | The index of the default source to play.                                          |
+| startTime            | number                                              | The time (in seconds) to start playing the video from.                            |
+| children             | React.ReactNode                                     | Child elements to be rendered within the video player component.                  |
+| className            | string                                              | Additional CSS class(es) to apply to the video player component.                  |
+| id                   | string                                              | The unique identifier of the video player component.                              |
+| primaryColor         | string                                              | The primary color used for styling the video player interface.                    |
+| annotation           | ReactNode                                           | Additional content (such as text or icons) to be displayed on the video player.   |
+| annotationStyle      | CSSProperties                                       | CSS styles to apply to the annotation content.                                    |
+| width                | string                                              | The width of the video player.                                                    |
+| height               | string                                              | The height of the video player.                                                   |
+| durationType         | "remainingTime" \| "default"                        | The type of duration display for the video player.                                |
+| placeholder          | string                                              | The URL of an image to display as a placeholder before the video loads.           |
+| title                | string                                              | The title of the video player.                                                    |
+| style                | CSSProperties                                       | Custom CSS styles to apply to the video player.                                   |
+| controller           | contextmenu \| boolean \| contextmenuRender         | Configurations for the control bar of the video player.                           |
+| volume               | number                                              | The volume level of the video player (0 to 1).                                    |
+| paused               | boolean                                             | Whether the video is paused or not.                                               |
+| poster               | string                                              | The URL of an image to display as the video poster.                               |
+| thumbnail            | string                                              | The URL of an image to display as the video thumbnail.                            |
+| autoPlay             | boolean                                             | Whether the video should automatically start playing when loaded.                 |
+| playbackRate         | number                                              | The playback rate of the video (e.g., 1 for normal speed, 2 for double speed).    |
+| playsInline          | boolean                                             | Whether the video should play inline (e.g., in the same layout as other content). |
+| preload              | string                                              | Specifies how the video should be loaded when the page loads.                     |
+| crossOrigin          | "anonymous" \| "use-credentials" \| "" \| undefined | The CORS setting for the video resource.                                          |
+| loop                 | boolean                                             | Whether the video should loop playback.                                           |
+| muted                | boolean                                             | Whether the video should be muted.                                                |
+| containerRef         | React.Ref<any>                                      | Reference to the container element of the video player.                           |
+| block                | boolean                                             | Whether the video player should be displayed full width or not.                   |
+| rounded              | boolean                                             |
+| lang                 | "ar" \| "en" \| "fr"                                | Specifies the language for video captions and UI elements.                        |
+| playOn               | "click" \| "hover" \| "focus" \| "visible"          | Determines when the video starts playing.                                         |
+| customLoader         | ReactNode                                           |                                                                                   |
+| error                | errorOtions                                         | Options for handling and displaying video playback errors.                        |
+| customIcons          | ICustomIcons                                        | Custom icons to replace default icons in the video player UI.                     |
+| contextMenu          | itemMenu[ ]                                         | Array of items for the context menu.                                              |
+| enableContextMenu    | boolean                                             | Enables or disables the context menu feature.                                     |
+| defaultPlaybackSpeed | boolean                                             | Sets the default playback speed for the video player.                             |
 
 ### 🎉 Event Props
 
@@ -279,7 +295,7 @@ Your support is greatly appreciated! ☕️❤️
 $ git clone https://github.com/braiekhazem/Vidify.git
 $ cd vidify
 $ npm install # dependencies for package
-$ cd demo 
+$ cd demo
 $ npm install # dependencies for demo site
 $ cd ..
 $ npm run dev  # for running the development server

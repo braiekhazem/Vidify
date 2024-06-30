@@ -3,7 +3,7 @@
   "name": "vidify",
   "author": "hazem braiek",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -15,6 +15,22 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "keywords": [
+    "vidify",
+    "react player",
+    "react",
+    "video player",
+    "media player",
+    "UI",
+    "customizable",
+    "component",
+    "TypeScript",
+    "seamless playback",
+    "dynamic source switching",
+    "keyboard shortcuts",
+    "accessibility",
+    "UI/UX"
+  ],
   "sideEffects": true,
   "files": [
     "/dist"
@@ -50,9 +66,15 @@
     "classes": "^0.3.0",
     "classnames": "^2.5.1",
     "husky": "^8.0.3",
+    "i18next": "^23.11.4",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next-http-backend": "^2.5.1",
     "rc-slider": "^10.5.0",
+    "rc-switch": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-i18next": "^14.1.1",
     "react-tooltip": "^5.26.3",
     "vite-plugin-css-injected-by-js": "^3.4.0",
     "vite-plugin-dts": "^3.7.3"

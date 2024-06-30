@@ -6,14 +6,36 @@ export interface WrapperProps {
   playing: boolean;
   videoState: VideoPlayerState;
   className: string;
-  currentVideoRef: React.Ref<any>;
+  actions: VideoPlayerState["actions"];
+  currentVideoRef: React.RefObject<HTMLVideoElement>;
   prefixCls: string;
+  customLoader?: ReactNode;
   title: string;
   onKeyDown: any;
   ref: any;
   onDoubleClick: any;
   onClick: any;
   tabIndex: number;
+  contextMenu: itemMenu[];
+  enableContextMenu: boolean;
   style: React.CSSProperties;
   controlBarElement: HTMLDivElement | null;
+}
+
+export interface itemMenu {
+  label: ReactNode;
+  icon?: ReactNode;
+  onClick?: (e: any) => void;
+  link?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface ContextMenuProps {
+  videoState: VideoPlayerState;
+  closeMenu: () => void;
+  className?: string;
+  onClick?: any;
+  items?: itemMenu[];
+  style?: React.CSSProperties;
 }

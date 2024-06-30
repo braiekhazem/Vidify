@@ -7,6 +7,8 @@ export interface ControlIconProps extends BaseEventIcon {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     p: boolean
   ) => void;
+  icon?: React.ReactNode;
+  pauseIcon?: React.ReactNode;
 }
 
 export interface BaseEventIcon {

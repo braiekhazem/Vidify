@@ -7,7 +7,7 @@ import { getPrefixCls } from "./../../utils/getPrefixCls";
 import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/spinner.svg";
 
 const Download: React.FC<DownloadProps> = (props) => {
-  const { onClick, className, downloading } = props;
+  const { onClick, className, downloading, icon } = props;
 
   const onClickHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -28,7 +28,9 @@ const Download: React.FC<DownloadProps> = (props) => {
           className="vf-spin"
         />
       ) : (
-        <DownloadSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+        icon || (
+          <DownloadSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+        )
       )}
     </div>
   );

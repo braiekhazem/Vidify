@@ -5,7 +5,7 @@ import { getPrefixCls } from "./../../utils/getPrefixCls";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 const MiniPlayer: React.FC<MiniPlayerProps> = (props) => {
-  const { video } = props;
+  const { video, icon } = props;
 
   const onClickHandler = async (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -27,7 +27,9 @@ const MiniPlayer: React.FC<MiniPlayerProps> = (props) => {
 
   return (
     <div className={prefixCls} onClick={onClickHandler}>
-      <MiniPlayerSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      {icon || (
+        <MiniPlayerSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      )}
     </div>
   );
 };

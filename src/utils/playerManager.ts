@@ -1,5 +1,6 @@
-import { VideoPlayerState } from "@src/components/VideoPlayer/@types";
+import { VideoPlayerState } from "../components/VideoPlayer/@types";
 import { downloadFile } from "./downloadFile";
+import { DEFAULT_VIDEO_FILTER } from "../components/Modals/FilterModal/FilterModal";
 
 export const playerManager: (
   setState: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
@@ -41,9 +42,90 @@ export const playerManager: (
       setState((prev: VideoPlayerState) => ({
         ...prev,
         currentTime,
-        rendered: true,
+        rendered: currentTime > 0,
         loadingData: false,
       }));
+    },
+
+    openDropdownSettings() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        dropdownSettingsOpen: true,
+      }));
+    },
+
+    closeDropdownSettings() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        dropdownSettingsOpen: false,
+      }));
+    },
+
+    toggleDropdownSettings() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        dropdownSettingsOpen: !prev.dropdownSettingsOpen,
+      }));
+    },
+
+    toggleAnnotation() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        annotation: !prev.annotation,
+      }));
+    },
+
+    setSpeed(speed) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        speed,
+      }));
+    },
+
+    togglekeyboardModal(open) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        keyboardOpened: open,
+      }));
+    },
+
+    toggleFilterModal(open) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        filterOpened: open,
+      }));
+    },
+
+    setVideoFilter(key, value) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        videoFilter: {
+          ...prev.videoFilter,
+          [key]: { ...prev.videoFilter[key], value },
+        },
+      }));
+    },
+
+    resetVideoFilters() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        videoFilter: DEFAULT_VIDEO_FILTER,
+      }));
+    },
+
+    setRotation(rotation) {
+      setState((prev: VideoPlayerState) => {
+        rotation =
+          rotation ||
+          ((prev.rotation === 4
+            ? 1
+            : prev.rotation + 1) as VideoPlayerState["rotation"]);
+
+        return {
+          ...prev,
+          rotation,
+        };
+      });
     },
 
     updateCurrentTime(newCurrentTime) {

@@ -13,6 +13,8 @@ const ControlIcon = React.forwardRef<HTMLElement, ControlIconProps>(
       onPlay,
       play = false,
       className,
+      icon,
+      pauseIcon,
     } = props;
 
     const [selfPlay, setSelfPlay] = useState<boolean>(play);
@@ -44,13 +46,8 @@ const ControlIcon = React.forwardRef<HTMLElement, ControlIconProps>(
       setSelfPlay(play);
     }, [play]);
 
-    return (
-      <span
-        id={concatPrefixCls(prefixCls, "play-button-container")}
-        className={classes}
-        ref={ref}
-        onClick={onClickHandler}
-      >
+    const PlayIcon = () => (
+      <>
         <span
           className={concatPrefixCls(
             prefixCls,
@@ -63,6 +60,24 @@ const ControlIcon = React.forwardRef<HTMLElement, ControlIconProps>(
             "play-button play-button-after"
           )}
         ></span>
+      </>
+    );
+
+    const renderIcon = () => {
+      if (selfPlay) {
+        return pauseIcon || <PlayIcon />;
+      }
+      return icon || <PlayIcon />;
+    };
+
+    return (
+      <span
+        id={concatPrefixCls(prefixCls, "play-button-container")}
+        className={classes}
+        ref={ref}
+        onClick={onClickHandler}
+      >
+        {renderIcon()}
       </span>
     );
   }

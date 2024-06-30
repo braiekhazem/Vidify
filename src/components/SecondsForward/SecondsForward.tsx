@@ -6,7 +6,7 @@ import { getPrefixCls } from "./../../utils/getPrefixCls";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 const SecondsForward: React.FC<SecondsForwardProps> = (props) => {
-  const { isNext, onClick } = props;
+  const { isNext, onClick, icon } = props;
 
   const onClickHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -20,7 +20,7 @@ const SecondsForward: React.FC<SecondsForwardProps> = (props) => {
 
   return (
     <div className={prefixCls} onClick={onClickHandler}>
-      <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+      {icon || <Icon width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />}
     </div>
   );
 };

@@ -16,7 +16,7 @@ export interface controlBarAllowedItems {
   screenshot?: ItemType | boolean;
   fullscreen?: ItemType | boolean;
   volumeSlider?: ItemType | boolean;
-  downlaod?: ItemType | boolean;
+  download?: ItemType | boolean;
   duration?: ItemType | boolean;
   skip?: ItemType | boolean;
 }
@@ -24,6 +24,7 @@ export interface ControlsBarProps {
   videoRef: any;
   customControlBar: ReactNode | null;
   videoState: VideoPlayerState;
+  customIcons: VideoPlayerProps["customIcons"];
   actions: VideoPlayerState["actions"];
   allowedItems: controlBarAllowedItems;
   progressBar: ReactNode | boolean;

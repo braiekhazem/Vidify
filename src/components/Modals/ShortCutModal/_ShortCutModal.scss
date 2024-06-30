@@ -1,0 +1,42 @@
+$class-prefix-shortcuts: "vf-shortcuts";
+
+.#{$class-prefix-shortcuts} {
+  padding: 10px;
+  overflow: auto;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    svg {
+      cursor: pointer;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.7px;
+    }
+    padding-bottom: 10px;
+    border-bottom: 0.2px solid var(--vf-color-white);
+    margin-bottom: 7px;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 5px;
+    font-size: 12px;
+    div {
+      text-transform: capitalize;
+    }
+    p {
+      text-transform: capitalize;
+    }
+  }
+}

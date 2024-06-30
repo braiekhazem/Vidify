@@ -7,7 +7,7 @@ import { ReactComponent as PreviousSVG } from "../../global/assets/icons/arrowNa
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 
 const ArrowNavigation: React.FC<ArrowNavigationProps> = (props) => {
-  const { type, onClickNext, onClickPrev, className, disabled } = props;
+  const { type, onClickNext, onClickPrev, className, disabled, icon } = props;
 
   const onClickHandler = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -28,7 +28,9 @@ const ArrowNavigation: React.FC<ArrowNavigationProps> = (props) => {
 
   return (
     <div className={classes} onClick={onClickHandler}>
-      <Icon width={DEFAULT_ICONS_SIZE - 9} height={DEFAULT_ICONS_SIZE - 9} />
+      {icon || (
+        <Icon width={DEFAULT_ICONS_SIZE - 9} height={DEFAULT_ICONS_SIZE - 9} />
+      )}
     </div>
   );
 };

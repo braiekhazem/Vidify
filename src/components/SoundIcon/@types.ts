@@ -9,4 +9,6 @@ export interface SoundIconProps extends BaseEventIcon {
   ) => void;
   onMute?: () => void;
   onVolume?: () => void;
+  muteIcon?: React.ReactNode;
+  volumeIcon?: React.ReactNode;
 }
