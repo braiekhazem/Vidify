@@ -35,6 +35,13 @@
     justify-content: center;
   }
 
+  .languages {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin-bottom: 7px;
+  }
+
   .volume-box {
     div {
       display: flex;

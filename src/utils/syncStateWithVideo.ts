@@ -21,7 +21,6 @@ export const syncStateWithVideo = (
     } else console.error("Volume outside of range [0,1]");
 
   if (speed !== video.playbackRate) {
-    console.log("set video pmay rate");
     video.playbackRate = speed;
   }
 };

@@ -210,6 +210,39 @@ const App = () => {
               />
               Auto play
             </label>
+            <div className="languages">
+              <p>Language: </p>
+              <select
+                id="languageSelect"
+                onChange={(e) => {
+                  localStorage.setItem(
+                    "lang",
+                    e.target?.options[e.target.selectedIndex]?.value || "ar"
+                  );
+                  window.location.reload();
+                }}
+              >
+                <option
+                  value="ar"
+                  selected={localStorage.getItem("lang") === "ar"}
+                >
+                  Arabic
+                </option>
+                <option
+                  value="en"
+                  selected={localStorage.getItem("lang") === "en"}
+                >
+                  English
+                </option>
+                <option
+                  value="fr"
+                  selected={localStorage.getItem("lang") === "fr"}
+                >
+                  French
+                </option>
+              </select>
+            </div>
+
             <label htmlFor="poster">
               Poster
               <input
@@ -233,8 +266,8 @@ const App = () => {
             defaultSrcIndex={0}
             preload=""
             durationType={videoInfo.durationType}
-            lang="ar"
-            defaultPlaybackSpeed={3}
+            lang={localStorage.getItem("lang") as "ar" | "en" | "fr"}
+            // defaultPlaybackSpeed={3}
             // playOn={["focus", "visible"]}
             // customIcons={{
             //   next: <div>hello</div>,
@@ -350,8 +383,8 @@ const App = () => {
                         y2="30.0254"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop stop-color="#40AAFF"></stop>
-                        <stop offset="1" stop-color="#C300FF"></stop>
+                        <stop stopColor="#40AAFF"></stop>
+                        <stop offset="1" stopColor="#C300FF"></stop>
                       </linearGradient>
                     </defs>
                   </svg>
@@ -546,6 +579,7 @@ const App = () => {
             </div>
             <div className="state-key-value">Width: {width}</div>
             <div className="state-key-value">Poster: {poster}</div>
+            <div className="state-key-value">Speed: {videoState?.speed}</div>
             {Object.keys(allowedItems).map((key, index) => {
               return (
                 <div className="state-key-value" key={index}>
