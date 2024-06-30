@@ -85,15 +85,15 @@ export default MyVideoPlayer;
 
 ### 🏷️ HTML Video Tag Native Attributes
 
-| Props       | Type                           | Default     | Note |
-| ----------- | ------------------------------ | ----------- | ---- |
-| src         | string \| string[]             | ''          |      |
-| preload     | 'auto' \| 'metadata' \| 'none' | 'auto'      |      |
-| autoPlay    | boolean                        | false       |
-| loop        | boolean                        | false       |      |
-| muted       | boolean                        | false       |      |
-| volume      | number                         | 1.0         |
-| crossOrigin | string                         | 'anonymous' |      |
+| Props       | Type                          | Default     | Note |
+| ----------- | ----------------------------- | ----------- | ---- |
+| src         | string\| string[]             | ''          |      |
+| preload     | 'auto'\| 'metadata' \| 'none' | 'auto'      |      |
+| autoPlay    | boolean                       | false       |      |
+| loop        | boolean                       | false       |      |
+| muted       | boolean                       | false       |      |
+| volume      | number                        | 1.0         |      |
+| crossOrigin | string                        | 'anonymous' |      |
 
 ##### More attributes details : [Vidify props attributes](https://github.com/braiekhazem/Vidify/blob/main/src/components/VideoPlayer/%40types.ts#L19)
 
@@ -294,13 +294,16 @@ Your support is greatly appreciated! ☕️❤️
 ```bash
 $ git clone https://github.com/braiekhazem/Vidify.git
 $ cd vidify
-$ npm install
+$ npm install # dependencies for package
+$ cd demo
+$ npm install # dependencies for demo site
+$ cd ..
 $ npm run dev  # for running the development server
 # OR
 $ npm run demo # for running the demo
 ```
 
-Open your browser and visit http://localhost:3000 .
+Open your browser and visit [http://localhost:3000]().
 
 ## 🤝 How to Contribute
 
