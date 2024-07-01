@@ -13,5 +13,15 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/demo.tsx"></script>
+    <script>
+      window.Feedback = window.Feedback || {};
+      Feedback.access_token = "4761676833e0186722f5fbd470e66f";
+      (function (d) {
+        let s = d.createElement("script");
+        s.async = true;
+        s.src = "https://feedback-widget-1.onrender.com/widget/v1.js";
+        (d.head || d.body).appendChild(s);
+      })(document);
+    </script>
   </body>
 </html>
