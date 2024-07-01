@@ -1,6 +1,6 @@
-import { VideoPlayerState } from "@src/components/VideoPlayer/@types";
+import { VideoPlayerState } from "../components/VideoPlayer/@types";
 import { downloadFile } from "./downloadFile";
-import { DEFAULT_VIDEO_FILTER } from "@src/components/Modals/FilterModal/FilterModal";
+import { DEFAULT_VIDEO_FILTER } from "../components/Modals/FilterModal/FilterModal";
 
 export const playerManager: (
   setState: React.Dispatch<React.SetStateAction<VideoPlayerState>>,

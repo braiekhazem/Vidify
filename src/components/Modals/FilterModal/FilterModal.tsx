@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import { FilterModalProps } from "./@types";
-import Dropdown from "@src/common/Dropdown/Dropdown";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import Dropdown from "../../../common/Dropdown/Dropdown";
+import { getPrefixCls } from "../../../utils/getPrefixCls";
 import classNames from "classnames";
 import { ReactComponent as CloseSVG } from "../../../global/assets/icons/settings/close.svg";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "../../../utils/concatPrefixCls";
 import Slider from "rc-slider";
-import { IVideoFilter } from "@src/components/VideoPlayer/@types";
+import { IVideoFilter } from "../../../components/VideoPlayer/@types";
 import { useTranslation } from "react-i18next";
 
 export const DEFAULT_VIDEO_FILTER: IVideoFilter = {

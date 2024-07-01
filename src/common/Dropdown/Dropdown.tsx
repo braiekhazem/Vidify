@@ -1,8 +1,8 @@
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "../../utils/getPrefixCls";
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { DropdownProps } from "./@types";
-import mergeRefs from "@src/utils/mergeRefs";
+import mergeRefs from "../../utils/mergeRefs";
 
 const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
   const {

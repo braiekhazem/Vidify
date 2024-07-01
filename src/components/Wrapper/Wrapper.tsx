@@ -6,9 +6,9 @@ import { ReactComponent as SpinnerSVG } from "../../global/assets/icons/loading/
 import { ReactComponent as KeyboardSVG } from "../../global/assets/icons/settings/keyboard.svg";
 import { useRefDimensions } from "../../hooks/useRefDimensions";
 import SettingsDropdown from "../SettingsDropdown";
-import Dropdown from "@src/common/Dropdown/Dropdown";
-import mergeRefs from "@src/utils/mergeRefs";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import Dropdown from "../../common/Dropdown";
+import mergeRefs from "../../utils/mergeRefs";
+import { getPrefixCls } from "../../utils/getPrefixCls";
 import ShortCutModal from "../Modals/ShortCutModal";
 import FilterModal from "../Modals/FilterModal";
 import { useTranslation } from "react-i18next";

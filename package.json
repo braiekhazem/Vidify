@@ -3,7 +3,7 @@
   "name": "vidify",
   "author": "hazem braiek",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -76,7 +76,6 @@
     "react-helmet": "^6.1.0",
     "react-i18next": "^14.1.1",
     "react-tooltip": "^5.26.3",
-    "tk-note": "^1.8.3",
     "vite-plugin-css-injected-by-js": "^3.4.0",
     "vite-plugin-dts": "^3.7.3"
   },

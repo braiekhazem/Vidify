@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { VideoLoadErrorProps } from "./@types";
-import { getPrefixCls } from "@src/utils/getPrefixCls";
+import { getPrefixCls } from "../../utils/getPrefixCls";
 import classNames from "classnames";
-import { concatPrefixCls } from "@src/utils/concatPrefixCls";
+import { concatPrefixCls } from "../../utils/concatPrefixCls";
 import { ReactComponent as RetrySVG } from "../../global/assets/icons/error/retry.svg";
 import { DEFAULT_ICONS_SIZE } from "../VideoPlayer/VideoPlayer";
 import { useTranslation } from "react-i18next";

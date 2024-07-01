@@ -14,10 +14,10 @@ import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 import { getAllowedControlBarItems } from "./../../utils/getAllowedControlBarItems";
 import { getVideoSrc } from "./../../utils/getVideoSrc";
 import VideoLoadError from "../VideoLoadError";
-import i18n from "@src/i18n";
+import i18n from "../../i18n";
 import { DEFAULT_CONTEXT_MENU_ITEMS } from "../Wrapper/Wrapper";
 import { DEFAULT_VIDEO_FILTER } from "../Modals/FilterModal/FilterModal";
-import useHover from "@src/hooks/useHover";
+import useHover from "../../hooks/useHover";
 
 const ASPECT_RATIO = 16 / 9;
 
