@@ -58,6 +58,7 @@ $class-prefix-control-bar: "vf-control-bar";
   height: 30px;
   opacity: 0.9;
   display: inline-block;
+  color: var(--vf-color-white) !important;
 
   -webkit-transition: opacity 0.1s cubic-bezier(0.4, 0, 1, 1);
   transition: opacity 0.1s cubic-bezier(0.4, 0, 1, 1);
@@ -72,6 +73,7 @@ $class-prefix-control-bar: "vf-control-bar";
   -o-border-radius: 5px;
   & > * {
     line-height: 0;
+    color: var(--vf-color-white) !important;
   }
 
   &:hover {
