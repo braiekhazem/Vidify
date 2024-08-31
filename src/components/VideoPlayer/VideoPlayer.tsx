@@ -64,7 +64,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     preload,
     error,
     lang,
-    crossOrigin = "anonymous",
     onClick,
     onClickNext,
     onClickPrevious,
@@ -80,6 +79,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     onWaiting,
     onDownload,
     onAbort,
+    ...rest
   } = props;
   const currentVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -342,7 +342,9 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       controlBarElement={controlsBarRef.current}
     >
       <video
-        src={currentSource}
+        src={
+          "http://so2.downet.net/dl/1725283490/Extortion.2017.720p.BluRay.akoam.net.mkv"
+        }
         id={id}
         tabIndex={0}
         poster={thumbnail || poster}
@@ -364,7 +366,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
           videoState.actions?.setLoadingData(true);
         }}
         playsInline={playsInline}
-        crossOrigin={crossOrigin}
         onLoadStart={() => videoState.actions?.setLoadingData(true)}
         onLoadedData={handleVideoLoaded}
         onError={handleVideoError}
@@ -380,6 +381,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
           opacity: `${videoState.videoFilter.opacity.value}%`,
         }}
         {...eventHandlers}
+        {...rest}
       />
 
       <PlayButton
