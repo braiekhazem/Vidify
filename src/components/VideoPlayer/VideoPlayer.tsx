@@ -64,7 +64,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     preload,
     error,
     lang,
-    crossOrigin = "anonymous",
     onClick,
     onClickNext,
     onClickPrevious,
@@ -80,6 +79,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     onWaiting,
     onDownload,
     onAbort,
+    ...rest
   } = props;
   const currentVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -364,7 +364,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
           videoState.actions?.setLoadingData(true);
         }}
         playsInline={playsInline}
-        crossOrigin={crossOrigin}
         onLoadStart={() => videoState.actions?.setLoadingData(true)}
         onLoadedData={handleVideoLoaded}
         onError={handleVideoError}
@@ -380,6 +379,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
           opacity: `${videoState.videoFilter.opacity.value}%`,
         }}
         {...eventHandlers}
+        {...rest}
       />
 
       <PlayButton

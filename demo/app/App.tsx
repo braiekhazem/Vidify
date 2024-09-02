@@ -6,7 +6,6 @@ import Header from "../components/Header";
 import DemoBox from "../components/DemoBox";
 import { defaultAllowedItems } from "../../src/utils/getAllowedControlBarItems";
 import { controlBarAllowedItems } from "../../src/components/ControlsBar/@types";
-import { Helmet } from "react-helmet";
 
 const defaultPoster =
   "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500";
@@ -368,7 +367,6 @@ const App = () => {
               },
             ]}
             src={url || src}
-            crossOrigin=""
             thumbnail={poster}
             volume={0.7}
             annotation={annotation ? <Logo /> : false}

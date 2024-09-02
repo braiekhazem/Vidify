@@ -14,6 +14,7 @@ $class-prefix-shortcuts: "vf-shortcuts";
       font-size: 14px;
       font-weight: 300;
       letter-spacing: 0.7px;
+      margin: 0;
     }
     padding-bottom: 10px;
     border-bottom: 0.2px solid var(--vf-color-white);
@@ -37,6 +38,7 @@ $class-prefix-shortcuts: "vf-shortcuts";
     }
     p {
       text-transform: capitalize;
+      margin: 0;
     }
   }
 }

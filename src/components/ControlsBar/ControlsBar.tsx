@@ -34,6 +34,7 @@ const renderItem = (
   const itemSettings = options
     ? options[itemName as keyof controlBarAllowedItems]
     : null;
+
   const isBoolean = typeof itemSettings === "boolean";
   const isAllowed = isBoolean ? itemSettings : itemSettings?.allow;
   if (!isAllowed && options) return null;
@@ -304,17 +305,21 @@ const internalControlsBar: React.ForwardRefRenderFunction<
         )}
         {/* {renderButton(<Speed />)} */}
         {/* {renderButton(<Subtitle />)} */}
-        {renderButton(
-          <Settings
-            onClick={() =>
-              videoState.dropdownSettingsOpen
-                ? actions?.closeDropdownSettings()
-                : actions?.openDropdownSettings()
-            }
-            icon={customIcons?.settings}
-            isActive={videoState.dropdownSettingsOpen}
-          />,
-          t("settings")
+        {renderItem(
+          allowedItems,
+          renderButton(
+            <Settings
+              onClick={() =>
+                videoState.dropdownSettingsOpen
+                  ? actions?.closeDropdownSettings()
+                  : actions?.openDropdownSettings()
+              }
+              icon={customIcons?.settings}
+              isActive={videoState.dropdownSettingsOpen}
+            />,
+            t("settings")
+          ),
+          "settings"
         )}
         {renderButton(
           <MiniPlayer video={videoRef} icon={customIcons?.picInPic} />,
