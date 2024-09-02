@@ -18,6 +18,7 @@ export interface controlBarAllowedItems {
   volumeSlider?: ItemType | boolean;
   download?: ItemType | boolean;
   duration?: ItemType | boolean;
+  settings?: ItemType | boolean;
   skip?: ItemType | boolean;
 }
 export interface ControlsBarProps {

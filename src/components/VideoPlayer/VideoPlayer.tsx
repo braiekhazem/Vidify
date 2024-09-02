@@ -342,9 +342,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       controlBarElement={controlsBarRef.current}
     >
       <video
-        src={
-          "http://so2.downet.net/dl/1725283490/Extortion.2017.720p.BluRay.akoam.net.mkv"
-        }
+        src={currentSource}
         id={id}
         tabIndex={0}
         poster={thumbnail || poster}

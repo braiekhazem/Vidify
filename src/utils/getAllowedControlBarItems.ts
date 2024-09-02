@@ -8,6 +8,7 @@ export const defaultAllowedItems: controlBarAllowedItems = {
   download: true,
   duration: true,
   skip: true,
+  settings: true,
 };
 
 export const getAllowedControlBarItems = (
@@ -20,6 +21,7 @@ export const getAllowedControlBarItems = (
     fullscreen = true,
     volumeSlider = true,
     download = true,
+    settings = true,
   } = typeof controller === "object"
     ? (controller as controlBarAllowedItems)
     : defaultAllowedItems;
@@ -29,5 +31,6 @@ export const getAllowedControlBarItems = (
     fullscreen,
     volumeSlider,
     download,
+    settings,
   };
 };
