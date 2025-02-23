@@ -394,6 +394,141 @@ const App = () => {
             onClickNext={() => console.log("next")}
             onClickPrevious={() => console.log("nprevious")}
           />
+          <VideoPlayer
+            ref={videoRef}
+            loop={true}
+            defaultSrcIndex={0}
+            preload=""
+            durationType={videoInfo.durationType}
+            lang={localStorage.getItem("lang") as "ar" | "en" | "fr"}
+            // defaultPlaybackSpeed={3}
+            // playOn={["focus", "visible"]}
+            // customIcons={{
+            //   next: <div>hello</div>,
+            //   previous: <div>hello2</div>,
+            //   previousForward: <div>h3</div>,
+            //   nextForward: <div>h4</div>,
+            //   download: <div>h5</div>,
+            //   screenShot: <div>h6</div>,
+            //   settings: <div>h7</div>,
+            //   picInPic: <div>h8</div>,
+            //   fullscreen: <div>h9</div>,
+            //   exitFullscreen: <div>h10</div>,
+            //   play: <div>h11</div>,
+            //   pause: <Logo width="100px" />,
+            //   mute: <div>h13</div>,
+            //   volume: <div>h14</div>,
+            // }}
+            // customLoader={<div>loading...</div>}
+            controller={{
+              ...allowedItems,
+              ...(customControlBar
+                ? {
+                    screenshot: {
+                      allow: true,
+                      style: { color: "red" },
+                      className: "custom-button",
+                    },
+
+                    fullscreen: false,
+                    progressBar: false,
+                    controlBar: (actions, info) => (
+                      <div style={{ display: "flex", columnGap: "10px" }}>
+                        <p>
+                          {info.currentTime} / {info.duration}
+                        </p>
+                        <button onClick={actions?.play}>Play</button>
+                        <button onClick={actions?.pause}>Pause</button>
+                        <p>Volume</p>
+                        <input
+                          type="range"
+                          value={info.volume * 100}
+                          onChange={(e) =>
+                            actions?.setVolume(+e.target.value / 100)
+                          }
+                        />
+                        <button onClick={actions?.screenShot}>
+                          ScreenShot
+                        </button>
+                        <button onClick={actions?.download}>Download</button>
+                      </div>
+                    ),
+                  }
+                : {}),
+            }}
+            error={{
+              className: "hazem",
+              withRetry: true,
+              onRetry: () => console.log("retyr"),
+
+              // renderError: (src) => <div>hello there</div>,
+            }}
+            enableContextMenu={true}
+            contextMenu={[
+              {
+                label: "Filter",
+                icon: (
+                  <div>
+                    <Logo />
+                  </div>
+                ),
+                onClick: () =>
+                  videoActions?.toggleFilterModal(!videoState?.filterModal),
+              },
+              {
+                label: "Custom Link",
+                icon: (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="42"
+                    viewBox="0 0 256 256"
+                  >
+                    <g fill="none">
+                      <rect width="256" height="256" fill="#fff" rx="60"></rect>
+                      <rect
+                        width="256"
+                        height="256"
+                        fill="#0a66c2"
+                        rx="60"
+                      ></rect>
+                      <path
+                        fill="#fff"
+                        d="M184.715 217.685h29.27a4 4 0 0 0 4-3.999l.015-61.842c0-32.323-6.965-57.168-44.738-57.168c-14.359-.534-27.9 6.868-35.207 19.228a.32.32 0 0 1-.595-.161V101.66a4 4 0 0 0-4-4h-27.777a4 4 0 0 0-4 4v112.02a4 4 0 0 0 4 4h29.268a4 4 0 0 0 4-4v-55.373c0-15.657 2.97-30.82 22.381-30.82c19.135 0 19.383 17.916 19.383 31.834v54.364a4 4 0 0 0 4 4M38 59.628c0 11.864 9.767 21.626 21.632 21.626c11.862-.001 21.623-9.769 21.623-21.631C81.253 47.761 71.491 38 59.628 38C47.762 38 38 47.763 38 59.627m6.959 158.058h29.307a4 4 0 0 0 4-4V101.66a4 4 0 0 0-4-4H44.959a4 4 0 0 0-4 4v112.025a4 4 0 0 0 4 4"
+                      ></path>
+                    </g>
+                  </svg>
+                ),
+                link: "https://www.linkedin.com/in/braiek-hazem",
+              },
+            ]}
+            src={url || src}
+            thumbnail={poster}
+            volume={0.7}
+            annotation={annotation ? <Logo /> : false}
+            block={block}
+            rounded={rounded}
+            width={`${width}`}
+            primaryColor={primaryColor}
+            poster={poster}
+            autoPlay={autoPlay}
+            onPlay={() => updateVideoInfo("playing", videoState?.playing)}
+            onPause={() => updateVideoInfo("playing", videoState?.playing)}
+            onProgress={() => {
+              updateVideoInfo("currentTime", videoState?.currentTime);
+            }}
+            onClick={() => console.log("video clicked")}
+            onError={() => updateVideoInfo("error", (videoInfo.error || 0) + 1)}
+            onEnded={() => console.log("video end")}
+            onLoadedData={() =>
+              updateVideoInfo("videoLoaded", videoState?.videoLoaded)
+            }
+            onDownload={() => console.log("download...")}
+            onVolumeChange={() => updateVideoInfo("volume", videoState?.volume)}
+            onScreenshot={(file) => console.log({ file })}
+            onClickNext={() => console.log("next")}
+            onClickPrevious={() => console.log("nprevious")}
+          />
         </div>
         <div className="vidify-demo-input-right hovered-scrollbar">
           <DemoBox header="Controll bar" classNames="control-bar-box">

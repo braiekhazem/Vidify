@@ -1,4 +1,11 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, {
+  createContext,
+  SyntheticEvent,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import { VideoPlayerProps, VideoPlayerState, contextmenu } from "./@types";
 import mergeRefs from "./../../utils/mergeRefs";
 import { getPrefixCls } from "./../../utils/getPrefixCls";
@@ -128,6 +135,9 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     useState<VideoPlayerState>(defaultVideoState);
 
   const currentSource = getVideoSrc(props, videoState);
+  const vidifyId = useId();
+
+  console.log({ vidifyId });
 
   useEffect(() => {
     if (currentVideoRef.current)
@@ -210,7 +220,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   };
 
   const fullScreenHandler = (e: SyntheticEvent<HTMLDivElement, Event>) => {
-    if (e.target === currentVideoRef.current) fullScreenMode();
+    if (e.target === currentVideoRef.current) fullScreenMode(e);
   };
 
   const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -348,6 +358,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       title={title}
       style={containerstyle}
       controlBarElement={controlsBarRef.current}
+      vidifyId={vidifyId}
     >
       <video
         src={currentSource}

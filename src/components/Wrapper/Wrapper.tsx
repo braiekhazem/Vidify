@@ -132,6 +132,7 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
     contextMenu,
     enableContextMenu,
     customLoader,
+    vidifyId,
     controlBarElement,
     ...rest
   } = props;
@@ -170,6 +171,7 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
 
   const handleContextMenu = (event: any) => {
     event.preventDefault();
+
     if (containerRef.current && enableContextMenu) {
       const containerRect = containerRef.current.getBoundingClientRect();
       const relativeX = event.clientX - containerRect.left;
@@ -215,10 +217,11 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
       onMouseMove={handleMouseMove}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
+      data-vidify-id={vidifyId}
     >
       <Dropdown
         open={showMenu}
-        onOpenChange={(open) => setShowMenu(open)}
+        onOpenChange={setShowMenu}
         placement={{
           top: cursorPosition.y,
           left: cursorPosition.x,

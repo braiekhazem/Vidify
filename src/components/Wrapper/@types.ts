@@ -16,6 +16,7 @@ export interface WrapperProps {
   onDoubleClick: any;
   onClick: any;
   tabIndex: number;
+  vidifyId: string;
   contextMenu: itemMenu[];
   enableContextMenu: boolean;
   style: React.CSSProperties;
