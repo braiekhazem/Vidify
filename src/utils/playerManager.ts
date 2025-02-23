@@ -130,6 +130,33 @@ export const playerManager: (
       });
     },
 
+    //TODO: fix the flip horizontal and vertical
+
+    setFlipHorizontal(flipHorizontal: boolean) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        flipHorizontal,
+        flipVertical: false,
+      }));
+    },
+
+    setFlipVertical(flipVertical: boolean) {
+      console.log("first");
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        flipVertical,
+        flipHorizontal: false,
+      }));
+    },
+
+    resetFlip() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        flipHorizontal: false,
+        flipVertical: false,
+      }));
+    },
+
     updateCurrentTime(newCurrentTime) {
       setState((prev: VideoPlayerState) => ({
         ...prev,

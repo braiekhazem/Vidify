@@ -1,5 +1,4 @@
 import React, {
-  createContext,
   SyntheticEvent,
   useEffect,
   useId,
@@ -129,6 +128,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     error: null,
     videoLoaded: false,
     playbackProgress: 0,
+    flipHorizontal: false,
+    flipVertical: false,
   };
 
   const [videoState, setVideoState] =
@@ -136,8 +137,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
 
   const currentSource = getVideoSrc(props, videoState);
   const vidifyId = useId();
-
-  console.log({ vidifyId });
 
   useEffect(() => {
     if (currentVideoRef.current)
@@ -337,8 +336,6 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     }
   }, [videoState]);
 
-  console.log({ videoState });
-
   return (
     <Wrapper
       className={classes}
@@ -396,6 +393,11 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
             blur(${videoState.videoFilter.blur.value}px)
           `,
           opacity: `${videoState.videoFilter.opacity.value}%`,
+          transform: `rotate(${(videoState.rotation - 1) * 90}deg) scale(${
+            videoState.videoFilter.zoom
+              ? videoState.videoFilter.zoom.value / 100
+              : 1
+          })`,
         }}
         {...eventHandlers}
         {...rest}

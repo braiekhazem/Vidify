@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { FilterModalProps } from "./@types";
 import Dropdown from "../../../common/Dropdown/Dropdown";
 import { getPrefixCls } from "../../../utils/getPrefixCls";
@@ -34,6 +34,11 @@ export const DEFAULT_VIDEO_FILTER: IVideoFilter = {
     value: 0,
     min: 0,
     max: 100,
+  },
+  zoom: {
+    value: 100,
+    min: 20,
+    max: 1000,
   },
 };
 
@@ -92,7 +97,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
           onClick={() => actions?.setRotation()}
         >
           <p>
-            Rotation: <span>{1}</span>
+            Rotation: <span>{videoState?.rotation}</span>
           </p>
         </div> */}
         <div className={concatPrefixCls(prefixCls, "reset-button")}>
