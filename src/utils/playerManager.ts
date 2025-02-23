@@ -10,7 +10,6 @@ export const playerManager: (
 ) => VideoPlayerState["actions"] = (setState, video, mediaEventHandlers) => {
   return {
     play() {
-      console.log("play video");
       setState((prev: VideoPlayerState) => ({
         ...prev,
         playing: prev.loadingData ? false : true,
@@ -108,6 +107,30 @@ export const playerManager: (
       }));
     },
 
+    setIsDraggingFilter(isDragging: boolean) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        videoFilter: {
+          ...prev.videoFilter,
+          ...(isDragging
+            ? {
+                brightness: { ...prev.videoFilter.brightness, value: 85 },
+                blur: { ...prev.videoFilter.blur, value: 4 },
+              }
+            : {
+                brightness: {
+                  ...prev.videoFilter.brightness,
+                  value: DEFAULT_VIDEO_FILTER.brightness.value,
+                },
+                blur: {
+                  ...prev.videoFilter.blur,
+                  value: DEFAULT_VIDEO_FILTER.blur.value,
+                },
+              }),
+        },
+      }));
+    },
+
     resetVideoFilters() {
       setState((prev: VideoPlayerState) => ({
         ...prev,
@@ -141,7 +164,6 @@ export const playerManager: (
     },
 
     setFlipVertical(flipVertical: boolean) {
-      console.log("first");
       setState((prev: VideoPlayerState) => ({
         ...prev,
         flipVertical,
@@ -276,7 +298,7 @@ export const playerManager: (
           mediaEventHandlers.onDownload && mediaEventHandlers.onDownload();
         })
         .catch((err) => {
-          console.log("Error", err);
+          console.error("Error", err);
         });
     },
   };

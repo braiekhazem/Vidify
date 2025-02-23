@@ -191,5 +191,6 @@ export interface VideoPlayerState {
     setFlipVertical: (flipVertical: boolean) => void;
     resetFlip: () => void;
     setRotation: (r?: VideoPlayerState["rotation"]) => void;
+    setIsDraggingFilter: (isDragging: boolean) => void;
   };
 }
