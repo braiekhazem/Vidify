@@ -1,6 +1,7 @@
 import { VideoPlayerState } from "../components/VideoPlayer/@types";
 import { downloadFile } from "./downloadFile";
 import { DEFAULT_VIDEO_FILTER } from "../components/Modals/FilterModal/FilterModal";
+import html2canvas from "html2canvas";
 
 export const playerManager: (
   setState: React.Dispatch<React.SetStateAction<VideoPlayerState>>,
@@ -9,6 +10,7 @@ export const playerManager: (
 ) => VideoPlayerState["actions"] = (setState, video, mediaEventHandlers) => {
   return {
     play() {
+      console.log("play video");
       setState((prev: VideoPlayerState) => ({
         ...prev,
         playing: prev.loadingData ? false : true,
@@ -181,16 +183,14 @@ export const playerManager: (
         mediaEventHandlers.onClickPrevious();
     },
 
-    screenShot() {
-      const capture = (video: HTMLVideoElement) => {
-        let w = video.videoWidth;
-        let h = video.videoHeight;
-        let canvas = document.createElement("canvas");
-        canvas.width = w;
-        canvas.height = h;
-        let ctx = canvas.getContext("2d");
-        ctx?.drawImage(video, 0, 0, w, h);
-        return canvas;
+    async screenShot() {
+      const capture = async (video: HTMLVideoElement) => {
+        video.crossOrigin = "Anonymous";
+        // use html2canvas to capture the video
+        return await html2canvas(video, {
+          useCORS: true,
+          allowTaint: true,
+        });
       };
 
       const date = new Date(Date.now());
@@ -216,7 +216,7 @@ export const playerManager: (
         return file;
       };
 
-      let canvas = capture(video as HTMLVideoElement);
+      let canvas = await capture(video as HTMLVideoElement);
       downloadFile({ url: canvas.toDataURL(), name: `${fileName}.png` });
       convertDataURLtoFile(canvas.toDataURL(), fileName).then((file) => {
         mediaEventHandlers.onScreenshot &&

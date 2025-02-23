@@ -254,6 +254,12 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     }
   };
 
+  const handleVideoEnded = () => {
+    if (loop) videoState.actions?.play();
+    else videoState.actions?.pause();
+    onEnded?.();
+  };
+
   const prefixCls = getPrefixCls("video");
 
   const classes = classNames(className, `${prefixCls}-wrapper`, {
@@ -321,6 +327,8 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     }
   }, [videoState]);
 
+  console.log({ videoState });
+
   return (
     <Wrapper
       className={classes}
@@ -351,11 +359,11 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         controls={false}
         onPause={onPause}
         onPlay={onPlay}
-        onEnded={onEnded}
+        onEnded={handleVideoEnded}
         onVolumeChange={onVolumeChange}
         className={prefixCls}
         onAbort={onAbort}
-        loop={videoState.loop}
+        loop={loop}
         preload={preload}
         onTimeUpdate={handleTimeUpdate}
         onProgress={onProgress}

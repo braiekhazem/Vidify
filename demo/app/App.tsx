@@ -12,7 +12,7 @@ const defaultPoster =
 
 const defaultSrc = [
   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+  "https://videos.pexels.com/video-files/5645597/5645597-uhd_2560_1440_30fps.mp4",
 ];
 
 const App = () => {
@@ -261,7 +261,7 @@ const App = () => {
         <div className="vidify-demo-container">
           <VideoPlayer
             ref={videoRef}
-            loop={false}
+            loop={true}
             defaultSrcIndex={0}
             preload=""
             durationType={videoInfo.durationType}
@@ -294,6 +294,7 @@ const App = () => {
                       style: { color: "red" },
                       className: "custom-button",
                     },
+
                     fullscreen: false,
                     progressBar: false,
                     controlBar: (actions, info) => (
