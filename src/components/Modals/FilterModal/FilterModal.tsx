@@ -39,7 +39,6 @@ export const DEFAULT_VIDEO_FILTER: IVideoFilter = {
 
 const FilterModal: React.FC<FilterModalProps> = (props) => {
   const { videoState } = props;
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation(["video"]);
   const { filterOpened = false, actions, videoFilter } = videoState;
 
@@ -52,7 +51,6 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
       open={filterOpened}
       onOpenChange={(open) => actions?.toggleFilterModal(open)}
       width={350}
-      ref={dropdownRef}
     >
       <div className={classes} onContextMenu={(e) => e.stopPropagation()}>
         <CloseSVG

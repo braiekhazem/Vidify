@@ -15,8 +15,6 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
     onOpenChange,
   } = props;
 
-  const parentElement = document.querySelector(".vf-video-wrapper");
-
   const [selfOpen, setSelfOpen] = useState<boolean>(open);
   const [dropdownStyles, setDropdownStyles] = useState<React.CSSProperties>({});
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -32,6 +30,8 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
   });
 
   const updateDropdownPosition = () => {
+    const parentElement = dropdownRef.current?.closest(".vf-video-wrapper");
+
     if (!parentElement || !dropdownRef.current) return;
 
     const parentRect = parentElement.getBoundingClientRect();
