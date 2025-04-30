@@ -343,7 +343,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       videoState={videoState}
       actions={videoState.actions}
       onKeyDown={keyDownHandler}
-      currentVideoRef={currentVideoRef}
+      currentVideoRef={currentVideoRef as React.RefObject<HTMLVideoElement>}
       ref={mergeRefs(containerRef, currentContainerRef)}
       onDoubleClick={fullScreenHandler}
       onClick={onClickHandler}

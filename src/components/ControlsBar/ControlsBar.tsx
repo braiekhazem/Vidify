@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 
 const renderItem = (
   options: controlBarAllowedItems | null,
-  item: JSX.Element,
+  item: any,
   itemName: string
 ) => {
   const itemSettings = options
@@ -42,8 +42,8 @@ const renderItem = (
   const className = !isBoolean && itemSettings?.className;
   const style = !isBoolean && itemSettings?.style;
 
-  const existingClassName = item.props.className;
-  const existingStyle = item.props.style;
+  const existingClassName = item?.props?.className;
+  const existingStyle = item?.props?.style;
 
   const mergedClassName = existingClassName
     ? `${existingClassName} ${className || ""}`
@@ -69,13 +69,18 @@ const renderVideoDuration = (
     setDurationType(type === "default" ? 0 : 1);
   }, [type]);
 
+  const validDuration = isNaN(duration) ? 0 : duration;
+  const validCurrentTime = isNaN(currentTime) ? 0 : currentTime;
+
+  const remainingTime = Math.max(0, validDuration - validCurrentTime);
+
   return (
     <div
       className={prefixCls}
       onClick={() => setDurationType(durationType === 0 ? 1 : 0)}
     >
-      {formatTime(currentTime, formatTime(duration))} /{" "}
-      {formatTime(durationType === 0 ? duration : duration - currentTime)}
+      {formatTime(validCurrentTime, formatTime(validDuration))} /{" "}
+      {formatTime(durationType === 0 ? validDuration : remainingTime)}
     </div>
   );
 };

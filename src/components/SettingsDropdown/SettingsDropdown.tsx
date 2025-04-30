@@ -228,7 +228,7 @@ const SettingsDropdown: React.FC<SettingsDropdownProps> = (props) => {
       placement={{ right: 12, bottom: 67 }}
       width={226}
       open={isOpen}
-      ref={dropdownRef}
+      ref={dropdownRef as React.RefObject<HTMLElement>}
       onOpenChange={(open) =>
         open
           ? actions?.openDropdownSettings()

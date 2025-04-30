@@ -12,7 +12,6 @@ export interface WrapperProps {
   customLoader?: ReactNode;
   title: string;
   onKeyDown: any;
-  ref: any;
   onDoubleClick: any;
   onClick: any;
   tabIndex: number;

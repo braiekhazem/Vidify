@@ -4,7 +4,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { DropdownProps } from "./@types";
 import mergeRefs from "../../utils/mergeRefs";
 
-const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
+const Dropdown = ({
+  ref,
+  ...props
+}: DropdownProps & {
+  ref?: React.RefObject<HTMLElement>;
+}) => {
   const {
     className,
     children,
@@ -98,6 +103,6 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
       {children}
     </div>
   );
-});
+};
 
 export default Dropdown;

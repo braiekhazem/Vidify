@@ -46,80 +46,76 @@ export const DEFAULT_CONTEXT_MENU_ITEMS: itemMenu[] = [
   },
 ];
 
-const InternalContextMenu: React.ForwardRefRenderFunction<
-  HTMLDivElement,
-  ContextMenuProps
-> = (props, ref) => {
-  const {
-    videoState,
-    className,
-    onClick,
-    style = {},
-    closeMenu,
-    items = DEFAULT_CONTEXT_MENU_ITEMS,
-  } = props;
-  const prefixCls = getPrefixCls("context-menu");
-  const classes = classNames(prefixCls, className);
-  const { t } = useTranslation(["video"]);
+const InternalContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(
+  (props, ref) => {
+    const {
+      videoState,
+      className,
+      onClick,
+      style = {},
+      closeMenu,
+      items = DEFAULT_CONTEXT_MENU_ITEMS,
+    } = props;
+    const prefixCls = getPrefixCls("context-menu");
+    const classes = classNames(prefixCls, className);
+    const { t } = useTranslation(["video"]);
 
-  const onClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-    onClick?.();
-  };
+    const onClickHandler = (
+      e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+      e.stopPropagation();
+      onClick?.();
+    };
 
-  const keyBoardItem: itemMenu = {
-    label: t("keyboard_shortcuts"),
-    icon: <KeyboardSVG />,
-    onClick: () =>
-      videoState.actions?.togglekeyboardModal(!videoState.keyboardOpened),
-  };
+    const keyBoardItem: itemMenu = {
+      label: t("keyboard_shortcuts"),
+      icon: <KeyboardSVG />,
+      onClick: () =>
+        videoState.actions?.togglekeyboardModal(!videoState.keyboardOpened),
+    };
 
-  return (
-    <div
-      className={classes}
-      style={{ width: 200, ...style }}
-      onClick={onClickHandler}
-      ref={ref}
-    >
-      {[...items, keyBoardItem]?.map((item, index) => {
-        const { icon, label, link, className, style, onClick } = item;
+    return (
+      <div
+        className={classes}
+        style={{ width: 200, ...style }}
+        onClick={onClickHandler}
+        ref={ref}
+      >
+        {[...items, keyBoardItem]?.map((item, index) => {
+          const { icon, label, link, className, style, onClick } = item;
 
-        return (
-          <div
-            className={`${concatPrefixCls(prefixCls, "item")} ${className}`}
-            onClick={(e) => {
-              onClick?.(e);
-              closeMenu();
-              if (link) window.open(link, "_blank");
-            }}
-            key={index}
-            style={style}
-          >
-            {icon && (
-              <div className={concatPrefixCls(prefixCls, "item-icon")}>
-                {icon}
-              </div>
-            )}
-            {label && (
-              <div className={concatPrefixCls(prefixCls, "item-label")}>
-                {label}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-const ContextMenu = React.forwardRef<HTMLDivElement, ContextMenuProps>(
-  InternalContextMenu
+          return (
+            <div
+              className={`${concatPrefixCls(prefixCls, "item")} ${className}`}
+              onClick={(e) => {
+                onClick?.(e);
+                closeMenu();
+                if (link) window.open(link, "_blank");
+              }}
+              key={index}
+              style={style}
+            >
+              {icon && (
+                <div className={concatPrefixCls(prefixCls, "item-icon")}>
+                  {icon}
+                </div>
+              )}
+              {label && (
+                <div className={concatPrefixCls(prefixCls, "item-label")}>
+                  {label}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 );
 
-const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
-  props,
-  ref
-) => {
+const ContextMenu = InternalContextMenu;
+
+const Wrapper = forwardRef<HTMLDivElement, WrapperProps>((props, ref) => {
   const {
     children,
     prefixCls,
@@ -262,6 +258,6 @@ const Wrapper: React.ForwardRefRenderFunction<HTMLDivElement, WrapperProps> = (
       {children}
     </div>
   );
-};
+});
 
-export default forwardRef<HTMLDivElement, WrapperProps>(Wrapper);
+export default Wrapper;
