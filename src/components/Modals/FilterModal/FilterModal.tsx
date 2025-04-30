@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { FilterModalProps } from "./@types";
 import Dropdown from "../../../common/Dropdown/Dropdown";
 import { getPrefixCls } from "../../../utils/getPrefixCls";
@@ -35,11 +35,15 @@ export const DEFAULT_VIDEO_FILTER: IVideoFilter = {
     min: 0,
     max: 100,
   },
+  zoom: {
+    value: 100,
+    min: 20,
+    max: 1000,
+  },
 };
 
 const FilterModal: React.FC<FilterModalProps> = (props) => {
   const { videoState } = props;
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation(["video"]);
   const { filterOpened = false, actions, videoFilter } = videoState;
 
@@ -52,7 +56,6 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
       open={filterOpened}
       onOpenChange={(open) => actions?.toggleFilterModal(open)}
       width={350}
-      ref={dropdownRef}
     >
       <div className={classes} onContextMenu={(e) => e.stopPropagation()}>
         <CloseSVG
@@ -94,7 +97,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
           onClick={() => actions?.setRotation()}
         >
           <p>
-            Rotation: <span>{1}</span>
+            Rotation: <span>{videoState?.rotation}</span>
           </p>
         </div> */}
         <div className={concatPrefixCls(prefixCls, "reset-button")}>

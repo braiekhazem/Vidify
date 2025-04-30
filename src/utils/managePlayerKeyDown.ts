@@ -67,7 +67,7 @@ export const managePlayerKeyDown = (
   } else if (event.key === "f" || event.key === "F") {
     if (videoState.fullscreen) actions?.setFullscreen(false);
     else actions?.setFullscreen(true);
-    fullScreenMode();
+    fullScreenMode(event);
   } else if (event.key === "k" || event.key === "K") {
     videoState.playing ? actions?.pause() : actions?.play();
   } else if (event.shiftKey && (event.key === "S" || event.key === "s")) {

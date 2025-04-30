@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { FullScreenProps } from "./@types";
 import { ReactComponent as FullscreenSVG } from "../../global/assets/icons/fullscreen/fullscreen.svg";
 import { ReactComponent as CancelFullscreenSVG } from "../../global/assets/icons/fullscreen/cancel-fullscreen.svg";
@@ -15,25 +15,27 @@ function isFullScreen() {
   );
 }
 
-const DoFullScreen = (el: HTMLElement): void => {
-  if (!isFullScreen()) {
-    if (el === undefined) el = document.documentElement;
-    if (document.fullscreenEnabled) {
-      el.requestFullscreen();
-    } else if (document.fullscreenEnabled) {
-      el.requestFullscreen();
-    } else if (document.fullscreenEnabled) {
-      el.requestFullscreen();
-    } else if (document.fullscreenEnabled) {
-      el.requestFullscreen();
-    }
+const requestFullScreen = (
+  el: HTMLElement = document.documentElement
+): void => {
+  if (isFullScreen()) {
+    return;
+  }
+
+  if (el.requestFullscreen) {
+    el.requestFullscreen();
+  } else if ((el as any).webkitRequestFullscreen) {
+    (el as any).webkitRequestFullscreen();
+  } else if ((el as any).mozRequestFullScreen) {
+    (el as any).mozRequestFullScreen();
+  } else if ((el as any).msRequestFullscreen) {
+    (el as any).msRequestFullscreen();
   }
 };
-
-export const fullScreenMode = () => {
-  const element: any = document.querySelector(".vf-video-wrapper"); //container element
+export const fullScreenMode = (e: SyntheticEvent<HTMLDivElement, Event>) => {
+  const element = (e.target as HTMLElement).closest(".vf-video-wrapper"); //container element
   if (!document.fullscreenElement) {
-    DoFullScreen(element);
+    requestFullScreen(element as HTMLElement);
   } else if (document.exitFullscreen) {
     document.exitFullscreen().catch((err) => {
       console.error(

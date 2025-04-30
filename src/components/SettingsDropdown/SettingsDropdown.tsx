@@ -27,6 +27,21 @@ const SettingsTab: React.FC<TabProps> = (props) => {
     actions?.closeDropdownSettings();
   };
 
+  //TODO: fix the flip horizontal and vertical
+  // const toggleFlipHandler = () => {
+  //   if (videoState.flipHorizontal) {
+  //     actions?.setFlipVertical(true);
+  //   } else if (videoState.flipVertical) {
+  //     actions?.setFlipHorizontal(true);
+  //   } else if (!videoState.flipHorizontal && !videoState.flipVertical) {
+  //     actions?.setFlipVertical(true);
+  //   } else {
+  //     actions?.resetFlip();
+  //   }
+
+  //   actions?.closeDropdownSettings();
+  // };
+
   const setSpeedTabnHandler = () => setActiveTab(1);
 
   return (
@@ -81,6 +96,23 @@ const SettingsTab: React.FC<TabProps> = (props) => {
 
         <div className={concatPrefixCls(prefixCls, "label")}>{t("filter")}</div>
       </div>
+      {/* <div
+        className={concatPrefixCls(prefixCls, "item")}
+        onClick={toggleFlipHandler}
+      >
+        <div className={concatPrefixCls(prefixCls, "icon")}>
+          <FilterSVG width={DEFAULT_ICONS_SIZE} height={DEFAULT_ICONS_SIZE} />
+        </div>
+
+        <div className={concatPrefixCls(prefixCls, "label")}>{t("flip")}</div>
+        <div className={concatPrefixCls(prefixCls, "content")}>
+          {videoState.flipHorizontal ? t("horizontal") : ""}
+          {videoState.flipVertical ? t("vertical") : ""}
+          {!videoState.flipHorizontal && !videoState.flipVertical
+            ? t("default")
+            : ""}
+        </div>
+      </div> */}
     </div>
   );
 };
@@ -196,7 +228,7 @@ const SettingsDropdown: React.FC<SettingsDropdownProps> = (props) => {
       placement={{ right: 12, bottom: 67 }}
       width={226}
       open={isOpen}
-      ref={dropdownRef}
+      ref={dropdownRef as React.RefObject<HTMLElement>}
       onOpenChange={(open) =>
         open
           ? actions?.openDropdownSettings()

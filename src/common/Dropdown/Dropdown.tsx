@@ -4,7 +4,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { DropdownProps } from "./@types";
 import mergeRefs from "../../utils/mergeRefs";
 
-const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
+const Dropdown = ({
+  ref,
+  ...props
+}: DropdownProps & {
+  ref?: React.RefObject<HTMLElement>;
+}) => {
   const {
     className,
     children,
@@ -14,8 +19,6 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
     height,
     onOpenChange,
   } = props;
-
-  const parentElement = document.querySelector(".vf-video-wrapper");
 
   const [selfOpen, setSelfOpen] = useState<boolean>(open);
   const [dropdownStyles, setDropdownStyles] = useState<React.CSSProperties>({});
@@ -32,6 +35,8 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
   });
 
   const updateDropdownPosition = () => {
+    const parentElement = dropdownRef.current?.closest(".vf-video-wrapper");
+
     if (!parentElement || !dropdownRef.current) return;
 
     const parentRect = parentElement.getBoundingClientRect();
@@ -98,6 +103,6 @@ const Dropdown = React.forwardRef<HTMLElement, DropdownProps>((props, ref) => {
       {children}
     </div>
   );
-});
+};
 
 export default Dropdown;

@@ -55,12 +55,15 @@ $class-prefix-progress-bar: "vf-progress-bar";
     -webkit-transform-origin: 0 0;
     -ms-transform-origin: 0 0;
     transform-origin: 0 0;
+    border-radius: 10px;
   }
 
   &-play-progress {
     z-index: 34;
     background-color: var(--vf-color-primary);
     width: 20%;
+    border-radius: 10px;
+
     &:before {
       content: "";
       position: absolute;
@@ -96,6 +99,7 @@ $class-prefix-progress-bar: "vf-progress-bar";
     background: var(--vf-color-white);
     font-size: 13px;
     font-weight: 600;
+    white-space: nowrap;
     z-index: 250;
     padding: 2px 4px;
     border-radius: 4px;
@@ -121,6 +125,11 @@ $class-prefix-progress-bar: "vf-progress-bar";
     -moz-transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1);
     -ms-transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1);
     -o-transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
   }
 
   & &-load-progress {

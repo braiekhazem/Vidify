@@ -38,6 +38,7 @@ export interface IVideoFilter {
   saturation: IFilterItem;
   brightness: IFilterItem;
   blur: IFilterItem;
+  zoom: IFilterItem;
 }
 
 export interface ICustomIcons {
@@ -147,6 +148,8 @@ export interface VideoPlayerState {
   rotation: 1 | 2 | 3 | 4;
   videoFilter: IVideoFilter;
   bufferingProgress: number;
+  flipHorizontal: boolean;
+  flipVertical: boolean;
   lang: VideoPlayerProps["lang"];
   annotation: boolean;
   durationType: VideoPlayerProps["durationType"];
@@ -184,6 +187,10 @@ export interface VideoPlayerState {
     toggleFilterModal: (open: boolean) => void;
     setVideoFilter: (key: keyof IVideoFilter, value: number) => void;
     resetVideoFilters: () => void;
+    setFlipHorizontal: (flipHorizontal: boolean) => void;
+    setFlipVertical: (flipVertical: boolean) => void;
+    resetFlip: () => void;
     setRotation: (r?: VideoPlayerState["rotation"]) => void;
+    setIsDraggingFilter: (isDragging: boolean) => void;
   };
 }

@@ -4,83 +4,80 @@ import React, { useEffect, useState } from "react";
 import { ControlIconProps } from "./@types";
 import { concatPrefixCls } from "./../../utils/concatPrefixCls";
 
-const ControlIcon = React.forwardRef<HTMLElement, ControlIconProps>(
-  (props, ref) => {
-    const {
-      onClick,
-      onChange,
-      onPause,
-      onPlay,
-      play = false,
-      className,
-      icon,
-      pauseIcon,
-    } = props;
+const ControlIcon = ({
+  ref,
+  ...props
+}: ControlIconProps & {
+  ref?: React.RefObject<HTMLElement>;
+}) => {
+  const {
+    onClick,
+    onChange,
+    onPause,
+    onPlay,
+    play = false,
+    className,
+    icon,
+    pauseIcon,
+  } = props;
 
-    const [selfPlay, setSelfPlay] = useState<boolean>(play);
-    const prefixCls = getPrefixCls("control-button");
+  const [selfPlay, setSelfPlay] = useState<boolean>(play);
+  const prefixCls = getPrefixCls("control-button");
 
-    const classes = classNames(prefixCls, className, {
-      [`${prefixCls}-pause`]: selfPlay,
-    });
+  const classes = classNames(prefixCls, className, {
+    [`${prefixCls}-pause`]: selfPlay,
+  });
 
-    const onClickHandler = (
-      event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ) => {
-      event.stopPropagation();
+  const onClickHandler = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
 
-      setSelfPlay(!selfPlay);
+    setSelfPlay(!selfPlay);
 
-      const isPlay = !selfPlay;
-      if (isPlay) {
-        onPlay && onPlay();
-      } else {
-        onPause && onPause();
-      }
+    const isPlay = !selfPlay;
+    if (isPlay) {
+      onPlay && onPlay();
+    } else {
+      onPause && onPause();
+    }
 
-      onChange && onChange(!selfPlay);
-      onClick && onClick(event, !selfPlay);
-    };
+    onChange && onChange(!selfPlay);
+    onClick && onClick(event, !selfPlay);
+  };
 
-    useEffect(() => {
-      setSelfPlay(play);
-    }, [play]);
+  useEffect(() => {
+    setSelfPlay(play);
+  }, [play]);
 
-    const PlayIcon = () => (
-      <>
-        <span
-          className={concatPrefixCls(
-            prefixCls,
-            "play-button play-button-before"
-          )}
-        ></span>
-        <span
-          className={concatPrefixCls(
-            prefixCls,
-            "play-button play-button-after"
-          )}
-        ></span>
-      </>
-    );
-
-    const renderIcon = () => {
-      if (selfPlay) {
-        return pauseIcon || <PlayIcon />;
-      }
-      return icon || <PlayIcon />;
-    };
-
-    return (
+  const PlayIcon = () => (
+    <>
       <span
-        id={concatPrefixCls(prefixCls, "play-button-container")}
-        className={classes}
-        ref={ref}
-        onClick={onClickHandler}
-      >
-        {renderIcon()}
-      </span>
-    );
-  }
-);
+        className={concatPrefixCls(prefixCls, "play-button play-button-before")}
+      ></span>
+      <span
+        className={concatPrefixCls(prefixCls, "play-button play-button-after")}
+      ></span>
+    </>
+  );
+
+  const renderIcon = () => {
+    if (selfPlay) {
+      return pauseIcon || <PlayIcon />;
+    }
+    return icon || <PlayIcon />;
+  };
+
+  return (
+    <span
+      id={concatPrefixCls(prefixCls, "play-button-container")}
+      className={classes}
+      ref={ref}
+      onClick={onClickHandler}
+    >
+      {renderIcon()}
+    </span>
+  );
+};
 
 export default ControlIcon;

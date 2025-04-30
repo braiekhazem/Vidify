@@ -106,6 +106,30 @@ export const playerManager: (
       }));
     },
 
+    setIsDraggingFilter(isDragging: boolean) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        videoFilter: {
+          ...prev.videoFilter,
+          ...(isDragging
+            ? {
+                brightness: { ...prev.videoFilter.brightness, value: 85 },
+                blur: { ...prev.videoFilter.blur, value: 4 },
+              }
+            : {
+                brightness: {
+                  ...prev.videoFilter.brightness,
+                  value: DEFAULT_VIDEO_FILTER.brightness.value,
+                },
+                blur: {
+                  ...prev.videoFilter.blur,
+                  value: DEFAULT_VIDEO_FILTER.blur.value,
+                },
+              }),
+        },
+      }));
+    },
+
     resetVideoFilters() {
       setState((prev: VideoPlayerState) => ({
         ...prev,
@@ -126,6 +150,32 @@ export const playerManager: (
           rotation,
         };
       });
+    },
+
+    //TODO: fix the flip horizontal and vertical
+
+    setFlipHorizontal(flipHorizontal: boolean) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        flipHorizontal,
+        flipVertical: false,
+      }));
+    },
+
+    setFlipVertical(flipVertical: boolean) {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        flipVertical,
+        flipHorizontal: false,
+      }));
+    },
+
+    resetFlip() {
+      setState((prev: VideoPlayerState) => ({
+        ...prev,
+        flipHorizontal: false,
+        flipVertical: false,
+      }));
     },
 
     updateCurrentTime(newCurrentTime) {
@@ -249,7 +299,7 @@ export const playerManager: (
           mediaEventHandlers.onDownload && mediaEventHandlers.onDownload();
         })
         .catch((err) => {
-          console.log("Error", err);
+          console.error("Error", err);
         });
     },
   };

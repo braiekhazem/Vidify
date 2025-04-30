@@ -1,4 +1,10 @@
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import React, {
+  SyntheticEvent,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import { VideoPlayerProps, VideoPlayerState, contextmenu } from "./@types";
 import mergeRefs from "./../../utils/mergeRefs";
 import { getPrefixCls } from "./../../utils/getPrefixCls";
@@ -122,12 +128,15 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
     error: null,
     videoLoaded: false,
     playbackProgress: 0,
+    flipHorizontal: false,
+    flipVertical: false,
   };
 
   const [videoState, setVideoState] =
     useState<VideoPlayerState>(defaultVideoState);
 
   const currentSource = getVideoSrc(props, videoState);
+  const vidifyId = useId();
 
   useEffect(() => {
     if (currentVideoRef.current)
@@ -210,7 +219,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
   };
 
   const fullScreenHandler = (e: SyntheticEvent<HTMLDivElement, Event>) => {
-    if (e.target === currentVideoRef.current) fullScreenMode();
+    if (e.target === currentVideoRef.current) fullScreenMode(e);
   };
 
   const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -252,6 +261,12 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         bufferingProgress: (bufferedEnd / duration) * 100,
       }));
     }
+  };
+
+  const handleVideoEnded = () => {
+    if (loop) videoState.actions?.play();
+    else videoState.actions?.pause();
+    onEnded?.();
   };
 
   const prefixCls = getPrefixCls("video");
@@ -328,7 +343,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       videoState={videoState}
       actions={videoState.actions}
       onKeyDown={keyDownHandler}
-      currentVideoRef={currentVideoRef}
+      currentVideoRef={currentVideoRef as React.RefObject<HTMLVideoElement>}
       ref={mergeRefs(containerRef, currentContainerRef)}
       onDoubleClick={fullScreenHandler}
       onClick={onClickHandler}
@@ -340,6 +355,7 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
       title={title}
       style={containerstyle}
       controlBarElement={controlsBarRef.current}
+      vidifyId={vidifyId}
     >
       <video
         src={currentSource}
@@ -351,11 +367,11 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
         controls={false}
         onPause={onPause}
         onPlay={onPlay}
-        onEnded={onEnded}
+        onEnded={handleVideoEnded}
         onVolumeChange={onVolumeChange}
         className={prefixCls}
         onAbort={onAbort}
-        loop={videoState.loop}
+        loop={loop}
         preload={preload}
         onTimeUpdate={handleTimeUpdate}
         onProgress={onProgress}
@@ -377,6 +393,11 @@ const InternalVideoPlayer: React.ForwardRefRenderFunction<
             blur(${videoState.videoFilter.blur.value}px)
           `,
           opacity: `${videoState.videoFilter.opacity.value}%`,
+          transform: `rotate(${(videoState.rotation - 1) * 90}deg) scale(${
+            videoState.videoFilter.zoom
+              ? videoState.videoFilter.zoom.value / 100
+              : 1
+          })`,
         }}
         {...eventHandlers}
         {...rest}
